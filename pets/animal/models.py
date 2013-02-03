@@ -22,4 +22,5 @@ class Animal(models.Model):
     animal_anlong = models.CharField(max_length=200)
     bodyweight = models.CharField(max_length=200)
     image_name = models.URLField(max_length=200)
+    image_file = models.CharField(max_length=200)
     pub_date = models.DateTimeField(auto_now=True)

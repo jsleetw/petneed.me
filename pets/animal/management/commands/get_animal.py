@@ -7,18 +7,20 @@ import time
 class Command(BaseCommand):
     args = '<>'
     help = 'get animal data from http://data.taipei.gov.tw'
-    url = 'http://163.29.39.183/GetAnimals.aspx'
+    url = "http://163.29.39.183/GetAnimals.aspx"
 
     def handle(self, *args, **options):
         print self.url
         data = urllib2.urlopen(self.url)
         j = json.load(data)
-        #print j
-        #print j[0]["AcceptNum"]
-        #print j[0]["Name"]
         for i in j:
-            print i["AcceptNum"]
             print i["Name"]
+            url = i["ImageName"]
+            url_file = url.split("/")[-1]
+            f = urllib2.urlopen(url)
+            data = f.read()
+            with open("animal/pics/" + url_file, "wb") as code:
+                code.write(data)
             a = Animal(name=i["Name"],
                        sex=i["Sex"],
                        type=i["Type"],
@@ -38,6 +40,7 @@ class Command(BaseCommand):
                        animal_anlong=i["AnimalAnlong"],
                        bodyweight=i["Bodyweight"],
                        image_name=i["ImageName"],
+                       image_file=url_file,
                        )
             a.save()
         self.stdout.write('end\n')
