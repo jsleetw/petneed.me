@@ -4,10 +4,10 @@
 
 	<!-- start: Meta -->
 	<meta charset="utf-8">
-	<title>TABULA BOOTSTRAP THEME by creativeLabs</title> 
-	<meta name="description" content="Tabula Bootstrap Theme"/>
-	<meta name="keywords" content="Template, Theme, web, html5, css3, Bootstrap, pin, wall, responsive, fluid, retina" />
-	<meta name="author" content="Łukasz Holeczek from creativeLabs"/>
+	<title>pets</title> 
+	<meta name="description" content="pets need your love"/>
+	<meta name="keywords" content="pets" />
+	<meta name="author" content="jslee"/>
 	<!-- end: Meta -->
 	
 	<!-- start: Mobile Specific -->
@@ -27,17 +27,17 @@
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
-	<link href="css/style.css" rel="stylesheet" type="text/css">
-	<link href="css/layerslider.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+	<link href="/static/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/static/css/layerslider.css" rel="stylesheet" type="text/css">
 	
 	<!--[if lt IE 9 ]>
-	  <link href="css/styleIE.css" rel="stylesheet">
+	  <link href="/static/css/styleIE.css" rel="stylesheet">
 	<![endif]-->
 	
 	<!--[if IE 9 ]>
-	  <link href="css/styleIE9.css" rel="stylesheet">
+	  <link href="/static/css/styleIE9.css" rel="stylesheet">
 	<![endif]-->
 	
 	<!-- end: CSS -->
@@ -64,31 +64,10 @@
 	            		<span class="icon-bar"></span>
 	            		<span class="icon-bar"></span>
 	          		</a>
-					<a class="brand" href="index.html">tabula</a>
+					<a class="brand" href="/">pets</a>
 	          		<div class="nav-collapse collapse">
 	            		<ul class="nav">
-							<li class="active"><a href="index.html">Home</a></li>
-	              			<li ><a href="about.html">About</a></li>
-							<li class="dropdown">
-	                			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Features<b class="caret"></b></a>
-	                			<ul class="dropdown-menu">
-	                  				<li><a href="social-icons.html">Social Icons</a></li>
-									<li><a href="icons.html">Glyphicons Halflings</a></li>
-									<li><a href="icons-pro.html">Glyphicons PRO</a></li>
-									<li><a href="icons_set2.html">Font Awesome Icons</a></li>
-									<li><a href="typography.html">Typography</a></li>
-									<li><a href="shortcodes.html">Shortcodes</a></li>
-									<li><a href="list-styles.html">List Styles</a></li>
-									<li><a href="charts.html">Charts</a></li>
-									<li><a href="sliders.html">Sliders</a></li>
-	                			</ul>
-	              			</li>
-							<li ><a href="portfolio.html">Portfolio</a></li>									
-							<li ><a href="pricing.html">Pricing</a></li>
-							<li ><a href="blog.html">Blog</a></li>
-	              			<li ><a href="contact.html">Contact</a></li>
-							<li ><a href="login.html">Login</a></li>
-							<li ><a href="register.html">Register</a></li>
+							<li class="active"><a href="/">Home</a></li>
 	            		</ul>
 	          		</div>
 	        	</div>
@@ -109,223 +88,23 @@
 			<!-- start: Wall -->
 			<div id="wall" class="row-fluid">
 
-				<div class="span3 item">
-					<div class="quotes">
-						<div class="quote">
-						“That’s not what we think design is. It’s not just what it looks like and feels like. Design is how it works”
-						</div>
-						<div class="author">
-							- Steve Jobs -
-						</div>	
-					</div>
-				</div>
-
+{% for i in animals %}
 				<div class="span3 item">
 					<div class="picture">
-						<a class="image" href="project.html" title="Title"><img src="img/photo5.jpg" alt=""/></a>
+                        <a class="image" href="/static/{{i.image_file}}" title="{{i.name}}"><img src="/static/{{i.image_file}}" alt=""/></a>
 						<div class="description">
-							<p>
-								Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+							<p>{{i.note}}
 							</p>
 						</div>
 						<div class="meta">
-							<span><i class="fa-icon-calendar"></i>1 June 2011</span>
-							<span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-							<span><i class="fa-icon-heart-empty"></i> 88</span>
+              <span><i class="fa-icon-heart-empty"></i> <a href="#">{{i.name}}</a></span>
+              <span><i class="fa-icon-phone">{{i.phone}}</i></span>
+              <br />
+              <span><i class="fa-icon-home muted"><small>{{i.resettlement}}</small></i></span>
 						</div>
 					</div>
 				</div>
-
-				<div class="span3 item">
-					<div class="quotes">
-						<div class="quote">
-						“In most people’s vocabularies, design means veneer. It’s interior decorating. It’s the fabric of the curtains of the sofa. But to me, nothing could be further from the meaning of design. Design is the fundamental soul of a human-made creation that ends up expressing itself in successive outer layers of the product or service.”
-						</div>
-						<div class="author">
-							- Steve Jobs -
-						</div>	
-					</div>
-				</div>
-
-				<div class="span3 item">
-					<div class="picture">
-						<a class="image" href="project.html" title="Title"><img src="img/photo1.jpg" alt=""/></a>
-						<div class="description">
-							<p>
-								Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-							</p>
-						</div>
-						<div class="meta">
-							<span><i class="fa-icon-calendar"></i>1 June 2011</span>
-							<span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-							<span><i class="fa-icon-heart-empty"></i> 88</span>
-						</div>
-					</div>	
-				</div>
-
-				<div class="span3 item">
-					<div class="picture">
-						<a class="image" href="project.html" title="Title"><img src="img/photo9.jpg" alt=""/></a>
-						<div class="meta">
-							<span><i class="fa-icon-calendar"></i>1 June 2011</span>
-							<span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-							<span><i class="fa-icon-heart-empty"></i> 88</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="span3 item">
-					<div class="picture">
-						<a class="image" href="project.html" title="Title"><img src="img/photo2.jpg" alt=""/></a>
-						<div class="meta">
-							<span><i class="fa-icon-calendar"></i>1 June 2011</span>
-							<span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-							<span><i class="fa-icon-heart-empty"></i> 88</span>
-						</div>	
-					</div>
-				</div>
-
-				<div class="span3 item">
-					<div class="picture">
-						<a class="image" href="project.html" title="Title"><img src="img/photo3.jpg" alt=""/></a>
-						<div class="description">
-							<p>
-								Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
-							</p>
-						</div>
-						<div class="meta">
-							<span><i class="fa-icon-calendar"></i>1 June 2011</span>
-							<span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-							<span><i class="fa-icon-heart-empty"></i> 88</span>
-						</div>	
-					</div>
-				</div>
-
-				<div class="span3 item">
-					<div class="picture">
-						<a class="image" href="project.html" title="Title"><img src="img/photo4.jpg" alt=""/></a>
-						<div class="meta">
-							<span><i class="fa-icon-calendar"></i>1 June 2011</span>
-							<span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-							<span><i class="fa-icon-heart-empty"></i> 88</span>
-						</div>	
-					</div>
-				</div>
-
-				<div class="span3 item">
-					<div class="flex-video">
-						<iframe src="http://player.vimeo.com/video/3538565?portrait=0&color=ffffff" width="480" height="256" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>	
-					</div>
-				</div>
-
-				<div class="span3 item">
-					<div class="picture">
-						<a class="image" href="project.html" title="Title"><img src="img/photo6.jpg" alt=""/></a>
-						<div class="description">
-							<p>
-								Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-							</p>
-						</div>
-						<div class="meta">
-							<span><i class="fa-icon-calendar"></i>1 June 2011</span>
-							<span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-							<span><i class="fa-icon-heart-empty"></i> 88</span>
-						</div>	
-					</div>
-				</div>
-
-				<div class="span3 item">
-					<div class="picture">
-						<a class="image" href="project.html" title="Title"><img src="img/photo7.jpg" alt=""/></a>
-						<div class="meta">
-							<span><i class="fa-icon-calendar"></i>1 June 2011</span>
-							<span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-							<span><i class="fa-icon-heart-empty"></i> 88</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="span3 item">
-					<div class="picture">
-						<a class="image" href="project.html" title="Title"><img src="img/photo8.jpg" alt=""/></a>
-						<div class="description">
-							<p>
-								Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-							</p>
-						</div>
-						<div class="meta">
-							<span><i class="fa-icon-calendar"></i>1 June 2011</span>
-							<span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-							<span><i class="fa-icon-heart-empty"></i> 88</span>
-						</div>	
-					</div>
-				</div>
-
-				<div class="span3 item scenery">
-					<div class="quotes">
-						<div class="quote">
-							“Innovation distinguishes between a leader and a follower.”	
-						</div>
-						<div class="author">
-							- Steve Jobs -
-						</div>	
-					</div>
-				</div>
-
-				<div class="span3 item">
-					<div class="quotes">
-						<div class="quote">
-						“Visual design is often the polar opposite of engineering: trading hard edges for subjective decisions based on gut feelings and personal experiences. It’s messy, unpredictable, and notoriously hard to measure. The apparently erratic behavior of artists drives engineers bananas. Their decisions seem arbitrary and risk everything with no guaranteed benefit.”
-						</div>
-						<div class="author">
-							- Scott Stevenson -
-						</div>	
-					</div>
-				</div>
-
-				<div class="span3 item">
-					<div class="picture">
-						<a class="image" href="project.html" title="Title"><img src="img/photo10.jpg" alt=""/></a>
-						<div class="description">
-							<p>
-								Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-							</p>
-						</div>
-						<div class="meta">
-							<span><i class="fa-icon-calendar"></i>1 June 2011</span>
-							<span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-							<span><i class="fa-icon-heart-empty"></i> 88</span>
-						</div>	
-					</div>
-				</div>
-
-				<div class="span3 item">
-					<div class="picture">
-						<a class="image" href="project.html" title="Title"><img src="img/photo11.jpg" alt=""/></a>
-						<div class="description">
-							<p>
-								Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-							</p>
-						</div>
-						<div class="meta">
-							<span><i class="fa-icon-calendar"></i>1 June 2011</span>
-							<span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-							<span><i class="fa-icon-heart-empty"></i> 88</span>
-						</div>	
-					</div>
-				</div>
-
-				<div class="span3 item">
-					<div class="picture">
-						<a class="image" href="project.html" title="Title"><img src="img/photo12.jpg" alt=""/></a>
-						<div class="meta">
-							<span><i class="fa-icon-calendar"></i>1 June 2011</span>
-							<span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-							<span><i class="fa-icon-heart-empty"></i> 88</span>
-						</div>
-					</div>
-				</div>
-
+{% endfor %}
 			</div>
 			<!-- end: Wall -->				
 					
@@ -347,34 +126,18 @@
 				<!-- start: About -->
 				<div class="span3">
 					
-					<h3>creativeLabs</h3>
+					<h3>pets.youhack.com</h3>
 
 					<p>
-						<i class="fa-icon-map-marker"></i> 30 South Park Avenue
+						<i class="fa-icon-envelope"></i> Email: pets@youhack.com
 					</p>
-					<p>	
-						<i class="fa-icon-map-marker"></i> San Francisco, CA 94108, USA
-					</p>	
-					<p>	
-						<i class="fa-icon-phone"></i> Phone: (123) 456-7890
-					</p>
-					<p>	
-						<i class="fa-icon-print"></i> Fax: +08 (123) 456-7890
-					</p>
-					<p>
-						<i class="fa-icon-envelope"></i> Email: contact@companyname.com
-					</p>
-					<p>
-						<i class="fa-icon-globe"></i> Web: companyname.com
-					</p>
-						
 				</div>
 				<!-- end: About -->
 
 				<!-- start: Latest Tweets -->
 				<div class="span3">
 					
-					<h3>Latest Tweets</h3>
+					<h3></h3>
 					
 					<ul id="twitter">
 						
@@ -389,9 +152,8 @@
 				<!-- start: Photo Stream -->
 				<div class="span3">
 					
-					<h3>Flickr Photo Stream</h3>
+					<h3></h3>
 					<div class="flickr-widget">
-						<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=12&display=latest&size=s&layout=x&source=user&user=29609591@N08"></script>
 						<div class="clear"></div>
 					</div>
 					
@@ -401,29 +163,8 @@
 				<!-- start: Follow Us -->
 				<div class="span3">
 					
-					<h3>Follow Us</h3>
+					<h3></h3>
 					
-					<a href="#" class="social-dribbble"></a>
-					<a href="#" class="social-twitter"></a>
-					<a href="#" class="social-flickr"></a>
-					<a href="#" class="social-facebook"></a>
-					<a href="#" class="social-linkedin"></a>
-					<a href="#" class="social-vimeo"></a>
-					<a href="#" class="social-youtube"></a>
-					<a href="#" class="social-delicious"></a>
-					<a href="#" class="social-rss"></a>
-					<a href="#" class="social-picassa"></a>
-					<a href="#" class="social-deviantart"></a>
-					<a href="#" class="social-technorati"></a>
-					<a href="#" class="social-stumbleupon"></a>
-					<a href="#" class="social-appstore"></a>
-					<a href="#" class="social-paypal"></a>
-					<a href="#" class="social-myspace"></a>
-					<a href="#" class="social-pinterest"></a>
-					<a href="#" class="social-soundcloud"></a>
-					<a href="#" class="social-behance"></a>
-					<a href="#" class="social-instagram"></a>
-					<a href="#" class="social-googleplus"></a>
 	
 				</div>
 				<!-- end: Follow Us -->
@@ -449,7 +190,7 @@
 				<!-- start: Under Footer Logo -->
 				<div class="span2">
 					<div id="under-footer-logo">
-						<a class="brand" href="#">tabula</a>
+						<a class="brand" href="#">pets</a>
 					</div>
 				</div>
 				<!-- end: Under Footer Logo -->
@@ -458,7 +199,7 @@
 				<div class="span9">
 					
 					<div id="under-footer-copyright">
-						&copy; 2012, <a href="http://clabs.co">creativeLabs</a>. Designed by <a href="http://clabs.co">creativeLabs</a> in Poland <img src="img/poland.png" alt="Poland" style="margin-top:-4px">
+&copy; 2013 pets. Created by <a href="http://jslee.name/">jslee</a> in Taiwan.
 					</div>
 					
 				</div>
@@ -485,30 +226,29 @@
 
 <!-- start: Java Script -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery-1.8.2.js"></script>
-<script src="js/isotope.js"></script>
-<script src="js/jquery.imagesloaded.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/flexslider.js"></script>
-<script src="js/carousel.js"></script>
-<script src="js/jquery.cslider.js"></script>
-<script src="js/slider.js"></script>
-<script src="js/fancybox.js"></script>
-<script src="js/twitter.js"></script>
-<script src="js/jquery.placeholder.min.js"></script>
+<script src="/static/js/jquery-1.8.2.js"></script>
+<script src="/static/js/isotope.js"></script>
+<script src="/static/js/jquery.imagesloaded.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script src="/static/js/flexslider.js"></script>
+<script src="/static/js/carousel.js"></script>
+<script src="/static/js/jquery.cslider.js"></script>
+<script src="/static/js/slider.js"></script>
+<script src="/static/js/fancybox.js"></script>
+<script src="/static/js/jquery.placeholder.min.js"></script>
 
-<script src="js/jquery-easing-1.3.js"></script>
-<script src="js/layerslider.kreaturamedia.jquery.js"></script>
+<script src="/static/js/jquery-easing-1.3.js"></script>
+<script src="/static/js/layerslider.kreaturamedia.jquery.js"></script>
 
-<script src="js/excanvas.js"></script>
-<script src="js/jquery.flot.js"></script>
-<script src="js/jquery.flot.pie.min.js"></script>
-<script src="js/jquery.flot.stack.js"></script>
-<script src="js/jquery.flot.resize.min.js"></script>
+<script src="/static/js/excanvas.js"></script>
+<script src="/static/js/jquery.flot.js"></script>
+<script src="/static/js/jquery.flot.pie.min.js"></script>
+<script src="/static/js/jquery.flot.stack.js"></script>
+<script src="/static/js/jquery.flot.resize.min.js"></script>
 
-<script defer="defer" src="js/modernizr.js"></script>
-<script defer="defer" src="js/retina.js"></script>
-<script defer="defer" src="js/custom.js"></script>
+<script defer="defer" src="/static/js/modernizr.js"></script>
+<script defer="defer" src="/static/js/retina.js"></script>
+<script defer="defer" src="/static/js/custom.js"></script>
 <!-- end: Java Script -->
 
 </body>
