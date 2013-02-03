@@ -4,7 +4,7 @@ from models import Animal
 def home(request):
 
     d = []
-    animals = Animal.objects.all()[:20]
+    animals = Animal.objects.all()
 
     return render_to_response('index.html', {"animals": animals} )
 
