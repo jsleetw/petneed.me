@@ -11,13 +11,15 @@ class Command(BaseCommand):
     help = 'get animal data from http://data.taipei.gov.tw'
     url = "http://163.29.39.183/GetAnimals.aspx"
 
-    def thumbnail(self, file, size='104x104'):
+    def thumbnail(self, file, size='104x104', x2=False):
         # defining the size
         x, y = [int(x) for x in size.split('x')]
         # defining the filename and the miniature filename
         filehead, filetail = os.path.split(file.path)
         basename, format = os.path.splitext(filetail)
         miniature = basename + '_' + size + format
+        if x2:
+            miniature = basename + '_' + size + '@2x' + format
         filename = file.path
         miniature_filename = os.path.join(filehead, miniature)
         filehead, filetail = os.path.split(file.url)
@@ -52,6 +54,7 @@ class Command(BaseCommand):
             f.path = "animal/pics/" + url_file
             f.url = url_file
             print self.thumbnail(f, "350x350")
+            print self.thumbnail(f, "350x350", True)
 
             a = Animal(name=i["Name"],
                        sex=i["Sex"],

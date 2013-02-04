@@ -3,8 +3,10 @@ from models import Animal
 
 def home(request):
 
-    d = []
     animals = Animal.objects.all()[:10]
+    for i in animals:
+        print "%s_350x350.jpg" % i.image_file.split(".jpg")[0]
+        i.smal_img_file = "%s_350x350.jpg" % i.image_file.split(".jpg")[0]
 
     return render_to_response('index.html', {"animals": animals} )
 

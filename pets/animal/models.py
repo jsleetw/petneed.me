@@ -2,7 +2,7 @@ from django.db import models
 import datetime
 
 class Animal(models.Model):
-    accept_num = models.IntegerField()
+    accept_num = models.IntegerField(unique=True)
     name = models.CharField(max_length=200)
     sex = models.CharField(max_length=200)
     type = models.CharField(max_length=200)
