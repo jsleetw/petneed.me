@@ -43,22 +43,19 @@ class Command(BaseCommand):
         j = json.load(data)
         for i in j:
             print i["Name"]
-            url = i["ImageName"]
-            url_file = url.split("/")[-1]
-            f = urllib2.urlopen(url)
-            data = f.read()
-            with open("animal/pics/" + url_file, "wb") as code:
-                code.write(data)
-            code.closed
-
-            f.path = "animal/pics/" + url_file
-            f.url = url_file
-            print self.thumbnail(f, "350x350")
-            print self.thumbnail(f, "350x350", True)
-
             a1 = Animal.objects.filter(accept_num=i["AcceptNum"])
             print a1
             if not a1:
+                url = i["ImageName"]
+                url_file = url.split("/")[-1]
+                f = urllib2.urlopen(url)
+                data = f.read()
+                with open("animal/pics/" + url_file, "wb") as code:
+                    code.write(data)
+                f.path = "animal/pics/" + url_file
+                f.url = url_file
+                print self.thumbnail(f, "350x350")
+                print self.thumbnail(f, "350x350", True)
                 a = Animal(name=i["Name"],
                            sex=i["Sex"],
                            type=i["Type"],
@@ -78,7 +75,6 @@ class Command(BaseCommand):
                            animal_anlong=i["AnimalAnlong"],
                            bodyweight=i["Bodyweight"],
                            image_name=i["ImageName"],
-                           image_file=url_file,
-                           )
+                           image_file=url_file,)
                 a.save()
         self.stdout.write('end\n')
