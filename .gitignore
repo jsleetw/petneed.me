@@ -2,3 +2,4 @@
 .DS_Store
 *.db
 pets/animal/pics/
+pets/src/media/*.jpg
