@@ -20,6 +20,8 @@ class Command(BaseCommand):
         miniature = basename + '_' + size + format
         if x2:
             miniature = basename + '_' + size + '@2x' + format
+            x = x * 2
+            y = y * 2
         filename = file.path
         miniature_filename = os.path.join(filehead, miniature)
         filehead, filetail = os.path.split(file.url)
@@ -50,12 +52,12 @@ class Command(BaseCommand):
                 url_file = url.split("/")[-1]
                 f = urllib2.urlopen(url)
                 data = f.read()
-                with open("animal/pics/" + url_file, "wb") as code:
+                with open("src/media/" + url_file, "wb") as code:
                     code.write(data)
-                f.path = "animal/pics/" + url_file
+                f.path = "src/media/" + url_file
                 f.url = url_file
-                print self.thumbnail(f, "350x350")
-                print self.thumbnail(f, "350x350", True)
+                print self.thumbnail(f, "248x350")
+                print self.thumbnail(f, "248x350", True)
                 a = Animal(name=i["Name"],
                            sex=i["Sex"],
                            type=i["Type"],
