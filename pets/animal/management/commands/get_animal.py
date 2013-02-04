@@ -56,26 +56,29 @@ class Command(BaseCommand):
             print self.thumbnail(f, "350x350")
             print self.thumbnail(f, "350x350", True)
 
-            a = Animal(name=i["Name"],
-                       sex=i["Sex"],
-                       type=i["Type"],
-                       build=i["Build"],
-                       age=i["Age"],
-                       variety=i["Variety"],
-                       reason=i["Reason"],
-                       accept_num=i["AcceptNum"],
-                       chip_num=i["ChipNum"],
-                       is_sterilization=i["IsSterilization"],
-                       hair_type=i["HairType"],
-                       note=i["Note"],
-                       resettlement=i["Resettlement"],
-                       phone=i["Phone"],
-                       email=i["Email"],
-                       childre_anlong=i["ChildreAnlong"],
-                       animal_anlong=i["AnimalAnlong"],
-                       bodyweight=i["Bodyweight"],
-                       image_name=i["ImageName"],
-                       image_file=url_file,
-                       )
-            a.save()
+            a1 = Animal.objects.filter(accept_num=i["AcceptNum"])
+            print a1
+            if not a1:
+                a = Animal(name=i["Name"],
+                           sex=i["Sex"],
+                           type=i["Type"],
+                           build=i["Build"],
+                           age=i["Age"],
+                           variety=i["Variety"],
+                           reason=i["Reason"],
+                           accept_num=i["AcceptNum"],
+                           chip_num=i["ChipNum"],
+                           is_sterilization=i["IsSterilization"],
+                           hair_type=i["HairType"],
+                           note=i["Note"],
+                           resettlement=i["Resettlement"],
+                           phone=i["Phone"],
+                           email=i["Email"],
+                           childre_anlong=i["ChildreAnlong"],
+                           animal_anlong=i["AnimalAnlong"],
+                           bodyweight=i["Bodyweight"],
+                           image_name=i["ImageName"],
+                           image_file=url_file,
+                           )
+                a.save()
         self.stdout.write('end\n')
