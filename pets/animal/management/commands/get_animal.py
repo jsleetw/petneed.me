@@ -20,8 +20,6 @@ class Command(BaseCommand):
         miniature = basename + '_' + size + format
         if x2:
             miniature = basename + '_' + size + '@2x' + format
-            x = x * 2
-            y = y * 2
         filename = file.path
         miniature_filename = os.path.join(filehead, miniature)
         filehead, filetail = os.path.split(file.url)
