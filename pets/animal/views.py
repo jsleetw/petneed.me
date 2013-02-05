@@ -2,8 +2,8 @@ from django.shortcuts import render_to_response
 from models import Animal
 
 def home(request):
-
-    animals = Animal.objects.all()[:10]
+    animals = Animal.objects.order_by("-id")[:30]
+    animals.reverse()
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
 
