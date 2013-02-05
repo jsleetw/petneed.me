@@ -1,0 +1,1 @@
+sudo python manage.py run_gunicorn --pid /tmp/gunicorn.pid --bind unix:/var/run/pets.socket --daemon --workers 8 --user www-data
