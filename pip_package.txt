@@ -4,5 +4,4 @@ argparse==1.2.1
 flake8==1.7.0
 gunicorn==0.17.2
 pysqlite==2.6.3
-vim-bridge==0.5
 wsgiref==0.1.2
