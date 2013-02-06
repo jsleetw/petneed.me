@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     # urls specific to this app
     url(r'^animal/', include(animal.urls)),
     # catch all, redirect to myfirstapp home view
-    url(r'.*', redirect_to, {'url': '/animal/home'}),
+    #url(r'.*', redirect_to, {'url': '/animal/home'}),
 
     # Examples:
     # url(r'^$', 'pets.views.home', name='home'),

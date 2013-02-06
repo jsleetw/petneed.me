@@ -80,16 +80,15 @@
 	</header>
 	<!--end: Header-->
 	<!--start: Container -->
-	<div class="container">
+	<div id="container" class="container">
 				
 		<!--start: Wrapper-->
 		<div id="wrapper">
 		
 			<!-- start: Wall -->
 			<div id="wall" class="row-fluid">
-
 {% for i in animals %}
-				<div class="span3 item">
+				<div class="span3 item element">
 					<div class="picture">
                         <a class="image" href="/static/media/{{i.image_file}}" title="{{i.name}}"><img src="/static/media/{{i.smal_img_file}}" alt=""/></a>
 						<div class="description">
@@ -97,7 +96,7 @@
 							</p>
 						</div>
 						<div class="meta">
-              <span><i class="fa-icon-heart-empty"></i> <a href="#">{{i.name}}</a></span>
+                            <span><i class="fa-icon-heart-empty"></i> <a href="#">{{i.name}} {{i.id}}</a></span>
               <span><i class="fa-icon-phone">{{i.phone}}</i></span>
               <br />
               <span><i class="fa-icon-home muted"><small>{{i.resettlement}}</small></i></span>
@@ -227,7 +226,7 @@
 <!-- start: Java Script -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="/static/js/jquery-1.8.2.js"></script>
-<script src="/static/js/isotope.js"></script>
+<script src="/static/js/jquery.isotope.min.js"></script>
 <script src="/static/js/jquery.imagesloaded.js"></script>
 <script src="/static/js/bootstrap.js"></script>
 <script src="/static/js/flexslider.js"></script>
@@ -246,11 +245,33 @@
 <script src="/static/js/jquery.flot.pie.min.js"></script>
 <script src="/static/js/jquery.flot.stack.js"></script>
 <script src="/static/js/jquery.flot.resize.min.js"></script>
-<script src="/static/js/jquery.infinitescroll.dev.js"></script>
+<script src="/static/js/jquery.infinitescroll.min.js"></script>
 
 <script defer="defer" src="/static/js/modernizr.js"></script>
 <script defer="defer" src="/static/js/retina.js"></script>
 <script defer="defer" src="/static/js/custom.js"></script>
+
+<nav id="page_nav">
+    <a href="/animal/pages/2"></a>
+</nav>
+<script>
+    jQuery(document).ready(function () {
+        var $container = $('#wall');
+        $container.isotope({
+            itemSelector : '.element'
+        });
+        $container.infinitescroll({
+            navSelector  : '#page_nav',    // selector for the paged navigation 
+            nextSelector : '#page_nav a',  // selector for the NEXT link (to page 2)
+            itemSelector : '.element',     // selector for all items you'll retrieve
+        },
+        // call Isotope as a callback
+        function( newElements ) {
+            $container.isotope( 'insert', $( newElements ) );
+        }
+        );
+    });
+</script>
 <!-- end: Java Script -->
 
 </body>
