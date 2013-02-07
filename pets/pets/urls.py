@@ -7,12 +7,15 @@ import animal.urls
 
 urlpatterns = patterns('',
     # urls specific to this app
-    url(r'^animal/', include(animal.urls)),
+    url(r'^animal/', include("animal.urls", namespace="animal")),
     # catch all, redirect to myfirstapp home view
     #url(r'.*', redirect_to, {'url': '/animal/home'}),
 
     # Examples:
-    # url(r'^$', 'pets.views.home', name='home'),
+    url(r'^$', 'animal.views.home', name='home'),
+    # catch all, redirect to myfirstapp home view
+    url(r'.*', redirect_to, {'url': '/'}),
+
     # url(r'^pets/', include('pets.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

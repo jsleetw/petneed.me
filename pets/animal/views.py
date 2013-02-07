@@ -14,7 +14,7 @@ def home(request):
     return render_to_response('index.html', {"animals": animals} )
 
 def page(request):
-    page = int(request.path_info.strip('/animal/pages/'))
+    page = int(request.path_info.strip('/animal/page/'))
     animals = Animal.objects.order_by("-id")
     paginator = Paginator(animals, 10)
     animals = paginator.page(page)
