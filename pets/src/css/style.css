@@ -2521,7 +2521,7 @@ a.buy:hover {
 ====================================================================== */
 
 #footer {
-	background: #222 url(../img/fbg.jpg);
+	background: #222 url(/static/img/fbg.jpg);
 	padding: 20px 30px;
 	text-shadow: 0px -1px 0px #000; 
 	-webkit-box-shadow: 0 0px 0 5px rgba(0,0,0,.1), 0px 1px 1px rgba(0,0,0,.35);
@@ -2558,7 +2558,7 @@ a.buy:hover {
 #under-footer {
 	padding: 0px 20px;
 	min-height: 50px;
-	background: #222 url(../img/fbg.jpg);
+	background: #222 url(/static/img/fbg.jpg);
 	color: #b0b0b0;
 	-webkit-box-shadow: 0 0px 0 5px rgba(0,0,0,.1), 0px 1px 1px rgba(0,0,0,.35);
 	   -moz-box-shadow: 0 0px 0 5px rgba(0,0,0,.1), 0px 1px 1px rgba(0,0,0,.35);
@@ -2604,7 +2604,7 @@ a.buy:hover {
 	height: 30px;
 	display: block;
 	background-color: #b0b0b0;
-	background-image: url(../img/scroll-top-top.png);
+	background-image: url(/static/img/scroll-top-top.png);
 	background-repeat: no-repeat;
 	background-position: 50%;
 	-webkit-transition: all 0.1s ease-in-out;

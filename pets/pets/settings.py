@@ -3,6 +3,9 @@ import os
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+COMPRESS_ENABLED = True
+COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -77,6 +80,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -123,6 +127,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'animal',
     'gunicorn',
+    'compressor',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -153,3 +158,5 @@ LOGGING = {
         },
     }
 }
+
+
