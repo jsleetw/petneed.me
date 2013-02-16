@@ -1,9 +1,9 @@
 # Django settings for pets project.
 import os
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False    
 COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 
