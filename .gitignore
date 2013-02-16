@@ -3,7 +3,4 @@
 *.db
 pets/animal/pics/
 pets/src/media/*.jpg
-
 *.pyc
-
-pets/pets/__init__.pyc
