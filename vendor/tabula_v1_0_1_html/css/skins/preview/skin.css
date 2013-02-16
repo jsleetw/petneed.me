@@ -1,0 +1,71 @@
+/* LayerSlider Preview Skin */
+
+
+
+.ls-preview .ls-bottom-nav-wrapper {
+	text-align: center;
+	margin: 15px auto 0px auto;
+	position: relative;
+}
+
+.ls-preview .ls-playvideo {
+	width: 50px;
+	height: 50px;
+	margin-left: -25px;
+	margin-top: -25px;
+}
+
+.ls-preview .ls-playvideo,
+.ls-preview .ls-nav-prev,
+.ls-preview .ls-nav-next {
+	background-image: url(skin.png);
+}
+
+.ls-preview .ls-playvideo {
+	background-position: -300px -150px;
+}
+
+.ls-preview .ls-playvideo:hover,
+.ls-preview .ls-vpcontainer:hover .ls-playvideo {
+	background-position: -375px -150px;
+}
+
+.ls-preview .ls-nav-prev {
+	background-position: 0px 0px;
+}
+
+.ls-preview .ls-nav-prev:hover {
+	background-position: 0px -75px;
+}
+
+.ls-preview .ls-nav-next {
+	background-position: -150px 0px;
+}
+
+.ls-preview .ls-nav-next:hover {
+	background-position: -150px -75px;
+}
+
+
+
+.ls-preview .ls-nav-prev,
+.ls-preview .ls-nav-next {
+	width: 45px;
+	height: 55px;
+	z-index: 10000;
+	top: 50%;
+	margin-top: -27px;
+	position: absolute;
+}
+
+.ls-preview .ls-nav-prev {
+	left: 0px;
+}
+
+.ls-preview .ls-nav-next {
+	right: 0px;
+}
+
+.ls-bottom-nav-wrapper {
+	display: none;
+}

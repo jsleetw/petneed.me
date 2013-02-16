@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<!-- start: Meta -->
+	<meta charset="utf-8">
+	<title>TABULA BOOTSTRAP THEME by creativeLabs</title> 
+	<meta name="description" content="Tabula Bootstrap Theme"/>
+	<meta name="keywords" content="Template, Theme, web, html5, css3, Bootstrap, pin, wall, responsive, fluid, retina" />
+	<meta name="author" content="Łukasz Holeczek from creativeLabs"/>
+	<!-- end: Meta -->
+	
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- end: Mobile Specific -->
+	
+	<!-- start: Facebook Open Graph -->
+	<meta property="og:title" content=""/>
+	<meta property="og:description" content=""/>
+	<meta property="og:type" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:image" content=""/>
+	<!-- end: Facebook Open Graph -->
+
+    <!-- start: CSS -->
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<link href="css/layerslider.css" rel="stylesheet" type="text/css">
+	
+	<!--[if lt IE 9 ]>
+	  <link href="css/styleIE.css" rel="stylesheet">
+	<![endif]-->
+	
+	<!--[if IE 9 ]>
+	  <link href="css/styleIE9.css" rel="stylesheet">
+	<![endif]-->
+	
+	<!-- end: CSS -->
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+	
+	<!--start: Header -->
+	<header>
+		
+		<!--start: Container -->
+		<div class="container">
+			
+			<!--start: Navigation -->
+			<div class="navbar navbar-inverse">
+	    		<div class="navbar-inner">
+	          		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	            		<span class="icon-bar"></span>
+	            		<span class="icon-bar"></span>
+	            		<span class="icon-bar"></span>
+	          		</a>
+					<a class="brand" href="index.html">tabula</a>
+	          		<div class="nav-collapse collapse">
+	            		<ul class="nav">
+							<li ><a href="index.html">Home</a></li>
+	              			<li ><a href="about.html">About</a></li>
+							<li class="active dropdown">
+	                			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Features<b class="caret"></b></a>
+	                			<ul class="dropdown-menu">
+	                  				<li><a href="social-icons.html">Social Icons</a></li>
+									<li><a href="icons.html">Glyphicons Halflings</a></li>
+									<li><a href="icons-pro.html">Glyphicons PRO</a></li>
+									<li><a href="icons_set2.html">Font Awesome Icons</a></li>
+									<li><a href="typography.html">Typography</a></li>
+									<li><a href="shortcodes.html">Shortcodes</a></li>
+									<li><a href="list-styles.html">List Styles</a></li>
+									<li><a href="charts.html">Charts</a></li>
+									<li><a href="sliders.html">Sliders</a></li>
+	                			</ul>
+	              			</li>
+							<li ><a href="portfolio.html">Portfolio</a></li>									
+							<li ><a href="pricing.html">Pricing</a></li>
+							<li ><a href="blog.html">Blog</a></li>
+	              			<li ><a href="contact.html">Contact</a></li>
+							<li ><a href="login.html">Login</a></li>
+							<li ><a href="register.html">Register</a></li>
+	            		</ul>
+	          		</div>
+	        	</div>
+	      	</div>	
+			<!--end: Navigation -->
+			
+		</div>
+		<!--end: Container-->			
+			
+	</header>
+	<!--end: Header-->	
+	<!--start: Container -->
+	<div class="container">
+		
+		<!-- start: Page Title -->
+		<div id="page-title">
+
+			<h2>Sliders</h2>	
+
+		</div>
+		<!-- end: Page Title -->
+		
+		<style type="text/css" media="screen">
+
+			.ls-layer,
+			.ls-layer * {
+				font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', Helvetica, Arial, Serif;
+				white-space: nowrap;
+				font-weight: normal;
+			}
+			
+			.l1-s1 {
+				color: #ecffb3;
+				text-shadow: 0px 2px 3px #546223;
+				font-size: 60px;
+			}
+			
+			.l1-s1b {
+				color: #fff;
+				text-shadow: 0px 0px 10px #fff;
+				font-size: 60px;
+			}
+
+			.l1-s2 {
+				color: #ecffb3;
+				text-shadow: 0px 2px 3px #546223;
+				font-size: 90px;
+			}
+			
+			.l1-s2b {
+				color: #fff;
+				text-shadow: 0px 0px 10px #fff;
+				font-size: 90px;
+			}
+			
+			.l1-s3 {
+				padding: 0px 10px;
+				height: 40px;
+				line-height: 40px;
+				box-shadow: 0px 4px 10px -5px black;
+				color: white;
+				text-shadow: none;
+				font-size: 28px;
+				background: #8bae4e;
+				background: -moz-linear-gradient(left, #8bae4e 0%, #b1c758 100%);
+				background: -webkit-gradient(linear, left top, right top, color-stop(0%,#8bae4e), color-stop(100%,#b1c758));
+				background: -webkit-linear-gradient(left, #8bae4e 0%,#b1c758 100%);
+				background: -o-linear-gradient(left, #8bae4e 0%,#b1c758 100%);
+				background: -ms-linear-gradient(left, #8bae4e 0%,#b1c758 100%);
+				background: linear-gradient(to right, #8bae4e 0%,#b1c758 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8bae4e', endColorstr='#b1c758',GradientType=1 );
+			}
+			
+			.l1-s4 {
+				padding: 0px 10px;
+				height: 40px;
+				line-height: 40px;
+				box-shadow: 0px 4px 10px -5px black;
+				color: white;
+				text-shadow: none;
+				font-size: 28px;
+				color: #4f6716;
+				background: white;
+			}
+			
+			.l2-s1 {
+				padding: 0px 10px;
+				height: 36px;
+				line-height: 36px;
+				color: white;
+				text-shadow: none;
+				font-size: 25px;
+				background: #98b3c7;
+				background: -moz-linear-gradient(left,  #98b3c7 0%, #77b8e9 100%);
+				background: -webkit-gradient(linear, left top, right top, color-stop(0%,#98b3c7), color-stop(100%,#77b8e9));
+				background: -webkit-linear-gradient(left,  #98b3c7 0%,#77b8e9 100%);
+				background: -o-linear-gradient(left,  #98b3c7 0%,#77b8e9 100%);
+				background: -ms-linear-gradient(left,  #98b3c7 0%,#77b8e9 100%);
+				background: linear-gradient(to right,  #98b3c7 0%,#77b8e9 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#98b3c7', endColorstr='#77b8e9',GradientType=1 );
+			}
+			
+			.l2-s2 {
+				padding: 0px 10px;
+				height: 36px;
+				line-height: 36px;
+				color: white;
+				text-shadow: none;
+				font-size: 25px;
+				background: #cd9084;
+				background: -moz-linear-gradient(left,  #cd9084 0%, #ce533d 100%);
+				background: -webkit-gradient(linear, left top, right top, color-stop(0%,#cd9084), color-stop(100%,#ce533d));
+				background: -webkit-linear-gradient(left,  #cd9084 0%,#ce533d 100%);
+				background: -o-linear-gradient(left,  #cd9084 0%,#ce533d 100%);
+				background: -ms-linear-gradient(left,  #cd9084 0%,#ce533d 100%);
+				background: linear-gradient(to right,  #cd9084 0%,#ce533d 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cd9084', endColorstr='#ce533d',GradientType=1 );
+			}
+
+			.l4-s1 {
+				padding: 0px 10px;
+				height: 36px;
+				line-height: 36px;
+				color: white;
+				text-shadow: none;
+				font-size: 25px;
+				background: #036d99;
+			}
+
+			.l4-s2 {
+				background: #5a96b4;
+			}
+			
+			.l5-s1 {
+				padding: 15px;
+				background: #ff9933;
+				border-radius: 5px;
+				moz-border-radius: 5px;
+				webkit-border-radius: 5px;
+				color: white;
+				text-shadow: 0px -1px 0px #985a1d;
+				font-size: 16px;
+				font-weight: bold;
+				line-height: auto;
+				box-shadow: 0px 3px 10px -2px black;
+			}
+			
+			.layer2 p {
+				font-size: 20px;
+				height: 30px;
+				line-height: 30px;
+				border-radius: 4px;
+				padding: 0px 10px;
+				box-shadow: 0px 1px 8px -2px black;
+				text-shadow: none;
+				color: white;
+			}
+			
+			.l3-s1 {
+				 color: #f8dfcf;
+				background: #b0734d;
+				font-size: 30px;
+				height: 40px;
+				line-height: 40px;
+				box-shadow: 0px 2px 20px -3px black;
+				padding: 0px 20px;
+				text-shadow: none;
+			}
+		</style>
+
+		<div id="layerslider-container">
+			
+			<div id="layerslider" style="width: 960px; height: 480px; margin-bottom: 80px;">
+
+				<div class="ls-layer" style="slidedelay: 7000;">
+
+					<img src="img/gallery/tn_1_1.jpg" class="ls-tn">
+					<img src="img/gallery/l12.jpg" class="ls-bg">
+					<img class="ls-s4" id="sss" src="img/gallery/l13.png" style="top: -101px; left: 105px; slidedirection : left;">
+					<h1 class="ls-s5 l1-s1" style="top:200px; left: 303px; slidedirection : top;">
+						LayerSlider
+					</h1>
+					<h1 class="ls-s2 l1-s1b" style="top:200px; left: 303px; slidedirection : fade; slideoutdirection : fade;durationin : 1700; durationout : 2700; easingin : easeInOutQuad; easingout : easeInOutQuad; delayin : 1500; showuntil : 1600;">
+						LayerSlider
+					</h1>
+					<img class="ls-s7" src="img/gallery/l16.png" style="top: 234px; left: -21px; slidedirection : bottom;">
+					<img class="ls-s2" src="img/gallery/l17.png" style="top: -219px; left: 548px; slidedirection : top;">
+					<h2  class="ls-s2 l1-s3" style="top:330px; left: 400px; slidedirection : bottom; slideoutdirection : right; durationin : 2000; durationout : 1000; easingin : easeOutElastic; easingout : easeInOutQuint; delayin : 1000; showuntil : 2000;">
+						The smartest slideshow plugin
+					</h2>
+					<h2  class="ls-s3 l1-s4" style="top:373px; left: 400px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 1000; easingin : easeOutBack; easingout : easeInOutQuint; delayin : 1000; showuntil : 500;"> 
+						with breathtaking effects!
+					</h2>
+					<h2  class="ls-s3 l1-s4" style="top:330px; left: 50%; slidedirection : left; slideoutdirection : right; durationin : 1200; durationout : 1200; easingin : easeInOutQuart; easingout : easeInOutQuart; delayin : 5000;">
+						Responsive mode with smart-resize feature of images, videos and text!
+					</h2>
+					<h2  class="ls-s3 l1-s3" style="top:373px; left: 50%; slidedirection : right; slideoutdirection : left; durationin : 1200; durationout : 1200; easingin : easeInOutQuart; easingout : easeInOutQuint; delayin : 5000;">
+						Now supports easy sublayer-changing option!
+					</h2>
+					<img class="ls-s1" src="img/gallery/l16.png"  style="top: 313px; left: 728px; slidedirection : bottom; slideoutdirection : bottom;  durationin : 8000; durationout : 1500; easingin : easeOutQuart; easingout : easeInOutQuint; delayin : 2000; ">
+					<h1  class="ls-s2 l1-s2" style="top:185px; left: 612px; slidedirection : top;  durationin : 2000; durationout : 1500; easingin : easeOutElastic; easingout : easeInOutQuint; delayin : 1500;">
+						3
+					</h1>
+					<h1  class="ls-s2 l1-s2b" style="top:185px; left: 612px; slidedirection : fade; slideoutdirection : fade; durationin : 1700; durationout : 2700; easingin : easeInOutQuad; easingout : easeInOutQuad; delayin : 3500; showuntil : 600;">
+						3
+					</h1>
+					<h2  class="ls-s3 l1-s4" style="top:373px; left: 400px; slidedirection : bottom; slideoutdirection : left; durationin : 1000; durationout : 1000; delayin : 3000; showuntil : 1000;">
+						and the most advanced user interface!
+					</h2>
+
+				</div>
+
+				<div class="ls-layer layer2" style="slidedirection: right; slidedelay: 8500;">
+					
+					<img src="img/gallery/bg_woods.jpg" class="ls-bg">
+					<img src="img/gallery/tn_1_2.jpg" class="ls-tn">
+					<img class="ls-s3"  src="img/gallery/nf1.png"  style="position: absolute; top: 0px; left: -100px; slidedirection : top; slideoutdirection : left;  delayin : 500; showuntil : 3100; ">
+					<img class="ls-s3"  src="img/gallery/nf2.png"  style="position: absolute; top: 0px; left: -100px; slidedirection : right; slideoutdirection : left;  delayin : 600; showuntil : 2500; ">
+					<img class="ls-s3"  src="img/gallery/nf3.png"  style="position: absolute; top: 0px; left: -100px; slidedirection : bottom; slideoutdirection : left;  delayin : 700; showuntil : 2600; ">
+					<img class="ls-s3"  src="img/gallery/nf4.png"  style="position: absolute; top: 0px; left: -100px; slidedirection : left; slideoutdirection : left;  delayin : 800; showuntil : 2900; ">
+					<img class="ls-s3"  src="img/gallery/nf5.png"  style="position: absolute; top: 0px; left: -100px; slidedirection : top; slideoutdirection : left;  delayin : 900; showuntil : 2900; ">
+					<img class="ls-s3"  src="img/gallery/nf6.png"  style="position: absolute; top: 0px; left: -100px; slidedirection : right; slideoutdirection : left;  delayin : 1000; showuntil : 2000; ">
+					<img class="ls-s3"  src="img/gallery/nf7.png"  style="position: absolute; top: 0px; left: -100px; slidedirection : bottom; slideoutdirection : left;  delayin : 1100; showuntil : 2400; ">
+					<img class="ls-s3"  src="img/gallery/nf8.png"  style="position: absolute; top: 0px; left: -100px; slidedirection : left; slideoutdirection : left;  delayin : 1200; showuntil : 2200; ">
+					<img class="ls-s3"  src="img/gallery/nf9.png"  style="position: absolute; top: 0px; left: -100px; slidedirection : top; slideoutdirection : left;  delayin : 1300; showuntil : 1900; ">
+					<p  class="ls-s3" style="position: absolute; top:30px; left: 500px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 1000; showuntil : 2000; background: #ff7700;"> Use with any HTML content </p>
+					<p  class="ls-s3" style="position: absolute; top:62px; left: 500px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 1500; showuntil : 2000; background: #ff7900;"> Unlimited types of usage </p>
+					<p  class="ls-s3" style="position: absolute; top:94px; left: 500px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 2000; showuntil : 2000; background: #ff7d00;"> Unlimited varitaions of animations </p>
+					<p  class="ls-s3" style="position: absolute; top:126px; left: 501px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 2500; showuntil : 2000; background: #ff8000;"> Responsive layout (with displaying 5 modes) </p>
+				<p  class="ls-s3" style="position: absolute; top:158px; left: 500px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 3000; showuntil : 2000; background: #ff8600;"> Stunning WYSIWYG editor (only in WP version) </p>
+				<p  class="ls-s3" style="position: absolute; top:190px; left: 500px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 3500; showuntil : 2000; background: #ff8b00;"> Auto play / stop videos </p>
+				<p  class="ls-s3" style="position: absolute; top:222px; left: 500px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 4000; showuntil : 2000; background: #ff9100;"> Linking sublayers to another layer or to any url </p>
+				<p  class="ls-s3" style="position: absolute; top:254px; left: 500px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 4500; showuntil : 2000; background: #ff9500;"> Touch control for mobile devices </p>
+				<p  class="ls-s3" style="position: absolute; top:286px; left: 500px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 5000; showuntil : 2000; background: #ff9a00;"> Built-in powerful API </p>
+				<p  class="ls-s3" style="position: absolute; top:318px; left: 500px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 5500; showuntil : 2000; background: #ff9f00;"> Deep linking </p>
+				<p  class="ls-s3" style="position: absolute; top:350px; left: 500px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 6000; showuntil : 2000; background: #ffa500;"> Seo friendly and supports all major browsers </p>
+				<p  class="ls-s3" style="position: absolute; top:382px; left: 500px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 6500; showuntil : 2000; background: #ffaa00;"> Skin support (layered PSD included) </p>
+				<p  class="ls-s3" style="position: absolute; top:414px; left: 500px; slidedirection : bottom; slideoutdirection : top; durationin : 1000; durationout : 750; delayin : 7000; showuntil : 2000; background: #ffaf00;"> Very detailed documentation &#038; free updates </p>
+				<h2  class="ls-s2 l3-s1" style="position: absolute; top:30%; left: 20%; slidedirection : fade; slideoutdirection : left; durationin : 1500; durationout : 1000; easingin : easeInOutQuad; easingout : easeInBack; delayin : 5000; showuntil : 2500;"> Over </h2>
+				<h2  class="ls-s2" style="position: absolute; top:50%; left: 20%; slidedirection : fade; slideoutdirection : left; durationin : 1500; durationout : 1000; easingin : easeInOutQuad; easingout : easeInBack; delayin : 5500; showuntil : 2100; color: white; background: #ff4800; font-size: 70px; height: 100px; line-height: 100px; padding: 0px 40px; box-shadow: 0px 2px 20px -3px black;"> 7000 </h2>
+				<h2  class="ls-s2 l3-s1" style="position: absolute; top:70%; left: 20%; slidedirection : fade; slideoutdirection : left; durationin : 1500; durationout : 1000; easingin : easeInOutQuad; easingout : easeInBack; delayin : 6000; showuntil : 1700;"> happy customers! </h2>
+
+				</div>
+				
+				<div class="ls-layer" style="slidedirection: right; slidedelay: 4000;">
+
+					<img src="img/gallery/tn_1_3.jpg" class="ls-tn">
+					<img src="img/gallery/l3.jpg" class="ls-bg">
+					<img class="ls-s4" src="img/gallery/l31.png" style="top: 173px; left: 324px;  durationin : 5800;">
+					<img class="ls-s3" src="img/gallery/l31.png" style="top: 123px; left: 226px;  durationin : 5800;">
+					<img class="ls-s2" src="img/gallery/l31.png" style="top: 250px; left: 260px;  durationin : 5800; durationout : 1300; easingout : easeInOutCirc;">
+					<img class="ls-s2" src="img/gallery/l31.png" style="top: 275px; left: 812px;  durationin : 5800;">
+					<img class="ls-s3" src="img/gallery/l32.png" style="top: 236px; left: 744px;  durationin : 5600; easingin : easeOutQuad;">
+					<img class="ls-s5" src="img/gallery/l33.png" style="top: 291px; left: 731px;  durationin : 2500; easingin : easeOutCirc;">
+					<img class="ls-s5" src="img/gallery/l34.png" style="top: 255px; left: 517px;  durationin : 2500; easingin : easeOutCirc;">
+					<img class="ls-s6" src="img/gallery/l36.png" style="top: 223px; left: 518px;  durationin : 2000; durationout : 3000; easingin : easeOutCirc; easingout : easeInOutExpo; delayin : 1000; showuntil : 1;">
+					<img class="ls-s6" src="img/gallery/l36.png" style="top: 134px; left: 613px;  durationin : 2000; durationout : 2000; easingin : easeOutExpo; delayin : 3300;">
+					<img class="ls-s6" src="img/gallery/l36.png" style="top: 30px; left: 439px;  durationin : 2400; durationout : 2000; easingin : easeOutExpo; delayin : 3500;">
+					<img class="ls-s7" src="img/gallery/l35.png" style="top: -4px; left: 389px;  durationin : 2000; durationout : 3000; easingin : easeOutCirc; easingout : easeInOutExpo; delayin : 1300; showuntil : 1;">
+					<img class="ls-s7" src="img/gallery/l35.png" style="top: 133px; left: 372px;  durationin : 2000; durationout : 1700; easingin : easeOutExpo; delayin : 4000;">
+					<p class="ls-s6 l4-s1" style="top:170px; left: 60px; slidedirection : fade; slideoutdirection : top;durationin : 1000; delayin : 1300;">
+						You can customize the plugin
+					</p>
+					<p class="ls-s6 l4-s1" style="top:208px; left: 60px; slidedirection : fade; slideoutdirection : top;durationin : 1000; delayin : 1000;">
+						with setting properties.
+					</p>
+					<p class="ls-s4 l4-s1 l4-s2" style="10px; top:300px; left: 100px;">
+						You can modify the easing,
+					</p>
+					<p class="ls-s7 l4-s1 l4-s2" style="top:338px; left: 100px; slidedirection: left;">
+						delay, duration and also the
+					</p>
+					<p class="ls-s10 l4-s1 l4-s2" style="10px; top:376px; left: 100px;">
+						parallax effect.
+					</p>
+
+				</div>
+
+				<div class="ls-layer" style="slidedirection: right; slidedelay: 5000;">
+
+					<img src="img/gallery/tn_1_5.jpg" class="ls-tn">
+					<img src="img/gallery/savannabg.jpg" class="ls-bg">
+					<img class="ls-s2" src="img/gallery/sun.png" style="top: 99px; left: 65px;  slideoutdirection : bottom;durationout : 6500; easingout : easeInQuad; showuntil : 1;">
+					<img class="ls-s2" src="img/gallery/bs.png" style="top: 152px; left: 124px; slidedirection : fade; slideoutdirection : fade;durationin : 2000; durationout : 2000; easingin : easeInOutQuad; easingout : easeInOutQuad; delayin : 1500; showuntil : 500;">
+					<img class="ls-s4" src="img/gallery/mountains1.png" style="top: 354px; left: -373px;  delayin : 200;">
+					<img class="ls-s3" src="img/gallery/mountains2.png" style="top: 361px; left: 50px;  delayin : 100;">
+					<img class="ls-s2" src="img/gallery/blackground.png" style="top: 433px; left: 50%;">
+					<img class="ls-s2" src="img/gallery/tree2.png" style="top: 347px; left: 66px;">
+					<img class="ls-s4" src="img/gallery/tree1.png" style="top: 270px; left: 609px;  delayin : 100;">
+					<img class="ls-s2" src="img/gallery/c1.png" style="top: 235px; left: 54px;  durationin : 6000; durationout : 6000; easingin : linear; easingout : linear; showuntil : 1;">
+					<img class="ls-s1" src="img/gallery/c21.png" style="top: 201px; left: 349px;  durationin : 7000; durationout : 7000; easingin : linear; easingout : linear; showuntil : 1;">
+					<img class="ls-s1" src="img/gallery/c3.png" style="top: 57px; left: -138px;  durationin : 6000; durationout : 6000; easingin : linear; easingout : linear; showuntil : 1;">
+					<img class="ls-s2" src="img/gallery/c4.png" style="top: 91px; left: -54px;  durationin : 7000; durationout : 7000; easingin : linear; easingout : linear; showuntil : 1;">
+					<div class="ls-s2" style="top:0px; left: 0px; slidedirection : fade; durationin : 10000; durationout : ; easingin : linear; easingout : easeInQuad; delayin : 1500; width: 1000px; height:500px; background: black;"></div>
+
+				</div>
+				
+				<div class="ls-layer" style="slidedirection: top; slidedelay: 4000;">
+		
+					<img src="img/gallery/tn_1_4.jpg" class="ls-tn">
+					<img src="img/gallery/l2.jpg" class="ls-bg">
+					<p class="ls-s2 l2-s1" style="top:70px; left: 50px; slidedirection : top; slideoutdirection : top; delayin : 600;">
+						You can use pictures or any
+					</p>
+					<p class="ls-s3 l2-s1" style="top:108px; left: 50px; slidedirection : top; slideoutdirection : top; delayin : 500;">
+						HTML elements as layers
+					</p>
+					<p class="ls-s6 l2-s1" style="top:210px; left: 90px; slidedirection : left; slideoutdirection : left; delayin : 1500;">
+						You can use as much
+					</p>
+					<p class="ls-s7 l2-s1" style="top:248px; left: 90px; slidedirection : left; slideoutdirection : left; delayin : 1550;">
+						sublayers as you want.
+					</p>
+					<p class="ls-s3 l2-s2" style="top:350px; left: 40px; slidedirection : fade; slideoutdirection : bottom; delayin : 3000;">
+						And you can simply set the direction
+					</p>
+					<p class="ls-s2 l2-s2" style="top:388px; left: 40px; slidedirection : fade; slideoutdirection : bottom; delayin : 3200;">
+						or fading / timing of sublayers and more!
+					</p>
+					<img class="ls-s10" src="img/gallery/l29.png" style="top: 155px; left: 454px; slidedirection : bottom; durationin : 1000; durationout : 1000; easingin : easeOutExpo; delayin : 1000; showuntil : 1000;">
+					<img class="ls-s10" src="img/gallery/l29b.png" style="top: 155px; left: 454px; slidedirection : bottom; durationin : 1000; durationout : 1000; easingin : easeOutExpo; delayin : 3000;">
+
+				</div>
+				
+				<div class="ls-layer" style="slidedirection: right; slidedelay: 4000;">
+
+					<img src="img/gallery/tn_1_6.jpg" class="ls-tn">
+					<div class="ls-s0" style="top:0px; left: 0px;">
+						<iframe width="960" height="480" src="http://www.youtube.com/embed/1iIZeIy7TqM" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<p class="ls-s2 l5-s1" style="top:20px; left: 140px; slidedirection : top; slideoutdirection : top;delayin : 1500; showuntil : 2500;">
+						How about embedding and auto-playing YouTube &amp;
+						<br>Vimeo videos with auto-pause slideshow feature?
+					</p>
+					<p class="ls-s2 l5-s1" style="top:20px; left: 140px; slidedirection : top; slideoutdirection : top;delayin : 5500; showuntil : 2500;">
+						With using of these features you can easily create also
+						<br>auto-playing video-galleries!
+					</p>
+					<p class="ls-s2 l5-s1" style="top:50%; left: 450px; slidedirection : right; slideoutdirection : fade;durationout : 2000; delayin : 8000; showuntil : 1500;">
+						Video played, so LayerSlider is changing to the next Layer.
+					</p>
+
+				</div>
+				
+				<div class="ls-layer">
+
+					<img src="img/gallery/tn_1_7.jpg" class="ls-tn">
+					<img src="img/gallery/l4.jpg" class="ls-bg">
+					<img class="ls-s2" src="img/gallery/l45.png" style="top: 30px; left: 50%;  durationin : 3000; durationout : 3000; easingin : linear; easingout : linear; showuntil : 1;">
+					<img class="ls-s5" src="img/gallery/l44.png" style="top: 30px; left: 120px;  durationin : 3500; easingin : easeOutExpo; delayin : 300;"><a href="http://codecanyon.net/item/layerslider-the-parallax-effect-slider/922100?ref=kreatura"
+					target="_blank" class="ls-s2" style="top: 130px; left:670px; display: block;  durationin : 2000; easingin : easeOutElastic; delayin : 1800; ">
+						<img src="img/gallery/getnow.png">
+					</a>
+					<a href="http://codecanyon.net/item/layerslider-the-parallax-effect-slider/922100?ref=kreatura"
+					target="_blank" class="ls-s3" style="top: 200px; left:647px; display: block;  durationin : 2000; easingin : easeOutElastic; delayin : 1900; ">
+						<img src="img/gallery/thiskickass.png">
+					</a>
+					<a href="http://codecanyon.net/item/layerslider-the-parallax-effect-slider/922100?ref=kreatura" target="_blank" class="ls-s4" style="top: 270px; left:600px; display: block;  durationin : 2000; easingin : easeOutElastic; delayin : 2000; ">
+						<img src="img/gallery/slideshowplugin.png">
+					</a>
+
+				</div>
+
+			</div>
+						
+		</div>
+		
+		<!--start: Wrapper-->
+		<div id="wrapper" class="full">
+			
+			<!-- start: Flexslider -->
+			<div class="slider">
+				<div id="flex1" class="flexslider home">
+					<ul class="slides">
+
+						<li>
+							<img src="img/slider/slider1.jpg" alt="" />
+							<div class="slide-caption n">
+								<h3>This is a caption</h3>
+							</div>
+						</li>
+
+						<li>
+							<img src="img/slider/slider2.jpg" alt="" />
+							<div class="slide-caption">
+								<h3>This is a caption</h3>
+							</div>
+						</li>
+
+						<li>
+							<img src="img/slider/slider3.jpg" alt="" />
+						</li>
+
+					</ul>
+				</div>
+			</div>
+			<!-- end: Flexslider -->
+		
+		</div>
+		<!-- end: Wrapper  -->	
+      	
+	</div>
+	<!--end: Container-->
+						
+	<!-- start: Footer -->
+	<div id="footer">
+		
+		<!-- start: Container -->
+		<div class="container">
+	
+			<!-- start: Row -->
+			<div class="row-fluid">
+
+				<!-- start: About -->
+				<div class="span3">
+					
+					<h3>creativeLabs</h3>
+
+					<p>
+						<i class="fa-icon-map-marker"></i> 30 South Park Avenue
+					</p>
+					<p>	
+						<i class="fa-icon-map-marker"></i> San Francisco, CA 94108, USA
+					</p>	
+					<p>	
+						<i class="fa-icon-phone"></i> Phone: (123) 456-7890
+					</p>
+					<p>	
+						<i class="fa-icon-print"></i> Fax: +08 (123) 456-7890
+					</p>
+					<p>
+						<i class="fa-icon-envelope"></i> Email: contact@companyname.com
+					</p>
+					<p>
+						<i class="fa-icon-globe"></i> Web: companyname.com
+					</p>
+						
+				</div>
+				<!-- end: About -->
+
+				<!-- start: Latest Tweets -->
+				<div class="span3">
+					
+					<h3>Latest Tweets</h3>
+					
+					<ul id="twitter">
+						
+					</ul>
+
+					<div class="clear"></div>
+					
+					
+				</div>
+				<!-- end: Latest Tweets -->
+
+				<!-- start: Photo Stream -->
+				<div class="span3">
+					
+					<h3>Flickr Photo Stream</h3>
+					<div class="flickr-widget">
+						<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=12&display=latest&size=s&layout=x&source=user&user=29609591@N08"></script>
+						<div class="clear"></div>
+					</div>
+					
+				</div>
+				<!-- end: Photo Stream -->
+				
+				<!-- start: Follow Us -->
+				<div class="span3">
+					
+					<h3>Follow Us</h3>
+					
+					<a href="#" class="social-dribbble"></a>
+					<a href="#" class="social-twitter"></a>
+					<a href="#" class="social-flickr"></a>
+					<a href="#" class="social-facebook"></a>
+					<a href="#" class="social-linkedin"></a>
+					<a href="#" class="social-vimeo"></a>
+					<a href="#" class="social-youtube"></a>
+					<a href="#" class="social-delicious"></a>
+					<a href="#" class="social-rss"></a>
+					<a href="#" class="social-picassa"></a>
+					<a href="#" class="social-deviantart"></a>
+					<a href="#" class="social-technorati"></a>
+					<a href="#" class="social-stumbleupon"></a>
+					<a href="#" class="social-appstore"></a>
+					<a href="#" class="social-paypal"></a>
+					<a href="#" class="social-myspace"></a>
+					<a href="#" class="social-pinterest"></a>
+					<a href="#" class="social-soundcloud"></a>
+					<a href="#" class="social-behance"></a>
+					<a href="#" class="social-instagram"></a>
+					<a href="#" class="social-googleplus"></a>
+	
+				</div>
+				<!-- end: Follow Us -->
+				
+			</div>
+			<!-- end: Row -->
+		
+		</div>
+		<!-- end: Container  -->	
+
+	</div>
+	<!-- end: Footer -->
+	
+	<!-- start: Under Footer -->
+	<div id="under-footer">
+		
+		<!-- start: Container -->
+		<div class="container">
+			
+			<!-- start: Row -->
+			<div class="row-fluid">
+
+				<!-- start: Under Footer Logo -->
+				<div class="span2">
+					<div id="under-footer-logo">
+						<a class="brand" href="#">tabula</a>
+					</div>
+				</div>
+				<!-- end: Under Footer Logo -->
+
+				<!-- start: Under Footer Copyright -->
+				<div class="span9">
+					
+					<div id="under-footer-copyright">
+						&copy; 2012, <a href="http://clabs.co">creativeLabs</a>. Designed by <a href="http://clabs.co">creativeLabs</a> in Poland <img src="img/poland.png" alt="Poland" style="margin-top:-4px">
+					</div>
+					
+				</div>
+				<!-- end: Under Footer Copyright -->
+
+				<!-- start: Under Footer Back To Top -->
+				<div class="span1">
+						
+					<div id="under-footer-back-to-top">
+						<a href="#"></a>
+					</div>
+				
+				</div>
+				<!-- end: Under Footer Back To Top -->
+			
+			</div>
+			<!-- end: Row -->
+			
+		</div>	
+		<!-- end: Container  -->
+		
+	</div>
+	<!-- end: Under Footer -->	
+
+<!-- start: Java Script -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery-1.8.2.js"></script>
+<script src="js/isotope.js"></script>
+<script src="js/jquery.imagesloaded.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/flexslider.js"></script>
+<script src="js/carousel.js"></script>
+<script src="js/jquery.cslider.js"></script>
+<script src="js/slider.js"></script>
+<script src="js/fancybox.js"></script>
+<script src="js/twitter.js"></script>
+<script src="js/jquery.placeholder.min.js"></script>
+
+<script src="js/jquery-easing-1.3.js"></script>
+<script src="js/layerslider.kreaturamedia.jquery.js"></script>
+
+<script src="js/excanvas.js"></script>
+<script src="js/jquery.flot.js"></script>
+<script src="js/jquery.flot.pie.min.js"></script>
+<script src="js/jquery.flot.stack.js"></script>
+<script src="js/jquery.flot.resize.min.js"></script>
+
+<script defer="defer" src="js/modernizr.js"></script>
+<script defer="defer" src="js/retina.js"></script>
+<script defer="defer" src="js/custom.js"></script>
+<!-- end: Java Script -->
+
+</body>
+</html>

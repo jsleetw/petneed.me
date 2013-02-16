@@ -1,0 +1,88 @@
+header {
+	position: static;
+}
+
+#wrapper {
+	margin-top: -20px;
+	margin-bottom: 30px;
+}
+
+#page-title {
+	margin-top: -50px;
+	margin-bottom: 50px;
+}
+
+hr {
+	height: 0px;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #ddd;
+}
+
+.separate:before,
+#page-title:before{
+	background: #bbb;
+}
+
+.separate:after,
+#page-title:after {
+	background: #ddd;
+}
+
+.page-title-small:before {
+	background: #bbb;
+}
+
+.page-title-small:after {
+	background: #fff;
+}
+
+#page-title h2 {
+	font-family: 'Economica', Arial, sans-serif !important;
+	color: #bbb;
+	font-weight: bold;
+}
+
+#googlemaps {
+	margin-top: -20px;
+}
+
+.meter > span:after, 
+.animate > span > spans li.current {
+	background: #080808; /* Old browsers */
+}
+
+.testimonials {
+	border: 1px solid #ddd;
+}
+
+.carousel-disabled,
+.mr-rotato-disabled,
+.mr-rotato-next, 
+.mr-rotato-prev {
+	border: 1px solid #ddd;
+}
+
+.nav-tabs {
+	border-bottom: 1px solid #ddd !important;	
+}
+
+.nav-tabs > li {
+  	margin-bottom: -1px;
+}
+
+.nav-tabs > li > a {
+	border-bottom: 1px solid #ddd !important;	
+}
+
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover {
+	border-left: 1px solid #ddd !important;	
+	border-right: 1px solid #ddd !important;	
+	border-top: 1px solid #ddd !important;	
+}
+
+.tab-content {
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;			
+}
