@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'animal.views.home', name='home'),
     # catch all, redirect to myfirstapp home view
-    url(r'.*', redirect_to, {'url': '/'}),
+    #url(r'.*', redirect_to, {'url': '/'}),
 
     # url(r'^pets/', include('pets.foo.urls')),
 

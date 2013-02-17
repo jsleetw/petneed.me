@@ -21,8 +21,10 @@ def page(request):
     print animals
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
-
     return render_to_response('page.html', {"animals": animals} )
+
+def login(request):
+      return render_to_response('login.html')
 
 #TODO: use view get image
 def get_img(request):
