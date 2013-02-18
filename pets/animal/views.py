@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from models import Animal
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template import RequestContext
 
 def home(request):
     animals = Animal.objects.order_by("-id")
@@ -11,7 +12,8 @@ def home(request):
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
 
-    return render_to_response('index.html', {"animals": animals} )
+    return render_to_response('index.html', {"animals": animals},
+            context_instance=RequestContext(request) )
 
 def page(request):
     page = int(request.path_info.strip('/animal/page/'))
