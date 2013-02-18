@@ -21,7 +21,6 @@
 	<meta property="og:url" content=""/>
 	<meta property="og:image" content=""/>
 	<!-- end: Facebook Open Graph -->
-
 <!-- start: CSS -->
 {% load compress %}
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
@@ -94,7 +93,7 @@
 {% for i in animals %}
 				<div class="span3 item element">
 					<div class="picture">
-                        <a class="image" href="{{ STATIC_URL }}media/{{i.image_file}}" title="{{i.name}}"><img src="{{ STATIC_URL }}media/{{i.smal_img_file}}" alt=""/></a>
+                        <a class="image" href="{{ MEDIA_URL }}{{i.image_file}}" title="{{i.name}}"><img src="{{ MEDIA_URL }}{{i.smal_img_file}}" alt=""/></a>
 						<div class="description">
 							<p>{{i.note}}
 							</p>
