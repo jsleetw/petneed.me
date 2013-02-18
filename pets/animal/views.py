@@ -26,7 +26,8 @@ def page(request):
     return render_to_response('page.html', {"animals": animals} )
 
 def login(request):
-      return render_to_response('login.html')
+      return render_to_response('login.html',
+              context_instance=RequestContext(request))
 
 #TODO: use view get image
 def get_img(request):
