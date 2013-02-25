@@ -3,10 +3,10 @@ import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-COMPRESS_ENABLED = False    
+COMPRESS_ENABLED = True
 COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
-COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = False
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),

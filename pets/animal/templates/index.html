@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} petneed.me | home {% endblock title %}
+{% block title %}petneed.me|home{% endblock title %}
 
 {% block context %}
 <div id="container" class="container">
@@ -33,31 +33,7 @@
     </div>
 {% endblock %}
 
-{% block js %}
-{% load compress %}
-{% compress js %}
-<script src="{{ STATIC_URL }}js/jquery-1.8.2.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.isotope.min.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.imagesloaded.js"></script>
-<script src="{{ STATIC_URL }}js/bootstrap.js"></script>
-<script src="{{ STATIC_URL }}js/flexslider.js"></script>
-<script src="{{ STATIC_URL }}js/carousel.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.cslider.js"></script>
-<script src="{{ STATIC_URL }}js/slider.js"></script>
-<script src="{{ STATIC_URL }}js/fancybox.js"></script>
-<script src="{{ STATIC_URL }}js/twitter.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.placeholder.min.js"></script>
-<script src="{{ STATIC_URL }}js/jquery-easing-1.3.js"></script>
-<script src="{{ STATIC_URL }}js/layerslider.kreaturamedia.jquery.js"></script>
-<script src="{{ STATIC_URL }}js/excanvas.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.flot.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.flot.pie.min.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.flot.stack.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.flot.resize.min.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.infinitescroll.min.js"></script>
-<script defer="defer" src="{{ STATIC_URL }}js/modernizr.js"></script>
-<script defer="defer" src="{{ STATIC_URL }}js/retina.js"></script>
-<script defer="defer" src="{{ STATIC_URL }}js/custom.js"></script>
+{% block js_in_doc %}
 <script>
     jQuery(document).ready(function () {
         var $container = $('#wall');
@@ -65,7 +41,7 @@
             itemSelector : '.element'
         });
         $container.infinitescroll({
-            navSelector  : '#page_nav',    // selector for the paged navigation 
+            navSelector  : '#page_nav',    // selector for the paged navigation
             nextSelector : '#page_nav a',  // selector for the NEXT link (to page 2)
             itemSelector : '.element',     // selector for all items you'll retrieve
         },
@@ -76,5 +52,4 @@
         );
     });
 </script>
-{% endcompress %}
-{% endblock %}
+{% endblock js_in_doc %}
