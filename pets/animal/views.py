@@ -29,6 +29,10 @@ def login(request):
       return render_to_response('login.html',
               context_instance=RequestContext(request))
 
+def register(request):
+      return render_to_response('register.html',
+              context_instance=RequestContext(request))
+
 #TODO: use view get image
 def get_img(request):
     pass
