@@ -5,6 +5,7 @@ import urllib2
 import os
 import Image
 
+
 class Command(BaseCommand):
     args = '<>'
     help = 'get animal data from http://data.taipei.gov.tw'
@@ -65,7 +66,7 @@ class Command(BaseCommand):
         miniature_filename = os.path.join(filehead, miniature)
         filehead, filetail = os.path.split(file.url)
         miniature_url = filehead + '/' + miniature
-        if os.path.exists(miniature_filename) and os.path.getmtime(filename) >os.path.getmtime(miniature_filename):
+        if os.path.exists(miniature_filename) and os.path.getmtime(filename) > os.path.getmtime(miniature_filename):
             os.unlink(miniature_filename)
         # if the image wasn't already resized, resize it
         if not os.path.exists(miniature_filename):
@@ -77,5 +78,3 @@ class Command(BaseCommand):
                 image.save(miniature_filename, image.format, quality=90)
 
         return miniature_url
-
-
