@@ -4,3 +4,4 @@
 pets/animal/pics/
 pets/src/media/*.jpg
 *.pyc
+settings.py
