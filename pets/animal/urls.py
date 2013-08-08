@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^home', 'animal.views.home'),
     url(r'^page/', 'animal.views.page'),
     url(r'^login', 'animal.views.login'),
+    url(r'^facebook_login', 'animal.views.facebook_login'),
     url(r'^register', 'animal.views.register'),
     #url(r'^get_img', 'animal.views.get_img'),
 )
