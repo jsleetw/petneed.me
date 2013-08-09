@@ -2,6 +2,11 @@ from django.shortcuts import render_to_response
 from models import Animal
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import RequestContext
+import urllib
+import urllib2
+from urllib2 import HTTPError
+from django.http import HttpResponse
+from django.conf import settings
 
 def home(request):
     animals = Animal.objects.order_by("-id")
@@ -30,28 +35,30 @@ def login(request):
               context_instance=RequestContext(request))
 
 def facebook_login(request):
-    import urllib
-    import urllib2
-    from django.http import HttpResponse
-    url = "https://graph.facebook.com/oauth/access_token"
-    data = {}
-    data['client_id'] = '370831489709069'
-    data['redirect_uri'] = "http://localhost:8000/animal/facebook_login"
-    data['client_secret'] = ""
-    data['code'] = request.GET['code']
-    data = urllib.urlencode(data)
-    req = urllib2.Request(url, data)
-    response = urllib2.urlopen(req)
-    html = response.read()
-    res = html.split("&")
-    access_token = res[0].replace("access_token=","")
+    try:
+        url = "https://graph.facebook.com/oauth/access_token"
+        data = {}
+        data['client_id'] = settings.FACEBOOK_APP_ID
+        data['redirect_uri'] = "http://localhost:8000/animal/facebook_login"
+        data['client_secret'] = settings.FACEBOOK_API_SECRET
+        data['code'] = request.GET['code']
+        data = urllib.urlencode(data)
+        req = urllib2.Request(url, data)
+        print req
+        response = urllib2.urlopen(req)
+        html = response.read()
+        res = html.split("&")
+        access_token = res[0].replace("access_token=","")
+    except HTTPError as e:
+        return HttpResponse("Get access token error: " + e.reason)
     #get app_token
     url = "https://graph.facebook.com/oauth/access_token"
     data = {}
-    data['client_id'] = '370831489709069'
-    data['client_secret'] = ""
+    data['client_id'] = settings.FACEBOOK_APP_ID
+    data['client_secret'] = settings.FACEBOOK_API_SECRET
     data['grant_type'] = "client_credentials"
     data = urllib.urlencode(data)
+    print req
     req = urllib2.Request(url, data)
     response = urllib2.urlopen(req)
     html = response.read()
@@ -63,9 +70,8 @@ def facebook_login(request):
     data['input_token'] = access_token
     data['access_token'] = app_token
     data = urllib.urlencode(data)
-    print data
-    #req = urllib2.Request(url, data)
     req = "%s?%s" % (url , data)
+    print req
     response = urllib2.urlopen(req)
     html = response.read()
     return HttpResponse(html)
