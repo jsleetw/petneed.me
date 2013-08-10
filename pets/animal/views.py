@@ -1,7 +1,10 @@
 from django.shortcuts import render_to_response
+from django.http import HttpResponse
 from models import Animal
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import RequestContext
+from django.utils import simplejson
+from django.core import serializers
 
 def home(request):
     animals = Animal.objects.order_by("-id")
@@ -28,6 +31,12 @@ def page(request):
 def login(request):
       return render_to_response('login.html',
               context_instance=RequestContext(request))
+
+def get_animals(request):
+    animals = Animal.objects.order_by("-id")
+    json = serializers.serialize('json', animals)
+    # print json.decode("unicode_escape")
+    return HttpResponse(json.decode("unicode_escape"), mimetype="application/json")
 
 #TODO: use view get image
 def get_img(request):

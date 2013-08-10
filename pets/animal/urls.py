@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     url(r'^home', 'animal.views.home'),
     url(r'^page/', 'animal.views.page'),
     url(r'^login', 'animal.views.login'),
+    url(r'^API/0.1/animals/$', 'animal.views.get_animals'),
     #url(r'^get_img', 'animal.views.get_img'),
 )
