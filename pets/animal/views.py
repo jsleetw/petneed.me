@@ -49,7 +49,7 @@ def get_animals(request):
                                     'chip_num': animal.chip_num,
                                     'is_sterilization': animal.is_sterilization,
                                     'hair_type': animal.hair_type,
-                                    'note': animal.note,
+                                    'note': animal.note.replace('"', '\\"'),
                                     'resettlement': animal.resettlement,
                                     'phone': animal.phone,
                                     'email': animal.email,
@@ -58,10 +58,10 @@ def get_animals(request):
                                     'bodyweight': animal.bodyweight,
                                     'image_name': animal.image_name,
                                     'image_file': animal.image_file,
-                                    'pub_date': animal.pub_date.strftime("%B %d, %Y") } 
+                                    'pub_date': animal.pub_date.strftime('%B %d, %Y') } 
                                         for animal in animals] )
     # print json.decode("unicode_escape")
-    return HttpResponse(json.decode("unicode_escape"), mimetype="application/json")
+    return HttpResponse(json.decode('unicode_escape'), mimetype='application/json')
 
 def facebook_login(request):
     try:
