@@ -4,7 +4,6 @@ from models import Animal
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import RequestContext
 from django.utils import simplejson
-from django.core import serializers
 import urllib
 import urllib2
 from urllib2 import HTTPError
@@ -39,9 +38,30 @@ def login(request):
 
 def get_animals(request):
     animals = Animal.objects.order_by("-id")
-    json = serializers.serialize('json', animals)
+    json = simplejson.dumps([{'accept_num': animal.accept_num,
+                                    'name': animal.name,
+                                    'sex': animal.sex,
+                                    'type': animal.type,
+                                    'build': animal.build,
+                                    'age': animal.age,
+                                    'variety': animal.variety,
+                                    'reason': animal.reason,
+                                    'chip_num': animal.chip_num,
+                                    'is_sterilization': animal.is_sterilization,
+                                    'hair_type': animal.hair_type,
+                                    'note': animal.note.replace('"', '\\"'),
+                                    'resettlement': animal.resettlement,
+                                    'phone': animal.phone,
+                                    'email': animal.email,
+                                    'childre_anlong': animal.childre_anlong,
+                                    'animal_anlong': animal.animal_anlong,
+                                    'bodyweight': animal.bodyweight,
+                                    'image_name': animal.image_name,
+                                    'image_file': animal.image_file,
+                                    'pub_date': animal.pub_date.strftime('%B %d, %Y') } 
+                                        for animal in animals] )
     # print json.decode("unicode_escape")
-    return HttpResponse(json.decode("unicode_escape"), mimetype="application/json")
+    return HttpResponse(json.decode('unicode_escape'), mimetype='application/json')
 
 def facebook_login(request):
     try:
