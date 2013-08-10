@@ -63,6 +63,36 @@ def get_animals(request):
     # print json.decode("unicode_escape")
     return HttpResponse(json.decode('unicode_escape'), mimetype='application/json')
 
+def get_specific_animal(request, accept_num):
+    animal = Animal.objects.filter(accept_num = accept_num)
+    print animal
+    if len(animal) > 0:
+        animal = animal[0]
+    else:
+        return HttpResponse(status=404, mimetype='application/json')
+    json = simplejson.dumps({'accept_num': animal.accept_num,
+                                    'name': animal.name,
+                                    'sex': animal.sex,
+                                    'type': animal.type,
+                                    'build': animal.build,
+                                    'age': animal.age,
+                                    'variety': animal.variety,
+                                    'reason': animal.reason,
+                                    'chip_num': animal.chip_num,
+                                    'is_sterilization': animal.is_sterilization,
+                                    'hair_type': animal.hair_type,
+                                    'note': animal.note,
+                                    'resettlement': animal.resettlement,
+                                    'phone': animal.phone,
+                                    'email': animal.email,
+                                    'childre_anlong': animal.childre_anlong,
+                                    'animal_anlong': animal.animal_anlong,
+                                    'bodyweight': animal.bodyweight,
+                                    'image_name': animal.image_name,
+                                    'image_file': animal.image_file,
+                                    'pub_date': animal.pub_date.strftime('%B %d, %Y') })
+    return HttpResponse(json.decode('unicode_escape'), mimetype='application/json')
+
 def facebook_login(request):
     try:
         url = "https://graph.facebook.com/oauth/access_token"
