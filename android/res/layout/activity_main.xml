@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <FrameLayout android:id="@+id/container"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/dlg_view_all"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#AA000000"
+        android:visibility="gone"
+        >
+        <me.petneed.android.view.AnimalDialogView_
+            android:id="@+id/dlg_view_animal_detail"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_centerInParent="true"
+            />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
