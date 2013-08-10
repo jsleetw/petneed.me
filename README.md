@@ -25,7 +25,7 @@ python manage.py get_animal
 ```
 FACEBOOK_APP_ID = ''
 FACEBOOK_API_SECRET = ''
-SECRET_KEY = '' <-random string and and don't share it with anybody.
+SECRET_KEY = '' <-random string and don't share it with anybody.
 ```
 
 5.Run development Server !
