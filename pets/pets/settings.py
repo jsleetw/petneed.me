@@ -129,7 +129,7 @@ INSTALLED_APPS = (
     'animal',
     'gunicorn',
     'compressor',
-    'social_auth',
+    #'social_auth',
 )
 
 # A sample logging configuration. The only tangible logging
