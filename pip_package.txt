@@ -8,3 +8,4 @@ gunicorn==0.17.2
 pysqlite==2.6.3
 six==1.2.0
 wsgiref==0.1.2
+django-social-auth==0.7.25

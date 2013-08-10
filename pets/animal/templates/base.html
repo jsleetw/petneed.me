@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- start: Meta -->
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock title %}</title>
+    <meta name="description" content="petneed.me pet need your love"/>
+    <meta name="keywords" content="pets adoption" />
+    <meta name="author" content="jslee"/>
+    <!-- end: Meta -->
+    <!-- start: Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- end: Mobile Specific -->
+    <!-- start: Facebook Open Graph -->
+    <meta property="og:title" content=""/>
+    <meta property="og:description" content=""/>
+    <meta property="og:type" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:image" content=""/>
+    <!-- end: Facebook Open Graph -->
+    <!-- start: CSS -->
+    {% load compress %}
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
+    {% compress css %}
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css">
+    <link href="{{ STATIC_URL }}css/layerslider.css" rel="stylesheet" type="text/css">
+    {% endcompress %}
+    <!--[if lt IE 9 ]>
+    <link href="{{ STATIC_URL }}css/styleIE.css" rel="stylesheet">
+    <![endif]-->
+    <!--[if IE 9 ]>
+    <link href="{{ STATIC_URL }}css/styleIE9.css" rel="stylesheet">
+    <![endif]-->
+    <!-- end: CSS -->
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '370831489709069', // App ID
+            channelUrl : '//beta.petneed.me/static/html/fb_channel.html', // Channel File
+            status     : true, // check login status
+            cookie     : true, // enable cookies to allow the server to access the session
+            xfbml      : true  // parse XFBML
+        });
+
+  // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
+  // for any authentication related change, such as login, logout or session refresh. This means that
+  // whenever someone who was previously logged out tries to log in again, the correct case below 
+  // will be handled. 
+  FB.Event.subscribe('auth.authResponseChange', function(response) {
+    // Here we specify what we do with the response anytime this event occurs. 
+    if (response.status === 'connected') {
+      // The response object is returned with a status field that lets the app know the current
+      // login status of the person. In this case, we're handling the situation where they 
+      // have logged in to the app.
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      // In this case, the person is logged into Facebook, but not into the app, so we call
+      // FB.login() to prompt them to do so. 
+      // In real-life usage, you wouldn't want to immediately prompt someone to login 
+      // like this, for two reasons:
+      // (1) JavaScript created popup windows are blocked by most browsers unless they 
+      // result from direct interaction from people using the app (such as a mouse click)
+      // (2) it is a bad experience to be continually prompted to login upon page load.
+      FB.login();
+    } else {
+      // In this case, the person is not logged into Facebook, so we call the login() 
+      // function to prompt them to do so. Note that at this stage there is no indication
+      // of whether they are logged into the app. If they aren't then they'll see the Login
+      // dialog right after they log in to Facebook. 
+      // The same caveats as above apply to the FB.login() call here.
+      FB.login();
+    }
+  });
+  };
+
+  // Load the SDK asynchronously
+  (function(d){
+   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement('script'); js.id = id; js.async = true;
+   js.src = "//connect.facebook.net/en_US/all.js";
+   ref.parentNode.insertBefore(js, ref);
+  }(document));
+
+  // Here we run a very simple test of the Graph API after login is successful. 
+  // This testAPI() function is only called in those cases. 
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Good to see you, ' + response.name + '.');
+    });
+  }
+</script>
+    <!--start: Header -->
+    <header>
+    <!--start: Container -->
+    <div class="container">
+        <!--start: Navigation -->
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="/">petneed.me</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li class="active"><a href="/animal/login">Login</a></li>
+                        <li class="active"><a href="/animal/register">Register</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--end: Navigation -->
+    </div>
+    <!--end: Container-->
+    </header>
+    <!--end: Header-->
+    <!--start: Container -->
+    {% block context %}
+    {% endblock context %}
+    <!--end: Container-->
+</div>
+<!-- end: Wrapper  -->
+<!-- start: Footer -->
+<div id="footer">
+    <!-- start: Container -->
+    <div class="container">
+        <!-- start: Row -->
+        <div class="row-fluid">
+            <!-- start: About -->
+            <div class="span3">
+                <h3></h3>
+                <p>
+                <i class="fa-icon-envelope"></i> Email: mr@jslee.name
+                </p>
+            </div>
+            <!-- end: About -->
+            <!-- start: Latest Tweets -->
+            <div class="span3">
+                <h3></h3>
+                <ul id="twitter">
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <!-- end: Latest Tweets -->
+            <!-- start: Photo Stream -->
+            <div class="span3">
+                <h3></h3>
+                <div class="flickr-widget">
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <!-- end: Photo Stream -->
+            <!-- start: Follow Us -->
+            <div class="span3">
+                <h3></h3>
+            </div>
+            <!-- end: Follow Us -->
+        </div>
+        <!-- end: Row -->
+    </div>
+    <!-- end: Container  -->
+</div>
+<!-- end: Footer -->
+<!-- start: Under Footer -->
+<div id="under-footer">
+    <!-- start: Container -->
+    <div class="container">
+        <!-- start: Row -->
+        <div class="row-fluid">
+            <!-- start: Under Footer Logo -->
+            <div class="span2">
+                <div id="under-footer-logo">
+                    <a class="brand" href="#">petneed.me</a>
+                </div>
+            </div>
+            <!-- end: Under Footer Logo -->
+            <!-- start: Under Footer Copyright -->
+            <div class="span9">
+                <div id="under-footer-copyright">
+                    &copy; 2013 petneed.me . Created by <a href="http://jslee.name/">jslee</a> in Taiwan.
+                </div>
+            </div>
+            <!-- end: Under Footer Copyright -->
+            <!-- start: Under Footer Back To Top -->
+            <div class="span1">
+                <div id="under-footer-back-to-top">
+                    <a href="#"></a>
+                </div>
+            </div>
+            <!-- end: Under Footer Back To Top -->
+        </div>
+        <!-- end: Row -->
+    </div>
+    <!-- end: Container  -->
+</div>
+<!-- end: Under Footer -->
+<!-- start: Java Script -->
+{% load compress %}
+{% compress js %}
+<script src="{{ STATIC_URL }}js/jquery-1.8.2.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.isotope.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.imagesloaded.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+<script src="{{ STATIC_URL }}js/flexslider.js"></script>
+<script src="{{ STATIC_URL }}js/carousel.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.cslider.js"></script>
+<script src="{{ STATIC_URL }}js/slider.js"></script>
+<script src="{{ STATIC_URL }}js/fancybox.js"></script>
+<script src="{{ STATIC_URL }}js/twitter.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.placeholder.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery-easing-1.3.js"></script>
+<script src="{{ STATIC_URL }}js/layerslider.kreaturamedia.jquery.js"></script>
+<script src="{{ STATIC_URL }}js/excanvas.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.flot.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.flot.pie.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.flot.stack.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.flot.resize.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.infinitescroll.min.js"></script>
+<script defer="defer" src="{{ STATIC_URL }}js/modernizr.js"></script>
+<script defer="defer" src="{{ STATIC_URL }}js/retina.js"></script>
+<script defer="defer" src="{{ STATIC_URL }}js/custom.js"></script>
+{% block js_in_doc %} {% endblock js_in_doc %}
+{% endcompress %}
+<!-- end: Java Script -->
+</body>
+</html>
