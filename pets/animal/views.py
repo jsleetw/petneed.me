@@ -1,7 +1,9 @@
 from django.shortcuts import render_to_response
+from django.http import HttpResponse
 from models import Animal
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import RequestContext
+from django.utils import simplejson
 import urllib
 import urllib2
 from urllib2 import HTTPError
@@ -33,6 +35,71 @@ def page(request):
 def login(request):
       return render_to_response('login.html',
               context_instance=RequestContext(request))
+
+def get_animals(request):
+    animals = Animal.objects.order_by('-id')
+    if request.GET.get('limit'):
+        limit_num = int(request.GET.get('limit'))
+        pages = Paginator(animals, limit_num)
+        if request.GET.get('page'):
+            page_num = request.GET.get('page')
+            animals = pages.page(page_num)
+        else:
+            animals = pages.page(1)
+    json = simplejson.dumps([{'accept_num': animal.accept_num,
+                                    'name': animal.name,
+                                    'sex': animal.sex,
+                                    'type': animal.type,
+                                    'build': animal.build,
+                                    'age': animal.age,
+                                    'variety': animal.variety,
+                                    'reason': animal.reason,
+                                    'chip_num': animal.chip_num,
+                                    'is_sterilization': animal.is_sterilization,
+                                    'hair_type': animal.hair_type,
+                                    'note': animal.note.replace('"', '\\"'),
+                                    'resettlement': animal.resettlement,
+                                    'phone': animal.phone,
+                                    'email': animal.email,
+                                    'childre_anlong': animal.childre_anlong,
+                                    'animal_anlong': animal.animal_anlong,
+                                    'bodyweight': animal.bodyweight,
+                                    'image_name': animal.image_name,
+                                    'image_file': animal.image_file,
+                                    'pub_date': animal.pub_date.strftime('%B %d, %Y') } 
+                                        for animal in animals] )
+    # print json.decode("unicode_escape")
+    return HttpResponse(json.decode('unicode_escape'), mimetype='application/json')
+
+def get_specific_animal(request, accept_num):
+    animal = Animal.objects.filter(accept_num = accept_num)
+    print animal
+    if len(animal) > 0:
+        animal = animal[0]
+    else:
+        return HttpResponse(status=404, mimetype='application/json')
+    json = simplejson.dumps({'accept_num': animal.accept_num,
+                                    'name': animal.name,
+                                    'sex': animal.sex,
+                                    'type': animal.type,
+                                    'build': animal.build,
+                                    'age': animal.age,
+                                    'variety': animal.variety,
+                                    'reason': animal.reason,
+                                    'chip_num': animal.chip_num,
+                                    'is_sterilization': animal.is_sterilization,
+                                    'hair_type': animal.hair_type,
+                                    'note': animal.note,
+                                    'resettlement': animal.resettlement,
+                                    'phone': animal.phone,
+                                    'email': animal.email,
+                                    'childre_anlong': animal.childre_anlong,
+                                    'animal_anlong': animal.animal_anlong,
+                                    'bodyweight': animal.bodyweight,
+                                    'image_name': animal.image_name,
+                                    'image_file': animal.image_file,
+                                    'pub_date': animal.pub_date.strftime('%B %d, %Y') })
+    return HttpResponse(json.decode('unicode_escape'), mimetype='application/json')
 
 def facebook_login(request):
     try:

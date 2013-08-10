@@ -467,10 +467,14 @@ header {
 #wall .item {
 	margin: 0px;
 	margin-bottom: 30px;
+	height: 500px;
+	overflow: hidden;
 }
 
 #wall .item .meta {
 	margin-top: 10px;
+	position: absolute;
+	bottom: 20px;	
 }
 
 #wall .item .meta span {
@@ -500,6 +504,8 @@ header {
 #portfolio .item .picture a.image {
 	width: 100%; 
 	height: auto;
+	max-height: 300px;
+	overflow: hidden;
 	display: block;
 	-webkit-border-radius: 2px;
 	   -moz-border-radius: 2px;
@@ -521,6 +527,8 @@ header {
 }
 #wall .item .picture .description {
 	margin-top: 10px;
+	height:115px;
+	overflow: scroll;
 }
 
 
