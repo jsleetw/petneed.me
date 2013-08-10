@@ -37,13 +37,12 @@ def login(request):
       return render_to_response('login.html',
               context_instance=RequestContext(request))
 
-<<<<<<< HEAD
 def get_animals(request):
     animals = Animal.objects.order_by("-id")
     json = serializers.serialize('json', animals)
     # print json.decode("unicode_escape")
     return HttpResponse(json.decode("unicode_escape"), mimetype="application/json")
-=======
+
 def facebook_login(request):
     try:
         url = "https://graph.facebook.com/oauth/access_token"
@@ -89,7 +88,6 @@ def facebook_login(request):
 def register(request):
       return render_to_response('register.html',
               context_instance=RequestContext(request))
->>>>>>> dev
 
 #TODO: use view get image
 def get_img(request):
