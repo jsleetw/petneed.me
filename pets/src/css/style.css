@@ -401,6 +401,12 @@ header {
   	border-bottom-color: #080808 !important;	
 }
 
+.nav-logo {
+	position:absolute;
+	margin-left:-80px;
+	margin-top:-30px;
+}
+
 /* Wrapper
 =================================================================== */
 
