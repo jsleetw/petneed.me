@@ -4,4 +4,4 @@
 pets/animal/pics/
 pets/src/media/*.jpg
 *.pyc
-settings.py
+local_settings.py

@@ -123,12 +123,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'animal',
     'gunicorn',
     'compressor',
+    'social_auth',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -160,5 +161,4 @@ LOGGING = {
     }
 }
 
-FACEBOOK_APP_ID = ''
-FACEBOOK_API_SECRET = ''
+from local_settings import *
