@@ -27,6 +27,11 @@ FACEBOOK_APP_ID                   = ''
 FACEBOOK_API_SECRET               = ''
 ```
 
+5.Run development Server !
+```
+python manage.py runserver
+```
+
 
 ## contributor
 * JS Lee
