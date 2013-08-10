@@ -23,8 +23,9 @@ python manage.py get_animal
 
 4.setup local_setting
 ```
-FACEBOOK_APP_ID                   = ''
-FACEBOOK_API_SECRET               = ''
+FACEBOOK_APP_ID = ''
+FACEBOOK_API_SECRET = ''
+SECRET_KEY = '' <-random string and and don't share it with anybody.
 ```
 
 5.Run development Server !
