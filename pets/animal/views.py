@@ -37,7 +37,15 @@ def login(request):
               context_instance=RequestContext(request))
 
 def get_animals(request):
-    animals = Animal.objects.order_by("-id")
+    animals = Animal.objects.order_by('-id')
+    if request.GET.get('limit'):
+        limit_num = int(request.GET.get('limit'))
+        pages = Paginator(animals, limit_num)
+        if request.GET.get('page'):
+            page_num = request.GET.get('page')
+            animals = pages.page(page_num)
+        else:
+            animals = pages.page(1)
     json = simplejson.dumps([{'accept_num': animal.accept_num,
                                     'name': animal.name,
                                     'sex': animal.sex,
