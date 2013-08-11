@@ -1,0 +1,46 @@
+{
+  "author": "jsleetw",
+  "contributors": [
+    "jsleetw",
+    "yeosblue",
+    "cosecantTW",
+    "waitingkuo",
+    "ttcat",
+    "linfion",
+  ],
+  "status": "beta",
+  "name": "petneedme",
+  "name_zh": "寵物需要我",
+  "description": "Pet adoption platfrom",
+  "description_zh": "寵物認養平台",
+  "homepage": "http://petneed.me/",
+  "document": "https://github.com/jsleetw/petneed.me",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jsleetw/petneed.me"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "keywords": [
+    "javascript",
+    "python",
+    "django"
+  ],
+  "audience": [
+    "public"
+  ],
+  "products": [
+    "website"
+  ],
+  "projects": [
+    "truth"
+  ],
+  "thumbnail": "https://raw.github.com/jsleetw/petneed.me/master/pets/src/img/petNeedme_full_color.png",
+  "needs": [
+    "designer",
+    "coder",
+  ]
+}
