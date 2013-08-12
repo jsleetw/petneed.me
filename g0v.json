@@ -41,6 +41,6 @@
   "thumbnail": "https://raw.github.com/jsleetw/petneed.me/master/pets/src/img/petNeedme_full_color.png",
   "needs": [
     "designer",
-    "coder",
+    "coder"
   ]
 }
