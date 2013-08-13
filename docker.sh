@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+PORT='4243'
+
 if [ "$(cat /etc/hostname)" = "sandbox" ]; then
 
   SCRIPT="$(readlink -f $0)"
@@ -23,10 +25,10 @@ ENDLINE
     python manage.py get_animal
   fi
 
-  python manage.py runserver 0.0.0.0:8000
+  python manage.py runserver 0.0.0.0:$PORT
 
 else
 
-  sudo docker run -e LANG="en_US.UTF-8" -e LANGUAGE="en_US:en" -u 1000 -p 8000:8000 -v $PWD:/petneed.me -t -i petneed.me /petneed.me/docker.sh
+  sudo docker run -e LANG="en_US.UTF-8" -e LANGUAGE="en_US:en" -u 1000 -p $PORT:$PORT -v $PWD:/petneed.me -t -i petneed.me /petneed.me/docker.sh
 
 fi
