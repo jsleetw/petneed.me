@@ -33,6 +33,20 @@ SECRET_KEY = '' <-random string and don't share it with anybody.
 python manage.py runserver
 ```
 
+## Run by the way of http://docker.io
+
+
+### Setup the development environment
+
+```
+sudo docker build -t petneed.me - < Dockerfile
+```
+
+### Start the app.
+
+```
+./docker.sh
+```
 
 ## contributor
 * JS Lee

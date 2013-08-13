@@ -16,7 +16,7 @@ class Command(BaseCommand):
         data = urllib2.urlopen(self.url)
         j = json.load(data)
         for i in j:
-            print i["Name"]
+            print (i["Name"]).encode('utf-8')
             a1 = Animal.objects.filter(accept_num=i["AcceptNum"])
             print a1
             if not a1:
