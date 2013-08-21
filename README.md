@@ -51,16 +51,10 @@ vagrant up
 vagrant ssh
 ```
 
-### Setup the development environment
+### Setup the development environment and start the app.
 
 ```
 vagrant@precise64:~$ cd /vagrant
-vagrant@precise64:/vagrant$ sudo docker build -t petneed.me - < Dockerfile
-```
-
-### Start the app.
-
-```
 vagrant@precise64:/vagrant$ ./docker.sh
 ```
 
