@@ -29,6 +29,9 @@ ENDLINE
 
 else
 
+  if sudo docker inspect petneed.me |& grep 'No such image'; then
+    sudo docker build -t petneed.me - < Dockerfile
+  fi
   sudo docker run -e LANG="en_US.UTF-8" -e LANGUAGE="en_US:en" -u 1000 -p $PORT:$PORT -v $PWD:/petneed.me -t -i petneed.me /petneed.me/docker.sh
 
 fi
