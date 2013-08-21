@@ -33,19 +33,35 @@ SECRET_KEY = '' <-random string and don't share it with anybody.
 python manage.py runserver
 ```
 
-## Run by the way of http://docker.io
+## Run by http://docker.io
 
+### Install Vagrant
+
+http://downloads.vagrantup.com
+
+### Setup a VM via Vagrant
+
+```
+vagrant up
+```
+
+### Connect to the VM
+
+```
+vagrant ssh
+```
 
 ### Setup the development environment
 
 ```
-sudo docker build -t petneed.me - < Dockerfile
+vagrant@precise64:~$ cd /vagrant
+vagrant@precise64:/vagrant$ sudo docker build -t petneed.me - < Dockerfile
 ```
 
 ### Start the app.
 
 ```
-./docker.sh
+vagrant@precise64:/vagrant$ ./docker.sh
 ```
 
 ## contributor
