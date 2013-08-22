@@ -24,3 +24,10 @@ class Animal(models.Model):
     image_name = models.URLField(max_length=200)
     image_file = models.CharField(max_length=200)
     pub_date = models.DateTimeField(auto_now=True)
+
+class User(models.Model):
+    email = models.EmailField()
+    is_fb = models.BooleanField()
+    fb_access_token = models.CharField(max_length=200)
+    fb_user_id = models.IntegerField()
+    last_login_date = models.DateTimeField(auto_now=True)
