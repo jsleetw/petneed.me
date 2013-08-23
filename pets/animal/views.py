@@ -146,7 +146,7 @@ def facebook_login(request):
     print "app_token:" + str(app_token)
     debug_json = __get_debug_json(request, access_token, app_token)
     print "debug_json:" + str(debug_json)
-    #get debug token
+    #TODO:jslee save access token
     return HttpResponse(debug_json)
 
 def register(request):
