@@ -101,47 +101,53 @@ def get_specific_animal(request, accept_num):
                                     'pub_date': animal.pub_date.strftime('%B %d, %Y') })
     return HttpResponse(json.decode('unicode_escape'), mimetype='application/json')
 
-def facebook_login(request):
-    try:
-        url = "https://graph.facebook.com/oauth/access_token"
-        data = {}
-        data['client_id'] = settings.FACEBOOK_APP_ID
-        data['redirect_uri'] = "http://localhost:8000/animal/facebook_login"
-        data['client_secret'] = settings.FACEBOOK_API_SECRET
-        data['code'] = request.GET['code']
-        data = urllib.urlencode(data)
-        req = urllib2.Request(url, data)
-        print req
-        response = urllib2.urlopen(req)
-        html = response.read()
-        res = html.split("&")
-        access_token = res[0].replace("access_token=","")
-    except HTTPError as e:
-        return HttpResponse("Get access token error: " + e.reason)
-    #get app_token
+def __get_access_token(request):
+    url = "https://graph.facebook.com/oauth/access_token"
+    data = {}
+    data['client_id'] = settings.FACEBOOK_APP_ID
+    data['redirect_uri'] = "http://localhost:8000/animal/facebook_login"
+    data['client_secret'] = settings.FACEBOOK_API_SECRET
+    data['code'] = request.GET['code']
+    data = urllib.urlencode(data)
+    req = urllib2.Request(url, data)
+    response = urllib2.urlopen(req)
+    html = response.read()
+    res = html.split("&")
+    access_token = res[0].replace("access_token=","")
+    return access_token
+
+def __get_app_token(request):
     url = "https://graph.facebook.com/oauth/access_token"
     data = {}
     data['client_id'] = settings.FACEBOOK_APP_ID
     data['client_secret'] = settings.FACEBOOK_API_SECRET
     data['grant_type'] = "client_credentials"
     data = urllib.urlencode(data)
-    print req
     req = urllib2.Request(url, data)
     response = urllib2.urlopen(req)
     html = response.read()
     app_token = html.replace("access_token=","")
-    print app_token
-    #get debug token
+    return app_token
+
+def __get_debug_json(request, access_token, app_token):
     url = "https://graph.facebook.com/debug_token"
     data = {}
     data['input_token'] = access_token
     data['access_token'] = app_token
     data = urllib.urlencode(data)
     req = "%s?%s" % (url , data)
-    print req
     response = urllib2.urlopen(req)
-    html = response.read()
-    return HttpResponse(html)
+    return response.read()
+
+def facebook_login(request):
+    access_token = __get_access_token(request)
+    print "access_token:" + str(access_token)
+    app_token = __get_app_token(request)
+    print "app_token:" + str(app_token)
+    debug_json = __get_debug_json(request, access_token, app_token)
+    print "debug_json:" + str(debug_json)
+    #get debug token
+    return HttpResponse(debug_json)
 
 def register(request):
       return render_to_response('register.html',
