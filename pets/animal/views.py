@@ -1,14 +1,17 @@
+import json
+import pprint
+import urllib
+import urllib2
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from models import Animal
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import RequestContext
 from django.utils import simplejson
-import urllib
-import urllib2
 from urllib2 import HTTPError
 from django.http import HttpResponse
 from django.conf import settings
+from animal.models import User
 
 def home(request):
     animals = Animal.objects.order_by("-id")
@@ -146,13 +149,20 @@ def facebook_login(request):
     print "app_token:" + str(app_token)
     debug_json = __get_debug_json(request, access_token, app_token)
     print "debug_json:" + str(debug_json)
-    #TODO:jslee save access token
+
+    debug_json_obj = json.loads(str(debug_json))
+    fb_user_id = debug_json_obj["data"]["user_id"]
+    f = User.objects.filter(fb_user_id=fb_user_id)
+    pprint.pprint(f)
+    if not f:
+        print "no data in User"
+    #TODO:@jslee:check token and update last_login_date
     return HttpResponse(debug_json)
 
 def register(request):
-      return render_to_response('register.html',
-              context_instance=RequestContext(request))
+    return render_to_response('register.html',
+            context_instance=RequestContext(request))
 
-#TODO: use view get image
+#TODO@jslee: use view get image
 def get_img(request):
     pass
