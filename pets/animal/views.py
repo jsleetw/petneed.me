@@ -155,7 +155,7 @@ def facebook_login(request):
     print "debug_json:" + str(debug_json)
     debug_json_obj = json.loads(str(debug_json))
     fb_user_id = debug_json_obj["data"]["user_id"]
-    f = User.objects.filter(fb_user_id=fb_user_id)
+    f = User.objects.get(fb_user_id=fb_user_id)
     if not f:
         #init new user data
         u = User(email="unknow",
@@ -164,14 +164,13 @@ def facebook_login(request):
                  fb_user_id=fb_user_id)
         u.save()
     else:
-        #compare access_token if changed then
-        print "fb_access_token:" + f[0].fb_access_token
-        if f[0].fb_access_token == access_token:
-            print "equl"
-        else:
-            #TODO:@jslee:update access_token and last_login_date
-            print "none equl"
-    #TODO:@jslee:check token and update last_login_date
+        #update access_token and last_login_date
+        f.access_token = access_token
+        from datetime import datetime
+        f.last_login_date = datetime.now()
+        print f.last_login_date
+        f.save()
+    #TODO:jslee:redirect back to front page
     return HttpResponse(debug_json)
 
 
