@@ -153,13 +153,24 @@ def facebook_login(request):
     print "app_token:" + str(app_token)
     debug_json = __get_debug_json(request, access_token, app_token)
     print "debug_json:" + str(debug_json)
-
     debug_json_obj = json.loads(str(debug_json))
     fb_user_id = debug_json_obj["data"]["user_id"]
     f = User.objects.filter(fb_user_id=fb_user_id)
-    pprint.pprint(f)
     if not f:
-        print "no data in User"
+        #init new user data
+        u = User(email="unknow",
+                 is_fb=True,
+                 fb_access_token=access_token,
+                 fb_user_id=fb_user_id)
+        u.save()
+    else:
+        #compare access_token if changed then
+        print "fb_access_token:" + f[0].fb_access_token
+        if f[0].fb_access_token == access_token:
+            print "equl"
+        else:
+            #TODO:@jslee:update access_token and last_login_date
+            print "none equl"
     #TODO:@jslee:check token and update last_login_date
     return HttpResponse(debug_json)
 
