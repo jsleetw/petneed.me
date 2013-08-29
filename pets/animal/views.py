@@ -3,14 +3,14 @@ import pprint
 import urllib
 import urllib2
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
-from models import Animal
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.template import RequestContext
 from django.utils import simplejson
 from django.conf import settings
-from animal.models import User
-
+from models import Animal
+from models import User
+from datetime import datetime
 
 def home(request):
     animals = Animal.objects.order_by("-id")
@@ -166,15 +166,16 @@ def facebook_login(request):
     else:
         #update access_token and last_login_date
         f.access_token = access_token
-        from datetime import datetime
         f.last_login_date = datetime.now()
         print f.last_login_date
         f.save()
-    #TODO:jslee:redirect back to front page
-    return HttpResponse(debug_json)
+    #redirect back to front page
+    return HttpResponseRedirect('/animal/login/')
 
 
 def register(request):
+    from django.contrib.auth.models import User
+    #TODO:jslee:add user by user input
     return render_to_response('register.html', context_instance=RequestContext(request))
 
 
