@@ -1,5 +1,4 @@
 import json
-import pprint
 import urllib
 import urllib2
 from django.shortcuts import render_to_response
@@ -11,6 +10,7 @@ from django.conf import settings
 from models import Animal
 from models import User
 from datetime import datetime
+
 
 def home(request):
     animals = Animal.objects.order_by("-id")
@@ -172,10 +172,28 @@ def facebook_login(request):
     #redirect back to front page
     return HttpResponseRedirect('/animal/login/')
 
+from django import forms
+
+
+class RegisterForm(forms.Form):
+    user = forms.EmailField()
+    password = forms.CharField(max_length=20)
+    conf_password = forms.CharField(max_length=20)
+
 
 def register(request):
-    from django.contrib.auth.models import User
-    #TODO:jslee:add user by user input
+    #from django.contrib.auth.models import User
+    if request.method == 'POST':
+        print "data input"
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            print "input valided"
+            #TODO:@jslee:update user models
+            return HttpResponseRedirect('/thanks/')
+        else:
+            print "invalided"
+    #TODO@jslee:show error on frontend
+    #see: https://docs.djangoproject.com/en/1.5/topics/forms/
     return render_to_response('register.html', context_instance=RequestContext(request))
 
 
