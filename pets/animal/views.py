@@ -188,15 +188,22 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             print "input valided"
-            #TODO:@jslee:update user models
+            user = request.POST.get("user")
+            password = request.POST.get("password")
+            conf_password = request.POST.get("conf_password")
+            print "user:" + user
+            print "password:" + password
+            print "conf_password:" + conf_password
+            #TODO:@jsleetw:update user models
             return HttpResponseRedirect('/thanks/')
+            #TODO:@jsleetw:thanks page
         else:
             print "invalided"
-    #TODO@jslee:show error on frontend
+    #TODO@jsleetw:show error on frontend
     #see: https://docs.djangoproject.com/en/1.5/topics/forms/
     return render_to_response('register.html', context_instance=RequestContext(request))
 
 
-#TODO@jslee: use view get image
+#TODO@jsleetw: use view get image
 def get_img(request):
     pass
