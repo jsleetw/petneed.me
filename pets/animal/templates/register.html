@@ -40,16 +40,19 @@
 						<h3 style="background:#f0f0f0">or</h3>
 
 					</div>
-
-                    <form method="post" action="/animal/register"><!--#TODO:@jslee:register by user input-->
-                    {% csrf_token %}
+                    {% if error_msg %}
+                        {{error_msg}}
+                    {% endif %}
+                    <form method="post" action="/animal/register">{% csrf_token %}
 						<div class="row-fluid">
 
 							<input class="span12" id="user" name="user" type="text" value="" placeholder="username"/>
 
-							<input class="span12" id="password" name="password" type="text" value="" placeholder="password"/>
+							<input class="span12" id="email" name="email" type="text" value="" placeholder="email"/>
 
-							<input class="span12" id="conf_password" name="conf_password" type="text" value="" placeholder="confirm password"/>
+							<input class="span12" id="password" name="password" type="password" value="" placeholder="password"/>
+
+							<input class="span12" id="conf_password" name="conf_password" type="password" value="" placeholder="confirm password"/>
 
 						</div>
 

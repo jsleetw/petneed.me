@@ -8,8 +8,17 @@ from django.template import RequestContext
 from django.utils import simplejson
 from django.conf import settings
 from models import Animal
-from models import User
+
 from datetime import datetime
+from django import forms
+from django.template.response import TemplateResponse
+
+
+class RegisterForm(forms.Form):
+    user = forms.CharField(max_length=20)
+    email = forms.EmailField(max_length=30)
+    password = forms.CharField(max_length=20)
+    conf_password = forms.CharField(max_length=20)
 
 
 def home(request):
@@ -147,6 +156,7 @@ def __get_debug_json(request, access_token, app_token):
 
 
 def facebook_login(request):
+    from models import User
     access_token = __get_access_token(request)
     print "access_token:" + str(access_token)
     app_token = __get_app_token(request)
@@ -172,36 +182,26 @@ def facebook_login(request):
     #redirect back to front page
     return HttpResponseRedirect('/animal/login/')
 
-from django import forms
-
-
-class RegisterForm(forms.Form):
-    user = forms.EmailField()
-    password = forms.CharField(max_length=20)
-    conf_password = forms.CharField(max_length=20)
-
 
 def register(request):
-    #from django.contrib.auth.models import User
+    from django.contrib.auth.models import User
+    error_msg = False
     if request.method == 'POST':
-        print "data input"
         form = RegisterForm(request.POST)
         if form.is_valid():
-            print "input valided"
             user = request.POST.get("user")
+            email = request.POST.get("email")
             password = request.POST.get("password")
             conf_password = request.POST.get("conf_password")
-            print "user:" + user
-            print "password:" + password
-            print "conf_password:" + conf_password
-            #TODO:@jsleetw:update user models
+            #create user models
+            user = User.objects.create_user(user, email, password)
+            user.save()
             return HttpResponseRedirect('/thanks/')
             #TODO:@jsleetw:thanks page
         else:
             print "invalided"
-    #TODO@jsleetw:show error on frontend
-    #see: https://docs.djangoproject.com/en/1.5/topics/forms/
-    return render_to_response('register.html', context_instance=RequestContext(request))
+            error_msg = form.errors
+    return render_to_response('register.html', {'error_msg': error_msg}, context_instance=RequestContext(request))
 
 
 #TODO@jsleetw: use view get image
