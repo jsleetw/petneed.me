@@ -5,28 +5,20 @@
 {% block context %}
 <!--start: Container -->
 <div class="container">
-
     <!-- start: Page Title -->
     <div class="row-fluid">
         <div id="page-title" class="span4 offset4">
-
             <h2>Log in to your account</h2>
-
         </div>
     </div>
     <!-- end: Page Title -->
-
     <!--start: Wrapper-->
     <div class="row-fluid">
         <div id="wrapper" class="full lr-page span4 offset4">
-
             <!-- start: Row -->
             <div class="row-fluid">
-
                 <div id="login-form" class="span12">
-
                     <div class="page-title-small">
-
                         <h3>use your account</h3>
                     </div>
                     <a href="https://www.facebook.com/dialog/oauth?client_id=370831489709069&redirect_uri=http://localhost:8000/animal/facebook_login" class="facebook_connect">
@@ -42,53 +34,32 @@
                         <div class="text">Login with Twitter</div>
                     </a>
                     -->
-
                     <div class="page-title-small">
-
                         <h3 style="background:#f0f0f0">or</h3>
-
                     </div>
-
                     <form method="post" action="">
-
                         <div class="row-fluid">
-
                             <input class="span12" id="user" name="user" type="text" value="" placeholder="username"/>
-
                             <input class="span12" id="pass" name="pass" type="text" value="" placeholder="password"/>
-
                         </div>
-
                         <div class="row-fluid">
-
                             <div class="remember">
                                 <input id="remember" name="remember" type="checkbox" value="1"/> Remember me!
                             </div>
-
                             <div class="forgot">
                                 <a href="#">Forgot password?</a>
                             </div>
-
                         </div>
-
                         <div class="actions">
-
                             <button type="submit" class="btn span12">Login!</button>
-
                         </div>
-
                     </form>
-
                 </div>
-
             </div>
             <!-- end: Row -->
-
         </div>
         <!-- end: Wrapper  -->
-
     </div>
 </div>
 <!--end: Container-->
 {% endblock context %}
-

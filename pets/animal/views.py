@@ -193,7 +193,6 @@ def register(request):
             email = request.POST.get("email")
             password = request.POST.get("password")
             conf_password = request.POST.get("conf_password")
-            #create user models
             user = User.objects.create_user(user, email, password)
             user.save()
             return HttpResponseRedirect('/thanks/')
