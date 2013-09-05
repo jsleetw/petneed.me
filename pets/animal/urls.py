@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^API/0.1/animal/(?P<accept_num>\d+)/$', 'animal.views.get_specific_animal'),
     url(r'^facebook_login', 'animal.views.facebook_login'),
     url(r'^register', 'animal.views.register'),
+    url(r'^thanks', 'animal.views.thanks'),
     #url(r'^get_img', 'animal.views.get_img'),
 )

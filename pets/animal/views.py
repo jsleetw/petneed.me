@@ -7,11 +7,10 @@ from django.core.paginator import Paginator
 from django.template import RequestContext
 from django.utils import simplejson
 from django.conf import settings
-from models import Animal
-
-from datetime import datetime
 from django import forms
 from django.template.response import TemplateResponse
+from models import Animal
+from datetime import datetime
 
 
 class RegisterForm(forms.Form):
@@ -195,13 +194,15 @@ def register(request):
             conf_password = request.POST.get("conf_password")
             user = User.objects.create_user(user, email, password)
             user.save()
-            return HttpResponseRedirect('/thanks/')
-            #TODO:@jsleetw:thanks page
+            return HttpResponseRedirect('/animal/thanks')
         else:
             print "invalided"
             error_msg = form.errors
     return render_to_response('register.html', {'error_msg': error_msg}, context_instance=RequestContext(request))
 
+def thanks(request):
+    return render_to_response('thanks.html',
+            context_instance=RequestContext(request))
 
 #TODO@jsleetw: use view get image
 def get_img(request):
