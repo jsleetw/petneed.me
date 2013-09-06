@@ -14,7 +14,6 @@ from datetime import datetime
 
 
 class RegisterForm(forms.Form):
-    user = forms.CharField(max_length=20)
     email = forms.EmailField(max_length=30)
     password = forms.CharField(max_length=20)
     conf_password = forms.CharField(max_length=20)
@@ -188,13 +187,18 @@ def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = request.POST.get("user")
             email = request.POST.get("email")
             password = request.POST.get("password")
             conf_password = request.POST.get("conf_password")
-            user = User.objects.create_user(user, email, password)
-            user.save()
-            return HttpResponseRedirect('/animal/thanks')
+            u = User.objects.filter(username=email)
+            print u
+            if not u:
+                user = User.objects.create_user(email, email, password)
+                user.save()
+                return HttpResponseRedirect('/animal/thanks')
+            else:
+                print "user is exist"
+                error_msg = "user is exist"
         else:
             print "invalided"
             error_msg = form.errors
