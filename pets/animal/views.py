@@ -153,6 +153,10 @@ def __get_debug_json(request, access_token, app_token):
     return response.read()
 
 
+def facebook_register(request):
+    return HttpResponse("hi")
+
+
 def facebook_login(request):
     from models import User
     access_token = __get_access_token(request)
