@@ -61,6 +61,13 @@
                         <li class="active"><a href="/">Home</a></li>
                         <li class="active"><a href="/animal/login">Login</a></li>
                         <li class="active"><a href="/animal/register">Register</a></li>
+                    {% if user %}
+                    <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">hi! {{ user }}</a>
+                    <ul class="dropdown-menu">
+                        <a href="#">Logout</a>
+                    </ul>
+                    </li>
+                    {% endif %}
                     </ul>
                 </div>
             </div>

@@ -23,13 +23,12 @@ def home(request):
     animals = Animal.objects.order_by("-id")
     paginator = Paginator(animals, 10)
     animals = paginator.page(1)
-    print animals
-
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
-
-    return render_to_response('index.html', {"animals": animals}, context_instance=RequestContext(request))
-
+    if request.user:
+        return render_to_response('index.html', {"animals": animals, "user": request.user}, context_instance=RequestContext(request))
+    else:
+        return render_to_response('index.html', {"animals": animals}, context_instance=RequestContext(request))
 
 def page(request):
     page = int(request.path_info.strip('/animal/page/'))
@@ -43,6 +42,24 @@ def page(request):
 
 
 def login(request):
+    from django.contrib.auth import authenticate, login
+    if request.method == 'POST':
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        user = authenticate(username=email, password=password)
+        print user.is_active
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                # Redirect to a success page.
+                print "login success"
+                return HttpResponseRedirect('/')
+            else:
+                return HttpResponse('1')
+                # Return a 'disabled account' error message
+        else:
+            return HttpResponse('2')
+            # Return an 'invalid login' error message.
     return render_to_response('login.html', context_instance=RequestContext(request))
 
 
@@ -195,7 +212,6 @@ def register(request):
             password = request.POST.get("password")
             conf_password = request.POST.get("conf_password")
             u = User.objects.filter(username=email)
-            print u
             if not u:
                 user = User.objects.create_user(email, email, password)
                 user.save()
