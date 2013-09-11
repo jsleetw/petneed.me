@@ -8,7 +8,7 @@ from django.template import RequestContext
 from django.utils import simplejson
 from django.conf import settings
 from django import forms
-from django.template.response import TemplateResponse
+from django.contrib.auth import authenticate, login, logout
 from models import Animal
 from datetime import datetime
 
@@ -30,6 +30,7 @@ def home(request):
     else:
         return render_to_response('index.html', {"animals": animals}, context_instance=RequestContext(request))
 
+
 def page(request):
     page = int(request.path_info.strip('/animal/page/'))
     animals = Animal.objects.order_by("-id")
@@ -41,8 +42,12 @@ def page(request):
     return render_to_response('page.html', {"animals": animals})
 
 
-def login(request):
-    from django.contrib.auth import authenticate, login
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect("/")
+
+
+def login_view(request):
     if request.method == 'POST':
         email = request.POST.get("email")
         password = request.POST.get("password")
@@ -100,7 +105,6 @@ def get_animals(request):
 
 def get_specific_animal(request, accept_num):
     animal = Animal.objects.filter(accept_num=accept_num)
-    print animal
     if len(animal) > 0:
         animal = animal[0]
     else:
@@ -211,6 +215,7 @@ def register(request):
             email = request.POST.get("email")
             password = request.POST.get("password")
             conf_password = request.POST.get("conf_password")
+            #TODO:@jsleetw:detach password and conf_password
             u = User.objects.filter(username=email)
             if not u:
                 user = User.objects.create_user(email, email, password)
@@ -224,9 +229,10 @@ def register(request):
             error_msg = form.errors
     return render_to_response('register.html', {'error_msg': error_msg}, context_instance=RequestContext(request))
 
+
 def thanks(request):
-    return render_to_response('thanks.html',
-            context_instance=RequestContext(request))
+    return render_to_response('thanks.html', context_instance=RequestContext(request))
+
 
 #TODO@jsleetw: use view get image
 def get_img(request):
