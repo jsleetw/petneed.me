@@ -59,14 +59,19 @@
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li class="active"><a href="/">Home</a></li>
-                        <li class="active"><a href="/animal/login">Login</a></li>
-                        <li class="active"><a href="/animal/register">Register</a></li>
+                    {% if user.is_authenticated %}
                         <li class="active dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">hi! {{ user }}<b class="caret"></b></a>
                             <ul class="dropdown-menu">
+                                <li><a href="/animal/profile">profile</a></li>
+                                <li><a href="/animal/upload">Upload</a></li>
                                 <li><a href="/animal/logout">Logout</a></li>
                             </ul>
                         </li>
+                    {% else %}
+                        <li class="active"><a href="/animal/login">Login</a></li>
+                        <li class="active"><a href="/animal/register">Register</a></li>
+                    {% endif %}
                     </ul>
                     </li>
                     </ul>
