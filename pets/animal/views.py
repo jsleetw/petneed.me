@@ -215,15 +215,17 @@ def register(request):
             email = request.POST.get("email")
             password = request.POST.get("password")
             conf_password = request.POST.get("conf_password")
-            #TODO:@jsleetw:detach password and conf_password
-            u = User.objects.filter(username=email)
-            if not u:
-                user = User.objects.create_user(email, email, password)
-                user.save()
-                return HttpResponseRedirect('/animal/thanks')
+            if not password == conf_password:
+                error_msg = "password not equal"
             else:
-                print "user is exist"
-                error_msg = "user is exist"
+                u = User.objects.filter(username=email)
+                if not u:
+                    user = User.objects.create_user(email, email, password)
+                    user.save()
+                    return HttpResponseRedirect('/animal/thanks')
+                else:
+                    print "user is exist"
+                    error_msg = "user is exist"
         else:
             print "invalided"
             error_msg = form.errors
