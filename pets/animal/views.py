@@ -1,6 +1,7 @@
 import json
 import urllib
 import urllib2
+from datetime import datetime
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
@@ -9,8 +10,8 @@ from django.utils import simplejson
 from django.conf import settings
 from django import forms
 from django.contrib.auth import authenticate, login, logout
-from models import Animal
-from datetime import datetime
+from models import Animal, MyUser
+from django.contrib.auth.models import User
 
 
 class RegisterForm(forms.Form):
@@ -176,7 +177,6 @@ def facebook_register(request):
 
 
 def facebook_login(request):
-    from models import User
     access_token = __get_access_token(request)
     print "access_token:" + str(access_token)
     app_token = __get_app_token(request)
@@ -185,13 +185,13 @@ def facebook_login(request):
     print "debug_json:" + str(debug_json)
     debug_json_obj = json.loads(str(debug_json))
     fb_user_id = debug_json_obj["data"]["user_id"]
-    f = User.objects.get(fb_user_id=fb_user_id)
+    f = MyUser.objects.get(fb_user_id=fb_user_id)
     if not f:
         #init new user data
-        u = User(email="unknow",
-                 is_fb=True,
-                 fb_access_token=access_token,
-                 fb_user_id=fb_user_id)
+        u = MyUser(email="unknow",
+                   is_fb=True,
+                   fb_access_token=access_token,
+                   fb_user_id=fb_user_id)
         u.save()
     else:
         #update access_token and last_login_date
@@ -204,7 +204,6 @@ def facebook_login(request):
 
 
 def register(request):
-    from django.contrib.auth.models import User
     error_msg = False
     if request.method == 'POST':
         form = RegisterForm(request.POST)

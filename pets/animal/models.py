@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django.contrib.auth.models import AbstractBaseUser
 
 class Animal(models.Model):
     accept_num = models.IntegerField(unique=True)
@@ -25,7 +26,7 @@ class Animal(models.Model):
     image_file = models.CharField(max_length=200)
     pub_date = models.DateTimeField(auto_now=True)
 
-class User(models.Model):
+class MyUser(AbstractBaseUser):
     email = models.EmailField()
     is_fb = models.BooleanField()
     fb_access_token = models.CharField(max_length=200)

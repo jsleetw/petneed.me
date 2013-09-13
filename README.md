@@ -5,7 +5,7 @@
 1.Install packages in python
 
 ```
-pip install -r pip_package.txt
+pip install -r requirements.txt
 ```
 
 2.Sync db
