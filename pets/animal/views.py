@@ -10,9 +10,8 @@ from django.utils import simplejson
 from django.conf import settings
 from django import forms
 from django.contrib.auth import authenticate, login, logout
-from models import Animal, MyUser
-from django.contrib.auth.models import User
-
+from models import Animal
+from django.contrib.auth import get_user_model
 
 class RegisterForm(forms.Form):
     email = forms.EmailField(max_length=30)
@@ -185,10 +184,11 @@ def facebook_login(request):
     print "debug_json:" + str(debug_json)
     debug_json_obj = json.loads(str(debug_json))
     fb_user_id = debug_json_obj["data"]["user_id"]
-    f = MyUser.objects.get(fb_user_id=fb_user_id)
+    User = get_user_model()
+    f = User.objects.get(fb_user_id=fb_user_id)
     if not f:
         #init new user data
-        u = MyUser(email="unknow",
+        u = User(email="unknow",
                    is_fb=True,
                    fb_access_token=access_token,
                    fb_user_id=fb_user_id)
@@ -205,6 +205,7 @@ def facebook_login(request):
 
 def register(request):
     error_msg = False
+    User = get_user_model()
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -214,9 +215,9 @@ def register(request):
             if not password == conf_password:
                 error_msg = "password not equal"
             else:
-                u = User.objects.filter(username=email)
+                u = User.objects.filter(email=email)
                 if not u:
-                    user = User.objects.create_user(email, email, password)
+                    user = User.objects.create_user(email, password)
                     user.save()
                     return HttpResponseRedirect('/animal/thanks')
                 else:

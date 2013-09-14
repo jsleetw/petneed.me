@@ -158,4 +158,6 @@ LOGGING = {
     }
 }
 
+AUTH_USER_MODEL = 'animal.MyUser'
+
 from local_settings import *
