@@ -134,7 +134,7 @@ def __get_access_token(request):
     url = "https://graph.facebook.com/oauth/access_token"
     data = {}
     data['client_id'] = settings.FACEBOOK_APP_ID
-    data['redirect_uri'] = "http://localhost:8000/animal/facebook_login"
+    data['redirect_uri'] = "http://localhost:8000/animal/facebook_register"
     data['client_secret'] = settings.FACEBOOK_API_SECRET
     data['code'] = request.GET['code']
     data = urllib.urlencode(data)
@@ -171,7 +171,32 @@ def __get_debug_json(request, access_token, app_token):
     return response.read()
 
 
+def __get_debug_json(request, access_token, app_token):
+    url = "https://graph.facebook.com/debug_token"
+    data = {}
+    data['input_token'] = access_token
+    data['access_token'] = app_token
+    data = urllib.urlencode(data)
+    req = "%s?%s" % (url, data)
+    response = urllib2.urlopen(req)
+    return response.read()
+
+
+def __get_fb_email(request, access_token, app_token):
+    #TODO:@jsleetw:get fb email for user email
+    return
+
+
 def facebook_register(request):
+    access_token = __get_access_token(request)
+    print "access_token:" + str(access_token)
+    app_token = __get_app_token(request)
+    print "app_token:" + str(app_token)
+    debug_json = __get_debug_json(request, access_token, app_token)
+    print "debug_json:" + str(debug_json)
+    debug_json_obj = json.loads(str(debug_json))
+    fb_user_id = debug_json_obj["data"]["user_id"]
+    print fb_user_id
     return HttpResponse("hi")
 
 
