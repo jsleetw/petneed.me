@@ -171,20 +171,15 @@ def __get_debug_json(request, access_token, app_token):
     return response.read()
 
 
-def __get_debug_json(request, access_token, app_token):
-    url = "https://graph.facebook.com/debug_token"
+def __get_fb_email(request, access_token):
+    url = "https://graph.facebook.com/fql"
     data = {}
-    data['input_token'] = access_token
-    data['access_token'] = app_token
+    data['q'] = "SELECT email FROM user WHERE uid=me()"
+    data['access_token'] = access_token
     data = urllib.urlencode(data)
     req = "%s?%s" % (url, data)
     response = urllib2.urlopen(req)
     return response.read()
-
-
-def __get_fb_email(request, access_token, app_token):
-    #TODO:@jsleetw:get fb email for user email
-    return
 
 
 def facebook_register(request):
@@ -197,6 +192,14 @@ def facebook_register(request):
     debug_json_obj = json.loads(str(debug_json))
     fb_user_id = debug_json_obj["data"]["user_id"]
     print fb_user_id
+    email_json = __get_fb_email(request, access_token)
+    email_json_obj = json.loads(str(email_json))
+    email = email_json_obj["data"][0]["email"]
+    print "fb_mail:"+ email
+    User = get_user_model()
+    f = User.objects.filter(email=email)
+    if not f:
+        pass
     return HttpResponse("hi")
 
 
@@ -210,7 +213,7 @@ def facebook_login(request):
     debug_json_obj = json.loads(str(debug_json))
     fb_user_id = debug_json_obj["data"]["user_id"]
     User = get_user_model()
-    f = User.objects.get(fb_user_id=fb_user_id)
+    f = User.objects.filter(fb_user_id=fb_user_id)
     if not f:
         #init new user data
         u = User(email="unknow",
