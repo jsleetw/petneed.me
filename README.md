@@ -7,6 +7,30 @@ sudo apt-get install sqlite3 python-dev libsqlite3-dev
 sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 ```
+0.2 for PTL recompile
+```
+sudo apt-get install libjpeg libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev
+sudo ln -s /usr/lib/i386-linux-gnu/libjpeg.so /usr/lib/
+sudo ln -s /usr/lib/i386-linux-gnu/libz.so /usr/lib/
+sudo ln -s /usr/lib/i386-linux-gnu/libfreetype.so /usr/lib/
+pip install -I PIL
+```
+Then you will see:
+```
+    --------------------------------------------------------------------
+    PIL 1.1.7 SETUP SUMMARY
+    --------------------------------------------------------------------
+    version       1.1.7
+    platform      linux2 2.7.3 (default, Apr 10 2013, 05:46:21)
+                  [GCC 4.6.3]
+    --------------------------------------------------------------------
+    *** TKINTER support not available
+    --- JPEG support available
+    --- ZLIB (PNG/ZIP) support available
+    --- FREETYPE2 support available
+    *** LITTLECMS support not available
+    --------------------------------------------------------------------
+```
 
 1.Install packages in python
 
