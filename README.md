@@ -1,6 +1,11 @@
 # PetNeed.Me(寵物需要我) project
-
 ## How to setup develop environment
+0.1 settingup pip python
+```
+sudo apt-get install python-pip python-dev build-essential 
+sudo pip install --upgrade pip
+sudo pip install --upgrade virtualenv 
+```
 
 1.Install packages in python
 
