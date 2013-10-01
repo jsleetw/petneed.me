@@ -14,6 +14,8 @@ sudo ln -s /usr/lib/i386-linux-gnu/libjpeg.so /usr/lib/
 sudo ln -s /usr/lib/i386-linux-gnu/libz.so /usr/lib/
 sudo ln -s /usr/lib/i386-linux-gnu/libfreetype.so /usr/lib/
 pip install -I PIL
+
+--i386 will replace to 'uname -i'
 ```
 Then you will see:
 ```
