@@ -5,6 +5,7 @@
 sudo apt-get install python-pip python-dev build-essential 
 sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv 
+sudo apt-get install sqlite3 python-dev libsqlite3-dev
 ```
 
 1.Install packages in python
@@ -30,7 +31,7 @@ python manage.py get_animal
 ```
 FACEBOOK_APP_ID = ''
 FACEBOOK_API_SECRET = ''
-SECRET_KEY = '' <-random string and don't share it with anybody.
+SECRET_KEY = '' #<-random string and don't share it with anybody.
 ```
 
 5.Run development Server !
