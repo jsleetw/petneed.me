@@ -1,6 +1,0 @@
-raise Exception("please setup local_settings.py first. see http://goo.gl/Ct5Yxz - local setting")
-# remove this exception once local_settings.py is setup
-
-FACEBOOK_APP_ID = ''
-FACEBOOK_API_SECRET = ''
-SECRET_KEY = '' #<-random string and don't share it with anybody.

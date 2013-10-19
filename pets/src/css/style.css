@@ -591,6 +591,44 @@ header {
 }
 	
 
+/* Profile
+=================================================================== */
+
+#profile .name {
+    font-size: 26px;
+    text-shadow: 1px 1px 1px white;
+    margin: 10px 0;
+}
+
+#profile .sex {
+    text-shadow: none;
+}
+
+#profile .male {
+    color: #003366;
+}
+#profile .female {
+    color: #bd362f;
+}
+
+#profile .meta {
+    margin: 10px 0;
+}
+
+#profile .meta .field {
+    margin: 5px 0;
+}
+
+#profile .meta .label {
+    padding: 5px;
+}
+
+#profile .meta div,
+#profile .meta span {
+    font-size: 16px;
+}
+
+
 /* Page Title
 =================================================================== */
 

@@ -1,8 +1,12 @@
+# coding: utf-8
+
+import re
 import json
 import urllib
 import urllib2
 from datetime import datetime
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
+#from pprint import pprint
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.template import RequestContext
@@ -13,6 +17,7 @@ from django.contrib.auth import authenticate, login, logout, get_user
 from models import Animal
 from django.contrib.auth import get_user_model
 from animal.utils import thumbnail
+
 
 class RegisterForm(forms.Form):
     email = forms.EmailField(max_length=30)
@@ -26,8 +31,8 @@ def home(request):
     animals = paginator.page(1)
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    #animals = map(__extend_animal_fields, animals)
     return render_to_response('index.html', {"animals": animals}, context_instance=RequestContext(request))
-
 
 def page(request):
     page = int(request.path_info.strip('/animal/page/'))
@@ -38,6 +43,29 @@ def page(request):
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
     return render_to_response('page.html', {"animals": animals})
+
+
+def profile(request, animal_id):
+    animal = get_object_or_404(Animal, pk=animal_id)
+    animal = __extend_animal_fields(animal)
+    return render_to_response('profile.html', {'current_url':
+                              'http://petneed.me' + request.get_full_path(), "animal": animal},
+                              context_instance=RequestContext(request))
+
+
+def __extend_animal_fields(animal):
+    animal.sex_class = 'male' if unicode(animal.sex) == u'雄' else 'female'
+    animal.smal_img_file = "%s_248x350.jpg" % animal.image_file.split(".jpg")[0]
+    animal.phone_normalized = re.sub('[ ()-]', '', animal.phone)  # used in tel:// protocol
+
+    shared_target = {'u': 'http://%s/animal/profile/%s' % (settings.SITE_DOMAIN, animal.id)}
+    shared_target = urlencode(shared_target)
+    animal.share_link_facebook = 'http://www.facebook.com/sharer/sharer.php?u=' + shared_target
+    return animal
+
+
+def user_profile(request):
+    return render_to_response("user_profile.html", context_instance=RequestContext(request))
 
 
 def logout_view(request):
@@ -196,7 +224,7 @@ def facebook_register(request):
     email_json = __get_fb_email(request, access_token)
     email_json_obj = json.loads(str(email_json))
     email = email_json_obj["data"][0]["email"]
-    print "fb_mail:"+ email
+    print "fb_mail:" + email
     User = get_user_model()
     f = User.objects.filter(email=email)
     if not f:
@@ -218,9 +246,9 @@ def facebook_login(request):
     if not f:
         #init new user data
         u = User(email="unknow",
-                   is_fb=True,
-                   fb_access_token=access_token,
-                   fb_user_id=fb_user_id)
+                 is_fb=True,
+                 fb_access_token=access_token,
+                 fb_user_id=fb_user_id)
         u.save()
     else:
         #update access_token and last_login_date
