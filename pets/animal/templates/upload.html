@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}petneed.me|upload{% endblock title %}
+{% block context %}
+<!--start: Container -->
+<div class="container">
+    <!-- start: Page Title -->
+    <div class="row-fluid">
+      <div id="page-title" class="span6 offset3">
+        <h2>Upload Animal Info</h2>
+      </div>
+    </div>
+    <!-- end: Page Title -->
+    <!--start: Wrapper-->
+    <div class="row-fluid">
+      <div class="offset3 span6">
+        <div id="wrapper" class="full">
+          <form method="POST" class="form-horizontal clearfix">
+            <div class="control-group">
+              <label class="control-label" for="inputPhoto">Select a
+                photo</label>
+              <div class="controls">
+                <input type="file" id="inputName"
+                       class="input-block-level">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputName">Pet's Name</label>
+              <div class="controls">
+                <input type="text" id="inputName" class="input-block-level">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputPhone">Phone</label>
+              <div class="controls">
+                <input type="text" id="inputPhone" class="input-block-level">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputRes">Organization</label>
+              <div class="controls">
+                <input type="text" id="inputRes" class="input-block-level">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputNote">Note</label>
+              <div class="controls">
+                <textarea rows="6" class="input-block-level" id="inputNote"></textarea>
+              </div>
+            </div>
+            <!-- TODO : input more info  -->
+            <button type="submit" class="btn span8 offset4
+                                         btn-success">Upload!</button>
+        </form>
+      </div>
+      <!-- end: Row -->
+    </div>
+    <!-- end: Wrapper  -->
+</div>
+{% endblock %}

@@ -264,3 +264,8 @@ def thanks(request):
 #TODO@jsleetw: use view get image
 def get_img(request):
     pass
+
+def upload(request):
+    if request.method == 'POST' :
+        pass
+    return render_to_response('upload.html', context_instance=RequestContext(request))
