@@ -26,7 +26,7 @@ def home(request):
     animals = paginator.page(1)
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
-    return render_to_response('index.html', {"animals": animals}, context_instance=RequestContext(request))
+    return render_to_response('index.html', {'current_url': 'http://'+settings.SITE_DOMAIN+request.get_full_path(),"animals": animals}, context_instance=RequestContext(request))
 
 
 def page(request):
@@ -37,13 +37,12 @@ def page(request):
     print animals
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
-    return render_to_response('page.html', {"animals": animals})
+    return render_to_response('page.html', {'current_url': 'http://'+settings.SITE_DOMAIN+request.get_full_path(),"animals": animals})
 
 
 def profile(request, animal_id):
     animal = get_object_or_404(Animal, pk=animal_id)
-    print animal
-    return render_to_response('profile.html', {'current_url': 'http://petneed.me'+request.get_full_path(),"animal": animal})
+    return render_to_response('profile.html', {'current_url': 'http://'+settings.SITE_DOMAIN+request.get_full_path(),"animal": animal})
 
 def user_profile(request):
     return render_to_response("user_profile.html", context_instance=RequestContext(request))
