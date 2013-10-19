@@ -357,13 +357,15 @@ def upload(request):
             head, ext = os.path.splitext(image.name)
             filename = user.get_username() + str(int(time.time())) + ext
             savefilename = "src/media/" + filename
+            # TODO : try-catch for PIL errors
             with open(savefilename, "wb") as code:
                 code.write(image.read())
                 a.image_name = savefilename
-                print savefilename
                 thumbnail(savefilename, "248x350")
                 thumbnail(savefilename, "248x350", True)
                 a.save()
+                # TODO : return new page while upload success
+            return HttpResponseRedirect("/")
         else:
             print "invalided"
             print form.errors
