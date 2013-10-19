@@ -39,6 +39,8 @@ def page(request):
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
     return render_to_response('page.html', {"animals": animals})
 
+def user_profile(request):
+    return render_to_response("user_profile.html", context_instance=RequestContext(request))
 
 def logout_view(request):
     logout(request)
