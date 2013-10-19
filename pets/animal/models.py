@@ -25,7 +25,8 @@ class Animal(models.Model):
     image_name = models.URLField(max_length=200)
     image_file = models.CharField(max_length=200)
     pub_date = models.DateTimeField(auto_now=True)
-
+    count_clicks = models.CharField(max_length=200, default=0)
+    count_eyeons = models.CharField(max_length=200, default=0)
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None):
