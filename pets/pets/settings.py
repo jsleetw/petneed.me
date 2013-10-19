@@ -161,9 +161,6 @@ LOGGING = {
 
 AUTH_USER_MODEL = 'animal.MyUser'
 
-from local_settings import *
-
-
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
     'social_auth.backends.facebook.FacebookBackend',
@@ -176,4 +173,8 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_REDIRECT_URL = '/'
 
 FACEBOOK_EXTENDED_PERMISSIONS = ['email', 'publish_actions', 'user_about_me', 'user_photos', 'user_location']
+SITE_DOMAIN = "petneed.me"
+
+from local_settings import *
+
 

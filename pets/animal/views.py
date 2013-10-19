@@ -1,18 +1,24 @@
+# coding: utf-8
+
 import re
 import json
 import urllib
 import urllib2
 from datetime import datetime
-from django.shortcuts import render_to_response,get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render_to_response, get_object_or_404
+#from pprint import pprint
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.paginator import Paginator
 from django.template import RequestContext
 from django.utils import simplejson
 from django.conf import settings
 from django import forms
 from django.contrib.auth import authenticate, login, logout
-from models import Animal
+from models import Animal, FindAnimal
 from django.contrib.auth import get_user_model
+from django.utils.http import urlencode
+
+
 
 class RegisterForm(forms.Form):
     email = forms.EmailField(max_length=30)
@@ -25,8 +31,8 @@ def home(request):
     paginator = Paginator(animals, 10)
     animals = paginator.page(1)
     for i in animals:
-        i.phone_normalized = re.sub('[ ()-]', '', i.phone) # used in tel:// protocol
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    animals = map(__extend_animal_fields, animals)
     return render_to_response('index.html', {"animals": animals}, context_instance=RequestContext(request))
 
 
@@ -35,18 +41,56 @@ def page(request):
     animals = Animal.objects.order_by("-id")
     paginator = Paginator(animals, 10)
     animals = paginator.page(page)
-    print animals
-    for i in animals:
-        i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    animals = map(__extend_animal_fields, animals)
     return render_to_response('page.html', {"animals": animals})
 
 
 def profile(request, animal_id):
     animal = get_object_or_404(Animal, pk=animal_id)
-    print animal
-    return render_to_response('profile.html', {'current_url': 'http://petneed.me'+request.get_full_path(),"animal": animal})
+    animal = __extend_animal_fields(animal)
+    return render_to_response('profile.html', {'current_url':
+                              'http://petneed.me' + request.get_full_path(), "animal": animal},
+                              context_instance=RequestContext(request))
+
+
+def __extend_animal_fields(animal):
+    animal.sex_class = 'male' if unicode(animal.sex) == u'雄' else 'female'
+    animal.smal_img_file = "%s_248x350.jpg" % animal.image_file.split(".jpg")[0]
+    animal.phone_normalized = re.sub('[ ()-]', '', animal.phone)  # used in tel:// protocol
+
+    shared_target = {'u': 'http://%s/animal/profile/%s' % (settings.SITE_DOMAIN, animal.id)}
+    shared_target = urlencode(shared_target)
+    animal.share_link_facebook = 'http://www.facebook.com/sharer/sharer.php?u=' + shared_target
+
+    # higher (integer) score reflects that the animal is more close to children/animal
+    # zero as strong negative
+    animal.children_score = __calculate_children_score(animal.childre_anlong)
+    animal.animal_score = __calculate_animal_score(animal.animal_anlong)
+
+    return animal
+
+def __calculate_children_score(statement):
+    score = 0
+    if u'可' == statement:
+        score = 3
+    elif u'可' in statement:
+        score = 2
+    elif u'不建議' in statement:
+        score = 1
+    elif u'不可' in statement:
+        score = 0
+    return score
+
+def __calculate_animal_score(statement):
+    score = 0
+    if u'可' in statement:
+        score = 1
+    elif u'不可' in statement:
+        score = 0
+    return score
 
 def user_profile(request):
+    from social_auth.backends.facebook import FacebookBackend
     return render_to_response("user_profile.html", context_instance=RequestContext(request))
 
 
@@ -100,7 +144,6 @@ def get_animals(request):
                                   'note': animal.note.replace('"', '\\"'),
                                   'resettlement': animal.resettlement,
                                   'phone': animal.phone,
-                                  'phone_normalized': re.sub('[ ()-]', '', animal.phone),
                                   'email': animal.email,
                                   'childre_anlong': animal.childre_anlong,
                                   'animal_anlong': animal.animal_anlong,
@@ -207,7 +250,7 @@ def facebook_register(request):
     email_json = __get_fb_email(request, access_token)
     email_json_obj = json.loads(str(email_json))
     email = email_json_obj["data"][0]["email"]
-    print "fb_mail:"+ email
+    print "fb_mail:" + email
     User = get_user_model()
     f = User.objects.filter(email=email)
     if not f:
@@ -229,9 +272,9 @@ def facebook_login(request):
     if not f:
         #init new user data
         u = User(email="unknow",
-                   is_fb=True,
-                   fb_access_token=access_token,
-                   fb_user_id=fb_user_id)
+                 is_fb=True,
+                 fb_access_token=access_token,
+                 fb_user_id=fb_user_id)
         u.save()
     else:
         #update access_token and last_login_date
@@ -276,3 +319,30 @@ def thanks(request):
 #TODO@jsleetw: use view get image
 def get_img(request):
     pass
+
+
+def find_animal_upload(request):
+    return render_to_response('find_animal_upload.html', context_instance=RequestContext(request))
+
+
+def find_animal(request):
+    animals = FindAnimal.objects.order_by("-id")
+    paginator = Paginator(animals, 10)
+    animals = paginator.page(1)
+    for i in animals:
+        i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    return render_to_response('find_animal.html', {"animals": animals}, context_instance=RequestContext(request))
+
+
+def find_animal_page(request, page_num):
+    animals = FindAnimal.objects.order_by("-id")
+    paginator = Paginator(animals, 10)
+    try:
+        animals = paginator.page(page_num)
+    except:
+        return HttpResponseNotFound()
+
+    for i in animals:
+        i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    return render_to_response('page.html', {"animals": animals})
+

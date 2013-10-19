@@ -2,7 +2,8 @@ from django.db import models
 import datetime
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-class Animal(models.Model):
+
+class AnimalCommonInfo(models.Model):
     accept_num = models.IntegerField(unique=True)
     name = models.CharField(max_length=200)
     sex = models.CharField(max_length=200)
@@ -27,6 +28,35 @@ class Animal(models.Model):
     pub_date = models.DateTimeField(auto_now=True)
     count_clicks = models.CharField(max_length=200, default=0)
     count_eyeons = models.CharField(max_length=200, default=0)
+
+    class Meta:
+        abstract = True
+
+class Animal(AnimalCommonInfo):
+    pass
+#     accept_num = models.IntegerField(unique=True)
+#     name = models.CharField(max_length=200)
+#     sex = models.CharField(max_length=200)
+#     type = models.CharField(max_length=200)
+#     build = models.CharField(max_length=200)
+#     age = models.CharField(max_length=200)
+#     variety = models.CharField(max_length=200)
+#     reason = models.CharField(max_length=200)
+#     accept_num = models.CharField(max_length=200)
+#     chip_num = models.CharField(max_length=200)
+#     is_sterilization = models.CharField(max_length=200)
+#     hair_type = models.CharField(max_length=200)
+#     note = models.TextField()
+#     resettlement = models.CharField(max_length=200)
+#     phone = models.CharField(max_length=200)
+#     email = models.EmailField()
+#     childre_anlong = models.CharField(max_length=200)
+#     animal_anlong = models.CharField(max_length=200)
+#     bodyweight = models.CharField(max_length=200)
+#     image_name = models.URLField(max_length=200)
+#     image_file = models.CharField(max_length=200)
+#     pub_date = models.DateTimeField(auto_now=True)
+
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -101,3 +131,7 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+class FindAnimal(AnimalCommonInfo):
+    pass
