@@ -35,6 +35,7 @@ def home(request):
     animals = map(__extend_animal_fields, animals)
     return render_to_response('index.html', {"animals": animals}, context_instance=RequestContext(request))
 
+
 def page(request):
     page = int(request.path_info.strip('/animal/page/'))
     animals = Animal.objects.order_by("-id")
@@ -89,6 +90,7 @@ def __calculate_animal_score(statement):
     return score
 
 def user_profile(request):
+    from social_auth.backends.facebook import FacebookBackend
     return render_to_response("user_profile.html", context_instance=RequestContext(request))
 
 
