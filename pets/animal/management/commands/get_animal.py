@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 from animal.models import Animal
+from animal.utils import thumbnail
 import json
 import urllib2
 import os
@@ -29,10 +30,8 @@ class Command(BaseCommand):
                 data = f.read()
                 with open("src/media/" + url_file, "wb") as code:
                     code.write(data)
-                f.path = "src/media/" + url_file
-                f.url = url_file
-                print self.thumbnail(f, "248x350")
-                print self.thumbnail(f, "248x350", True)
+                print thumbnail("src/media/" + url_file, "248x350")
+                print thumbnail("src/media/" + url_file, "248x350", True)
                 a = Animal(name=i["Name"],
                            sex=i["Sex"],
                            type=i["Type"],
@@ -55,29 +54,3 @@ class Command(BaseCommand):
                            image_file=url_file,)
                 a.save()
         self.stdout.write('end\n')
-
-    def thumbnail(self, file, size='104x104', x2=False):
-        # defining the size
-        x, y = [int(x) for x in size.split('x')]
-        # defining the filename and the miniature filename
-        filehead, filetail = os.path.split(file.path)
-        basename, format = os.path.splitext(filetail)
-        miniature = basename + '_' + size + format
-        if x2:
-            miniature = basename + '_' + size + '@2x' + format
-        filename = file.path
-        miniature_filename = os.path.join(filehead, miniature)
-        filehead, filetail = os.path.split(file.url)
-        miniature_url = filehead + '/' + miniature
-        if os.path.exists(miniature_filename) and os.path.getmtime(filename) > os.path.getmtime(miniature_filename):
-            os.unlink(miniature_filename)
-        # if the image wasn't already resized, resize it
-        if not os.path.exists(miniature_filename):
-            image = Image.open(filename)
-            image.thumbnail([x, y], Image.ANTIALIAS)
-            try:
-                image.save(miniature_filename, image.format, quality=90, optimize=1)
-            except:
-                image.save(miniature_filename, image.format, quality=90)
-
-        return miniature_url
