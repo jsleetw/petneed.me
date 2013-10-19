@@ -1,3 +1,5 @@
+import os
+import Image
 
 def thumbnail(filename, size='104x104', x2=False):
     # defining the size
