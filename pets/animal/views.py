@@ -1,3 +1,4 @@
+import re
 import json
 import urllib
 import urllib2
@@ -88,7 +89,7 @@ def get_animals(request):
                                   'hair_type': animal.hair_type,
                                   'note': animal.note.replace('"', '\\"'),
                                   'resettlement': animal.resettlement,
-                                  'phone': animal.phone,
+                                  'phone': re.sub('[- ()]', '', animal.phone),
                                   'email': animal.email,
                                   'childre_anlong': animal.childre_anlong,
                                   'animal_anlong': animal.animal_anlong,
