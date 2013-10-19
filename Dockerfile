@@ -19,7 +19,7 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib/
 RUN ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib/
 RUN ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/
 RUN ln -s /usr/lib/x86_64-linux-gnu/liblcms.so /usr/lib/
-RUN pip install Django==1.4.3
+RUN pip install Django==1.5.3
 RUN pip install PIL==1.1.7
 RUN pip install argparse==1.2.1
 RUN pip install django-appconf==0.6

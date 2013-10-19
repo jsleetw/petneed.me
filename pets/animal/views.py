@@ -1,3 +1,4 @@
+import re
 import json
 import urllib
 import urllib2
@@ -38,10 +39,15 @@ def page(request):
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
     return render_to_response('page.html', {"animals": animals})
 
+
 def profile(request, animal_id):
     animal = get_object_or_404(Animal, pk=animal_id)
     print animal
     return render_to_response('profile.html', {'current_url': 'http://petneed.me'+request.get_full_path(),"animal": animal})
+
+def user_profile(request):
+    return render_to_response("user_profile.html", context_instance=RequestContext(request))
+
 
 def logout_view(request):
     logout(request)
@@ -92,7 +98,7 @@ def get_animals(request):
                                   'hair_type': animal.hair_type,
                                   'note': animal.note.replace('"', '\\"'),
                                   'resettlement': animal.resettlement,
-                                  'phone': animal.phone,
+                                  'phone': re.sub('[- ()]', '', animal.phone),
                                   'email': animal.email,
                                   'childre_anlong': animal.childre_anlong,
                                   'animal_anlong': animal.animal_anlong,
