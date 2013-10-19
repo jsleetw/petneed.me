@@ -4,17 +4,20 @@ import json
 import urllib2
 import os
 import Image
-
+import urllib
 
 class Command(BaseCommand):
     args = '<>'
     help = 'get animal data from http://data.taipei.gov.tw'
-    url = "http://163.29.39.183/GetAnimals.aspx"
+    #url = "http://163.29.39.183/GetAnimals.aspx"
+    params = urllib.urlencode({'resource_id': 'c57f54e2-8ac3-4d30-bce0-637a8968796e'})
+    url = "http://60.199.253.136/api/action/datastore_search" + '?' + params
 
     def handle(self, *args, **options):
         print self.url
         data = urllib2.urlopen(self.url)
         j = json.load(data)
+        j = j["result"]["records"]
         for i in j:
             print (i["Name"]).encode('utf-8')
             a1 = Animal.objects.filter(accept_num=i["AcceptNum"])
