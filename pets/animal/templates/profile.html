@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block title %}petneed.me|home{% endblock title %}
+{% block FBog %}
+    <meta property="og:title" content="{{animal.name}}"/>
+    <meta property="og:description" content="{{animal.note}}"/>
+    <meta property="og:url" content="{{current_url}}"/>
+    <meta property="og:image" content="/static/media/{{animal.image_file}}"/>
+{% endblock FBog %}
+    <!-- end: Facebook Open Graph -->
 {% block context %}
 <div id="container" class="container">
 <div id="wrapper">
