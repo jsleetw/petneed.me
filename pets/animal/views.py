@@ -24,6 +24,26 @@ class RegisterForm(forms.Form):
     password = forms.CharField(max_length=20)
     conf_password = forms.CharField(max_length=20)
 
+class UploadForm(forms.Form):
+    name = forms.CharField(max_length=200)
+    #sex = forms.CharField(max_length=200)
+    #type = forms.CharField(max_length=200)
+    #build = forms.CharField(max_length=200)
+    #age = forms.CharField(max_length=200)
+    #variety = forms.CharField(max_length=200)
+    #reason = forms.CharField(max_length=200)
+    #accept_num = forms.CharField(max_length=200)
+    #chip_num = forms.CharField(max_length=200)
+    #is_sterilization = forms.CharField(max_length=200)
+    #hair_type = forms.CharField(max_length=200)
+    note = forms.CharField()
+    resettlement = forms.CharField(max_length=200)
+    phone = forms.CharField(max_length=200)
+    #email = forms.EmailField()
+    #childre_anlong = forms.CharField(max_length=200)
+    #animal_anlong = forms.CharField(max_length=200)
+    #bodyweight = forms.CharField(max_length=200)
+    photo = forms.FileField()
 
 def home(request):
     animals = Animal.objects.order_by("-id")
@@ -294,7 +314,8 @@ def upload(request):
     user = get_user(request)
     if user.is_authenticated():
     	if request.method == 'POST':
-            form = RegisterForm(request.POST)
+            form = UploadForm(request.POST, request.FILES)
+	    print "check is valid form"
             if form.is_valid():
                 a = Animal() 
                 a.name = request.POST.get("name")
@@ -317,9 +338,9 @@ def upload(request):
                 #a.bodyweight = request.POST.get("bodyweight")
        	        image = request.FILES['photo']
  
-	        if not ((name is none) or (note is none) or 
-   	                (resettlement is none) or (phone is none) or
-		        (image is none)):
+	        if not ((a.name is None) or (a.note is None) or 
+   	                (a.resettlement is None) or (a.phone is None) or
+		        (image is None)):
                     error_msg = "some requirement fields are not filled in"
                 else:
 		    head, ext = os.path.splitext(image.name)
@@ -333,8 +354,8 @@ def upload(request):
             else:
                 print "invalided"
                 error_msg = form.errors
-        else:
-            print "user authenticated failed"
+    else:
+        print "user authentication failed"
 
     return render_to_response('upload.html', {'error_msg': error_msg}, context_instance=RequestContext(request))
 
