@@ -9,7 +9,7 @@
             {% for i in animals %}
             <div class="span3 item element">
                 <div class="picture">
-                    <a class="image" href="{% url 'animal:profile' i.id %}" title="{{i.name}}"><img src="{{ MEDIA_URL }}{{i.smal_img_file}}" alt=""/></a>
+                    <a class="image" href="{{ MEDIA_URL }}{{i.image_file}}" title="{{i.name}}"><img src="{{ MEDIA_URL }}{{i.smal_img_file}}" alt=""/></a>
                     <div class="description">
                         <p>{{i.note}}
                         </p>
