@@ -9,16 +9,17 @@ import time
 from datetime import datetime
 from django.shortcuts import render_to_response, get_object_or_404
 #from pprint import pprint
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.paginator import Paginator
 from django.template import RequestContext
 from django.utils import simplejson
 from django.conf import settings
 from django import forms
 from django.contrib.auth import authenticate, login, logout, get_user
-from models import Animal
+from models import Animal, FindAnimal
 from django.contrib.auth import get_user_model
 from animal.utils import thumbnail
+
 
 
 class RegisterForm(forms.Form):
@@ -41,6 +42,7 @@ def home(request):
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
     #animals = map(__extend_animal_fields, animals)
     return render_to_response('index.html', {"animals": animals}, context_instance=RequestContext(request))
+
 
 def page(request):
     page = int(request.path_info.strip('/animal/page/'))
@@ -69,10 +71,36 @@ def __extend_animal_fields(animal):
     shared_target = {'u': 'http://%s/animal/profile/%s' % (settings.SITE_DOMAIN, animal.id)}
     shared_target = urlencode(shared_target)
     animal.share_link_facebook = 'http://www.facebook.com/sharer/sharer.php?u=' + shared_target
+
+    # higher (integer) score reflects that the animal is more close to children/animal
+    # zero as strong negative
+    animal.children_score = __calculate_children_score(animal.childre_anlong)
+    animal.animal_score = __calculate_animal_score(animal.animal_anlong)
+
     return animal
 
+def __calculate_children_score(statement):
+    score = 0
+    if u'可' == statement:
+        score = 3
+    elif u'可' in statement:
+        score = 2
+    elif u'不建議' in statement:
+        score = 1
+    elif u'不可' in statement:
+        score = 0
+    return score
+
+def __calculate_animal_score(statement):
+    score = 0
+    if u'可' in statement:
+        score = 1
+    elif u'不可' in statement:
+        score = 0
+    return score
 
 def user_profile(request):
+    from social_auth.backends.facebook import FacebookBackend
     return render_to_response("user_profile.html", context_instance=RequestContext(request))
 
 
@@ -345,3 +373,30 @@ def upload(request):
 #TODO@jsleetw: use view get image
 def get_img(request):
     pass
+
+
+def find_animal_upload(request):
+    return render_to_response('find_animal_upload.html', context_instance=RequestContext(request))
+
+
+def find_animal(request):
+    animals = FindAnimal.objects.order_by("-id")
+    paginator = Paginator(animals, 10)
+    animals = paginator.page(1)
+    for i in animals:
+        i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    return render_to_response('find_animal.html', {"animals": animals}, context_instance=RequestContext(request))
+
+
+def find_animal_page(request, page_num):
+    animals = FindAnimal.objects.order_by("-id")
+    paginator = Paginator(animals, 10)
+    try:
+        animals = paginator.page(page_num)
+    except:
+        return HttpResponseNotFound()
+
+    for i in animals:
+        i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    return render_to_response('page.html', {"animals": animals})
+
