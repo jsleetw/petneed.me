@@ -9,14 +9,14 @@
             {% for i in animals %}
             <div class="span3 item element">
                 <div class="picture">
-                    <a class="image" href="{% url 'animal:profile' i.id %}" title="{{i.name}}"><img src="{{ MEDIA_URL }}{{i.smal_img_file}}" alt=""/></a>
+                    <a class="image" href="{{ MEDIA_URL }}{{i.image_file}}" title="{{i.name}}"><img src="{{ MEDIA_URL }}{{i.smal_img_file}}" alt=""/></a>
                     <div class="description">
                         <p>{{i.note}}
                         </p>
                     </div>
                     <div class="meta">
                         <span><i class="fa-icon-heart-empty"></i> <a href="#">{{i.name}}</a></span>
-                        <span><i class="fa-icon-phone"><a href="tel://{{i.phone}}">{{i.phone}}</a></i></span>
+                        <span><i class="fa-icon-phone">{{i.phone}}</i></span>
                         <br />
                         <span><i class="fa-icon-home muted"><small>{{i.resettlement}}</small></i></span>
                     </div>
