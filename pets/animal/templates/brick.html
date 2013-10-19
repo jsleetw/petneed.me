@@ -3,7 +3,8 @@
             <a class="image" href="{% url 'animal:profile' i.id %}" title="{{i.name}}">
             <img src="/static/media/{{i.smal_img_file}}" alt=""/></a>
         <div class="description">
-            <p>{{i.note}}
+            {% load string_tags %}
+            <p>{% cut_string i.note 150 %}
             </p>
         </div>
         <div class="actions">
