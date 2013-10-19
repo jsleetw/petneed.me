@@ -7,16 +7,17 @@ import urllib2
 from datetime import datetime
 from django.shortcuts import render_to_response, get_object_or_404
 #from pprint import pprint
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.paginator import Paginator
 from django.template import RequestContext
 from django.utils import simplejson
 from django.conf import settings
 from django import forms
 from django.contrib.auth import authenticate, login, logout
-from models import Animal
+from models import Animal, FindAnimal
 from django.contrib.auth import get_user_model
 from django.utils.http import urlencode
+
 
 
 class RegisterForm(forms.Form):
@@ -316,3 +317,30 @@ def thanks(request):
 #TODO@jsleetw: use view get image
 def get_img(request):
     pass
+
+
+def find_animal_upload(request):
+    return render_to_response('find_animal_upload.html', context_instance=RequestContext(request))
+
+
+def find_animal(request):
+    animals = FindAnimal.objects.order_by("-id")
+    paginator = Paginator(animals, 10)
+    animals = paginator.page(1)
+    for i in animals:
+        i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    return render_to_response('find_animal.html', {"animals": animals}, context_instance=RequestContext(request))
+
+
+def find_animal_page(request, page_num):
+    animals = FindAnimal.objects.order_by("-id")
+    paginator = Paginator(animals, 10)
+    try:
+        animals = paginator.page(page_num)
+    except:
+        return HttpResponseNotFound()
+
+    for i in animals:
+        i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    return render_to_response('page.html', {"animals": animals})
+
