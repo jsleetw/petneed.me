@@ -23,7 +23,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    #url(r'', include('social_auth.urls')),
+    url(r'', include('social_auth.urls')),
 )
 
 urlpatterns += staticfiles_urlpatterns()
