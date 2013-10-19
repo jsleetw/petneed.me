@@ -1,20 +1,5 @@
 <div id="wall" class="row-fluid">
 {% for i in animals %}
-<div class="element span3 item ">
-    <div class="picture">
-        <a class="image" href="/static/media/{{i.image_file}}" title="{{i.name}}"><img src="/static/media/{{i.smal_img_file}}" alt=""/></a>
-        <div class="description">
-            <p>{{i.note}}
-            </p>
-        </div>
-        <div class="meta">
-            <span><i class="fa-icon-heart-empty"></i> <a href="#">{{i.name}}</a></span>
-            <span><i class="fa-icon-phone"><a href="tel://{{i.phone}}">{{i.phone}}</a></i></span>
-            <br />
-            <span><i class="fa-icon-home muted"><small>{{i.resettlement}}</small></i></span>
-	<div class="fb-like pull-right" data-width="50" data-layout="box_count" data-show-faces="true" data-send="false" data-href="{{current_url}}animal/profile/{{i.id}}/"></div>
-        </div>
-    </div>
-</div>
+{% include "brick.html" %}
 {% endfor %}
 </div>
