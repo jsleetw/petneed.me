@@ -3,6 +3,7 @@ import json
 import urllib
 import urllib2
 from datetime import datetime
+from pprint import pprint
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
@@ -13,6 +14,7 @@ from django import forms
 from django.contrib.auth import authenticate, login, logout
 from models import Animal
 from django.contrib.auth import get_user_model
+from django.utils.http import urlencode
 
 class RegisterForm(forms.Form):
     email = forms.EmailField(max_length=30)
@@ -24,9 +26,7 @@ def home(request):
     animals = Animal.objects.order_by("-id")
     paginator = Paginator(animals, 10)
     animals = paginator.page(1)
-    for i in animals:
-        i.phone_normalized = re.sub('[ ()-]', '', i.phone) # used in tel:// protocol
-        i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    animals = map(__extend_animal_fields, animals)
     return render_to_response('index.html', {"animals": animals}, context_instance=RequestContext(request))
 
 
@@ -35,10 +35,18 @@ def page(request):
     animals = Animal.objects.order_by("-id")
     paginator = Paginator(animals, 10)
     animals = paginator.page(page)
-    print animals
-    for i in animals:
-        i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    animals = map(__extend_animal_fields, animals)
     return render_to_response('page.html', {"animals": animals})
+
+
+def __extend_animal_fields(animal):
+    animal.smal_img_file = "%s_248x350.jpg" % animal.image_file.split(".jpg")[0]
+    animal.phone_normalized = re.sub('[ ()-]', '', animal.phone) # used in tel:// protocol
+
+    shared_target = {'u': 'http://%s/animal/profile/%s' % (settings.SITE_DOMAIN, animal.id)}
+    shared_target = urlencode(shared_target)
+    animal.share_link_facebook = 'http://www.facebook.com/sharer/sharer.php?u='+shared_target
+    return animal
 
 def user_profile(request):
     return render_to_response("user_profile.html", context_instance=RequestContext(request))
@@ -93,7 +101,6 @@ def get_animals(request):
                                   'note': animal.note.replace('"', '\\"'),
                                   'resettlement': animal.resettlement,
                                   'phone': animal.phone,
-                                  'phone_normalized': re.sub('[ ()-]', '', animal.phone),
                                   'email': animal.email,
                                   'childre_anlong': animal.childre_anlong,
                                   'animal_anlong': animal.animal_anlong,
