@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import re
 import json
 import urllib
@@ -40,12 +42,13 @@ def page(request):
 
 def profile(request, animal_id):
     animal = get_object_or_404(Animal, pk=animal_id)
-    print animal
+    animal = __extend_animal_fields(animal)
     return render_to_response('profile.html', {'current_url':
         'http://petneed.me'+request.get_full_path(),"animal": animal},
         context_instance=RequestContext(request))
 
 def __extend_animal_fields(animal):
+    animal.sex_class = 'male' if unicode(animal.sex) == u'雄' else 'female'
     animal.smal_img_file = "%s_248x350.jpg" % animal.image_file.split(".jpg")[0]
     animal.phone_normalized = re.sub('[ ()-]', '', animal.phone) # used in tel:// protocol
 
