@@ -338,7 +338,8 @@ def upload(request):
                 a.save()
         else:
             print "invalided"
-            return render_to_response('upload.html', {'error_msg': error_msg}, context_instance=RequestContext(request))
+            print form.errors
+            return render_to_response('upload.html', {'error_msg': form.errors}, context_instance=RequestContext(request))
     return render_to_response('upload.html', context_instance=RequestContext(request))
 
 #TODO@jsleetw: use view get image
