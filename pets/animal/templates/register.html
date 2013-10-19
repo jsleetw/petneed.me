@@ -19,7 +19,8 @@
                     <div class="page-title-small">
                         <h3>use your account</h3>
                     </div>
-                    <a href="https://www.facebook.com/dialog/oauth?scope=email&client_id=370831489709069&redirect_uri=http://localhost:8000/animal/facebook_register" class="facebook_connect">
+                    <!--<a href="https://www.facebook.com/dialog/oauth?scope=email&client_id=370831489709069&redirect_uri=http://localhost:8000/animal/facebook_register" class="facebook_connect">-->
+                    <a href="{% url 'socialauth_begin' 'facebook' %}" class="facebook_connect">
                         <div class="img"><i class="fa-icon-facebook"></i></div>
                         <div class="text">Register with Facebook</div>
                     </a>

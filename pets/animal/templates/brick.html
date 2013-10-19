@@ -1,0 +1,18 @@
+<div class="span3 item element">
+    <div class="picture">
+            <a class="image" href="{% url 'animal:profile' i.id %}" title="{{i.name}}">
+            <img src="/static/media/{{i.smal_img_file}}" alt=""/></a>
+        <div class="description">
+            <p>{{i.note}}
+            </p>
+        </div>
+        <div class="actions">
+            <span class="btn btn-danger"><i class="fa-icon-phone"></i> <a href="tel://{{i.phone_normalized}}">想瞭解</a></span>
+            <span class="btn btn-primary"><i class="fa-icon-facebook-sign"></i> <a href="{{i.share_link_facebook}}">想分享</a></span>
+        </div>
+        <div class="meta">
+            <span><i class="fa-icon-heart-empty"></i> <a href="#">{{i.name}}</a></span>
+            <span><i class="fa-icon-home muted"> <small>{{i.resettlement}}</small></i></span>
+        </div>
+    </div>
+</div>

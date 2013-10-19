@@ -12,6 +12,7 @@ from django import forms
 from django.contrib.auth import authenticate, login, logout
 from models import Animal
 from django.contrib.auth import get_user_model
+from animal.utils import thumbnail
 
 class RegisterForm(forms.Form):
     email = forms.EmailField(max_length=30)
@@ -262,7 +263,6 @@ def thanks(request):
 
 def upload(request):
     error_msg = False
-    User = get_user_model()
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -274,32 +274,31 @@ def upload(request):
             #a.age = request.POST.get("age")
             #a.variety = request.POST.get("variety")
             #a.reason = request.POST.get("reason")
-            a.accept_num = request.POST.get("accept_num")
+            #a.accept_num = request.POST.get("accept_num")
             #a.chip_num = request.POST.get("chip_num")
             #a.is_sterilization = request.POST.get("is_sterilization")
             #a.hair_type = request.POST.get("hair_type")
             a.note = request.POST.get("note")
             a.resettlement = request.POST.get("resettlement")
-            p.hone = request.POST.get("phone")
+            a.phone = request.POST.get("phone")
             #a.email = request.POST.get("email")
             #a.childre_anlong = request.POST.get("childre_anlong")
             #a.nimal_anlong = request.POST.get("animal_anlong")
             #a.bodyweight = request.POST.get("bodyweight")
-	    image_id = request.POST.get("image_id")
+	    image = request.FILES['photo']
  
-	    if not ((name is none) or (accept_num is none) or (note is none) or 
-		    (resettlement is none) or (phone is none)):
+	    if not ((name is none) or (note is none) or 
+		    (resettlement is none) or (phone is none) or
+		    (image is none)):
                 error_msg = "some requirement fields are not filled in"
             else:
-                
-                u = User.objects.filter(email=email)
-                if not u:
-                    user = User.objects.create_user(email, password)
-                    user.save()
-                    return HttpResponseRedirect('/animal/thanks')
-                else:
-                    print "user is exist"
-                    error_msg = "user is exist"
+                filename = name + datetime.now().jpg
+	        with open("src/media/" + filename, "wb") as code:
+                    code.write(image)
+		a.image_name = filename
+		thumbnail(filename, "248x350")
+		thumbnail(filename, "248x350", TRUE)
+		a.save()
         else:
             print "invalided"
             error_msg = form.errors
