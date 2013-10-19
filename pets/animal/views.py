@@ -1,9 +1,11 @@
 # coding: utf-8
 
 import re
+import os
 import json
 import urllib
 import urllib2
+import time
 from datetime import datetime
 from django.shortcuts import render_to_response, get_object_or_404
 #from pprint import pprint
@@ -24,6 +26,12 @@ class RegisterForm(forms.Form):
     password = forms.CharField(max_length=20)
     conf_password = forms.CharField(max_length=20)
 
+class UploadForm(forms.Form):
+    name = forms.CharField()
+    note = forms.CharField()
+    photo = forms.ImageField()
+    resettlement = forms.CharField()
+    phone = forms.CharField()
 
 def home(request):
     animals = Animal.objects.order_by("-id")
@@ -294,7 +302,7 @@ def upload(request):
     user = get_user(request)
     if user.is_authenticated():
     	if request.method == 'POST':
-            form = RegisterForm(request.POST)
+            form = UploadForm(request.POST, request.FILES)
             if form.is_valid():
                 a = Animal() 
                 a.name = request.POST.get("name")
@@ -317,21 +325,19 @@ def upload(request):
                 #a.bodyweight = request.POST.get("bodyweight")
        	        image = request.FILES['photo']
  
-	        if not ((name is none) or (note is none) or 
-   	                (resettlement is none) or (phone is none) or
-		        (image is none)):
-                    error_msg = "some requirement fields are not filled in"
-                else:
-		    head, ext = os.path.splitext(image.name)
-                    filename = user.get_username() + datetime.now() + ext
-	            with open("src/media/" + filename, "wb") as code:
-                        code.write(image)
-		    a.image_name = filename
-		    thumbnail(filename, "248x350")
-		    thumbnail(filename, "248x350", TRUE)
-		    a.save()
+                head, ext = os.path.splitext(image.name)
+                filename = user.get_username() + str(int(time.time())) + ext
+                savefilename = "src/media/" + filename
+                with open(savefilename, "wb") as code:
+                    code.write(image.read())
+                a.image_name = savefilename
+                print savefilename
+                thumbnail(savefilename, "248x350")
+                thumbnail(savefilename, "248x350", True)
+                a.save()
             else:
                 print "invalided"
+                return HttpResponse(unicode(form))
                 error_msg = form.errors
         else:
             print "user authenticated failed"
