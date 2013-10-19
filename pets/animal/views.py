@@ -374,11 +374,11 @@ def upload(request):
             # TODO : try-catch for PIL errors
             with open(savefilename, "wb") as code:
                 code.write(image.read())
-                a.image_name = savefilename
-                thumbnail(savefilename, "248x350")
-                thumbnail(savefilename, "248x350", True)
-                a.save()
-                # TODO : return new page while upload success
+            a.image_file = filename
+            thumbnail(savefilename, "248x350")
+            thumbnail(savefilename, "248x350", True)
+            a.save()
+            # TODO : return new page while upload success
             return HttpResponseRedirect("/")
         else:
             print "invalided"
