@@ -3,9 +3,12 @@
             <a class="image" href="{% url 'animal:profile' i.id %}" title="{{i.name}}">
             <img src="/static/media/{{i.smal_img_file}}" alt=""/></a>
         <div class="description">
-            {% load string_tags %}
-            <p>{% cut_string i.note 150 %}
-            </p>
+            {% if i.note|length > 100 %}
+                {% load string_tags %}
+                <p>{% cut_string i.note 100 %}...<br/><a href="{% url 'animal:profile' i.id %}">more</a></p>
+            {% else %}
+                <p>{{ i.note }}</p>
+            {% endif %}
         </div>
         <div class="actions">
             <span class="btn btn-danger"><i class="fa-icon-phone"></i> <a href="tel://{{i.phone_normalized}}">想瞭解</a></span>
