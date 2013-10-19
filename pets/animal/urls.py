@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 urlpatterns = patterns('',
     url(r'^home', 'animal.views.home'),
     url(r'^page/', 'animal.views.page'),
+    url(r'^profile/(?P<animal_id>\d+)/$', 'animal.views.profile', name='profile'),
     url(r'^login', 'animal.views.login_view'),
     url(r'^logout', 'animal.views.logout_view'),
     url(r'^API/0.1/animals/$', 'animal.views.get_animals'),
