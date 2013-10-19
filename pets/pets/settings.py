@@ -126,7 +126,7 @@ INSTALLED_APPS = (
     'animal',
     'gunicorn',
     'compressor',
-    #'social_auth',
+    'social_auth',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -161,3 +161,18 @@ LOGGING = {
 AUTH_USER_MODEL = 'animal.MyUser'
 
 from local_settings import *
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleOAuthBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.google.GoogleBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_REDIRECT_URL = '/'
+
+FACEBOOK_EXTENDED_PERMISSIONS = ['email', 'publish_actions', 'user_about_me', 'user_photos', 'user_location']
+
