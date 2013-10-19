@@ -1,9 +1,11 @@
 # coding: utf-8
 
 import re
+import os
 import json
 import urllib
 import urllib2
+import time
 from datetime import datetime
 from django.shortcuts import render_to_response, get_object_or_404
 #from pprint import pprint
@@ -43,7 +45,7 @@ class UploadForm(forms.Form):
     #childre_anlong = forms.CharField(max_length=200)
     #animal_anlong = forms.CharField(max_length=200)
     #bodyweight = forms.CharField(max_length=200)
-    photo = forms.FileField()
+    photo = forms.ImageField()
 
 def home(request):
     animals = Animal.objects.order_by("-id")
@@ -345,14 +347,16 @@ def upload(request):
                 else:
 		    head, ext = os.path.splitext(image.name)
                     filename = user.get_username() + datetime.now() + ext
-	            with open("src/media/" + filename, "wb") as code:
-                        code.write(image)
+		    savefinename = "src/media/" + filename
+	            with open(savefilename + filename, "wb") as code:
+                        code.write(image.read())
 		    a.image_name = filename
 		    thumbnail(filename, "248x350")
 		    thumbnail(filename, "248x350", TRUE)
 		    a.save()
             else:
                 print "invalided"
+                return HttpResponse(unicode(form))
                 error_msg = form.errors
     else:
         print "user authentication failed"
