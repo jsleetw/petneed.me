@@ -7,7 +7,7 @@ sudo apt-get install sqlite3 python-dev libsqlite3-dev
 sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 ```
-0.2 for PTL recompile
+0.2 for PIL recompile
 ```
 sudo apt-get install libjpeg libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev
 sudo ln -s /usr/lib/i386-linux-gnu/libjpeg.so /usr/lib/
