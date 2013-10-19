@@ -300,49 +300,46 @@ def thanks(request):
 def upload(request):
     error_msg = False
     user = get_user(request)
-    if user.is_authenticated():
-    	if request.method == 'POST':
-            form = UploadForm(request.POST, request.FILES)
-            if form.is_valid():
-                a = Animal() 
-                a.name = request.POST.get("name")
-    	        #a.sex = request.POST.get("sex")
-                #a.type = request.POST.get("type")
-                #a.build = request.POST.get("build")
-                #a.age = request.POST.get("age")
-                #a.variety = request.POST.get("variety")
-                #a.reason = request.POST.get("reason")
-                #a.accept_num = request.POST.get("accept_num")
-                #a.chip_num = request.POST.get("chip_num")
-                #a.is_sterilization = request.POST.get("is_sterilization")
-                #a.hair_type = request.POST.get("hair_type")
-                a.note = request.POST.get("note")
-                a.resettlement = request.POST.get("resettlement")
-                a.phone = request.POST.get("phone")
-                #a.email = request.POST.get("email")
-                #a.childre_anlong = request.POST.get("childre_anlong")
-                #a.nimal_anlong = request.POST.get("animal_anlong")
-                #a.bodyweight = request.POST.get("bodyweight")
-       	        image = request.FILES['photo']
- 
-                head, ext = os.path.splitext(image.name)
-                filename = user.get_username() + str(int(time.time())) + ext
-                savefilename = "src/media/" + filename
-                with open(savefilename, "wb") as code:
-                    code.write(image.read())
+    if request.method == 'POST':
+        if not user.is_authenticated():
+            return HttpResponseRedirect("/")
+        form = UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            a = Animal() 
+            a.name = request.POST.get("name")
+    	    #a.sex = request.POST.get("sex")
+            #a.type = request.POST.get("type")
+            #a.build = request.POST.get("build")
+            #a.age = request.POST.get("age")
+            #a.variety = request.POST.get("variety")
+            #a.reason = request.POST.get("reason")
+            #a.accept_num = request.POST.get("accept_num")
+            #a.chip_num = request.POST.get("chip_num")
+            #a.is_sterilization = request.POST.get("is_sterilization")
+            #a.hair_type = request.POST.get("hair_type")
+            a.note = request.POST.get("note")
+            a.resettlement = request.POST.get("resettlement")
+            a.phone = request.POST.get("phone")
+            #a.email = request.POST.get("email")
+            #a.childre_anlong = request.POST.get("childre_anlong")
+            #a.nimal_anlong = request.POST.get("animal_anlong")
+            #a.bodyweight = request.POST.get("bodyweight")
+            image = request.FILES['photo']
+            
+            head, ext = os.path.splitext(image.name)
+            filename = user.get_username() + str(int(time.time())) + ext
+            savefilename = "src/media/" + filename
+            with open(savefilename, "wb") as code:
+                code.write(image.read())
                 a.image_name = savefilename
                 print savefilename
                 thumbnail(savefilename, "248x350")
                 thumbnail(savefilename, "248x350", True)
                 a.save()
-            else:
-                print "invalided"
-                return HttpResponse(unicode(form))
-                error_msg = form.errors
         else:
-            print "user authenticated failed"
-
-    return render_to_response('upload.html', {'error_msg': error_msg}, context_instance=RequestContext(request))
+            print "invalided"
+            return render_to_response('upload.html', {'error_msg': error_msg}, context_instance=RequestContext(request))
+    return render_to_response('upload.html', context_instance=RequestContext(request))
 
 #TODO@jsleetw: use view get image
 def get_img(request):
