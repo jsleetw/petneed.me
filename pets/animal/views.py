@@ -346,7 +346,7 @@ def upload(request):
                     error_msg = "some requirement fields are not filled in"
                 else:
 		    head, ext = os.path.splitext(image.name)
-                    filename = user.get_username() + str(datetime.now().time()) + ext
+                    filename = user.get_username() + str(int(time.time())) + ext
 		    print filename
 		    savefilename = "src/media/" + filename
 		    print savefilename
