@@ -9,7 +9,7 @@ from django.template import RequestContext
 from django.utils import simplejson
 from django.conf import settings
 from django import forms
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user
 from models import Animal
 from django.contrib.auth import get_user_model
 from animal.utils import thumbnail
@@ -263,45 +263,51 @@ def thanks(request):
 
 def upload(request):
     error_msg = False
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            a = Animal() 
-            a.name = request.POST.get("name")
-    	    #a.sex = request.POST.get("sex")
-            #a.type = request.POST.get("type")
-            #a.build = request.POST.get("build")
-            #a.age = request.POST.get("age")
-            #a.variety = request.POST.get("variety")
-            #a.reason = request.POST.get("reason")
-            #a.accept_num = request.POST.get("accept_num")
-            #a.chip_num = request.POST.get("chip_num")
-            #a.is_sterilization = request.POST.get("is_sterilization")
-            #a.hair_type = request.POST.get("hair_type")
-            a.note = request.POST.get("note")
-            a.resettlement = request.POST.get("resettlement")
-            a.phone = request.POST.get("phone")
-            #a.email = request.POST.get("email")
-            #a.childre_anlong = request.POST.get("childre_anlong")
-            #a.nimal_anlong = request.POST.get("animal_anlong")
-            #a.bodyweight = request.POST.get("bodyweight")
-	    image = request.FILES['photo']
+    user = get_user(request)
+    if user.is_authenticated():
+    	if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                a = Animal() 
+                a.name = request.POST.get("name")
+    	        #a.sex = request.POST.get("sex")
+                #a.type = request.POST.get("type")
+                #a.build = request.POST.get("build")
+                #a.age = request.POST.get("age")
+                #a.variety = request.POST.get("variety")
+                #a.reason = request.POST.get("reason")
+                #a.accept_num = request.POST.get("accept_num")
+                #a.chip_num = request.POST.get("chip_num")
+                #a.is_sterilization = request.POST.get("is_sterilization")
+                #a.hair_type = request.POST.get("hair_type")
+                a.note = request.POST.get("note")
+                a.resettlement = request.POST.get("resettlement")
+                a.phone = request.POST.get("phone")
+                #a.email = request.POST.get("email")
+                #a.childre_anlong = request.POST.get("childre_anlong")
+                #a.nimal_anlong = request.POST.get("animal_anlong")
+                #a.bodyweight = request.POST.get("bodyweight")
+       	        image = request.FILES['photo']
  
-	    if not ((name is none) or (note is none) or 
-		    (resettlement is none) or (phone is none) or
-		    (image is none)):
-                error_msg = "some requirement fields are not filled in"
+	        if not ((name is none) or (note is none) or 
+   	                (resettlement is none) or (phone is none) or
+		        (image is none)):
+                    error_msg = "some requirement fields are not filled in"
+                else:
+		    head, ext = os.path.splitext(image.name)
+                    filename = user.get_username() + datetime.now() + ext
+	            with open("src/media/" + filename, "wb") as code:
+                        code.write(image)
+		    a.image_name = filename
+		    thumbnail(filename, "248x350")
+		    thumbnail(filename, "248x350", TRUE)
+		    a.save()
             else:
-                filename = name + datetime.now().jpg
-	        with open("src/media/" + filename, "wb") as code:
-                    code.write(image)
-		a.image_name = filename
-		thumbnail(filename, "248x350")
-		thumbnail(filename, "248x350", TRUE)
-		a.save()
+                print "invalided"
+                error_msg = form.errors
         else:
-            print "invalided"
-            error_msg = form.errors
+            print "user authenticated failed"
+
     return render_to_response('upload.html', {'error_msg': error_msg}, context_instance=RequestContext(request))
 
 #TODO@jsleetw: use view get image
