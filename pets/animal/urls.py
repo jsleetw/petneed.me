@@ -15,5 +15,8 @@ urlpatterns = patterns('',
     url(r'^facebook_register$', 'animal.views.facebook_register'),
     url(r'^thanks', 'animal.views.thanks'),
     url(r'^user_profile', 'animal.views.user_profile'),
+    url(r'^find$', 'animal.views.find_animal'),
+    url(r'^find/(?P<page_num>\d+)$', 'animal.views.find_animal_page'),
+    url(r'^find/upload', 'animal.views.find_animal_upload'),
     #url(r'^get_img', 'animal.views.get_img'),
 )

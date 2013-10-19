@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}petneed.me|home{% endblock title %}
+{% block context %}
+<div id="container" class="container">
+    <!--start: Wrapper-->
+    <div id="wrapper">
+        <!-- start: Wall -->
+        <div id="wall" class="row-fluid">
+            {% for i in animals %}
+            <div class="span3 item element">
+                <div class="picture">
+                    <a class="image" href="{{ MEDIA_URL }}{{i.image_file}}" title="{{i.name}}"><img src="{{ MEDIA_URL }}{{i.smal_img_file}}" alt=""/></a>
+                    <div class="description">
+                        <p>{{i.note}}
+                        </p>
+                    </div>
+                    <div class="meta">
+                        <span><i class="fa-icon-heart-empty"></i> <a href="#">{{i.name}}</a></span>
+                        <span><i class="fa-icon-phone"><a href="tel://{{i.phone}}">{{i.phone}}</a></i></span>
+                        <br />
+                        <span><i class="fa-icon-home muted"><small>{{i.resettlement}}</small></i></span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <nav id="page_nav">
+            <a href="/animal/find/2"></a>
+            </nav>
+        </div>
+        <!-- end: Wall -->
+    </div>
+{% endblock context %}
+{% block js_in_doc %}
+<script>
+    jQuery(document).ready(function () {
+        var $container = $('#wall');
+        $container.isotope({
+            itemSelector : '.element'
+        });
+        $container.infinitescroll({
+            navSelector  : '#page_nav',    // selector for the paged navigation
+            nextSelector : '#page_nav a',  // selector for the NEXT link (to page 2)
+            itemSelector : '.element',     // selector for all items you'll retrieve
+            errorCallback: function () {
+                $(window).resize();
+            }
+        },
+        // call Isotope as a callback
+        function( newElements ) {
+
+            $container.isotope( 'insert', $( newElements ) );
+        }
+        );
+    });
+</script>
+{% endblock js_in_doc %}
