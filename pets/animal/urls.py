@@ -14,5 +14,6 @@ urlpatterns = patterns('',
     url(r'^register$', 'animal.views.register'),
     url(r'^facebook_register$', 'animal.views.facebook_register'),
     url(r'^thanks', 'animal.views.thanks'),
+    url(r'^user_profile', 'animal.views.user_profile'),
     #url(r'^get_img', 'animal.views.get_img'),
 )
