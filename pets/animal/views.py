@@ -3,8 +3,8 @@ import json
 import urllib
 import urllib2
 from datetime import datetime
+from django.shortcuts import render_to_response,get_object_or_404
 from pprint import pprint
-from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.template import RequestContext
@@ -38,6 +38,10 @@ def page(request):
     animals = map(__extend_animal_fields, animals)
     return render_to_response('page.html', {"animals": animals})
 
+def profile(request, animal_id):
+    animal = get_object_or_404(Animal, pk=animal_id)
+    print animal
+    return render_to_response('profile.html', {'current_url': 'http://petneed.me'+request.get_full_path(),"animal": animal})
 
 def __extend_animal_fields(animal):
     animal.smal_img_file = "%s_248x350.jpg" % animal.image_file.split(".jpg")[0]
@@ -50,6 +54,7 @@ def __extend_animal_fields(animal):
 
 def user_profile(request):
     return render_to_response("user_profile.html", context_instance=RequestContext(request))
+
 
 def logout_view(request):
     logout(request)

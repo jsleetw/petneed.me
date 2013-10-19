@@ -173,3 +173,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 LOGIN_REDIRECT_URL = '/'
+
+FACEBOOK_EXTENDED_PERMISSIONS = ['email', 'publish_actions', 'user_about_me', 'user_photos', 'user_location']
+
