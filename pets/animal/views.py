@@ -59,8 +59,33 @@ def __extend_animal_fields(animal):
     shared_target = {'u': 'http://%s/animal/profile/%s' % (settings.SITE_DOMAIN, animal.id)}
     shared_target = urlencode(shared_target)
     animal.share_link_facebook = 'http://www.facebook.com/sharer/sharer.php?u=' + shared_target
+
+    # higher (integer) score reflects that the animal is more close to children/animal
+    # zero as strong negative
+    animal.children_score = __calculate_children_score(animal.childre_anlong)
+    animal.animal_score = __calculate_animal_score(animal.animal_anlong)
+
     return animal
 
+def __calculate_children_score(statement):
+    score = 0
+    if u'可' == statement:
+        score = 3
+    elif u'可' in statement:
+        score = 2
+    elif u'不建議' in statement:
+        score = 1
+    elif u'不可' in statement:
+        score = 0
+    return score
+
+def __calculate_animal_score(statement):
+    score = 0
+    if u'可' in statement:
+        score = 1
+    elif u'不可' in statement:
+        score = 0
+    return score
 
 def user_profile(request):
     return render_to_response("user_profile.html", context_instance=RequestContext(request))
