@@ -340,19 +340,21 @@ def upload(request):
                 #a.bodyweight = request.POST.get("bodyweight")
        	        image = request.FILES['photo']
  
-	        if not ((a.name is None) or (a.note is None) or 
-   	                (a.resettlement is None) or (a.phone is None) or
-		        (image is None)):
+	        if ((a.name is None) or (a.note is None) or 
+   	            (a.resettlement is None) or (a.phone is None) or
+		    (image is None)):
                     error_msg = "some requirement fields are not filled in"
                 else:
 		    head, ext = os.path.splitext(image.name)
-                    filename = user.get_username() + datetime.now() + ext
-		    savefinename = "src/media/" + filename
+                    filename = user.get_username() + str(datetime.now().time()) + ext
+		    print filename
+		    savefilename = "src/media/" + filename
+		    print savefilename
 	            with open(savefilename + filename, "wb") as code:
                         code.write(image.read())
 		    a.image_name = filename
-		    thumbnail(filename, "248x350")
-		    thumbnail(filename, "248x350", TRUE)
+		    thumbnail(savefilename, "248x350")
+		    thumbnail(savefilename, "248x350", TRUE)
 		    a.save()
             else:
                 print "invalided"
@@ -360,6 +362,7 @@ def upload(request):
                 error_msg = form.errors
     else:
         print "user authentication failed"
+	return HttpResponseRedirect("/")
 
     return render_to_response('upload.html', {'error_msg': error_msg}, context_instance=RequestContext(request))
 
