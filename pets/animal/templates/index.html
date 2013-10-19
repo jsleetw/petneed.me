@@ -24,22 +24,22 @@
 {% endblock context %}
 {% block js_in_doc %}
 <script>
-//    jQuery(document).ready(function () {
-//        var $container = $('#wall');
-//        $container.isotope({
-//            itemSelector : '.element'
-//        });
-//        $container.infinitescroll({
-//            navSelector  : '#page_nav',    // selector for the paged navigation
-//            nextSelector : '#page_nav a',  // selector for the NEXT link (to page 2)
-//            itemSelector : '.element',     // selector for all items you'll retrieve
-//        },
-//        // call Isotope as a callback
-//        function( newElements ) {
-//            $container.isotope( 'insert', $( newElements ) );
-//        }
-//        );
-//    });
+    jQuery(document).ready(function () {
+        var $container = $('#wall');
+        $container.isotope({
+            itemSelector : '.element'
+        });
+        $container.infinitescroll({
+            navSelector  : '#page_nav',    // selector for the paged navigation
+            nextSelector : '#page_nav a',  // selector for the NEXT link (to page 2)
+            itemSelector : '.element',     // selector for all items you'll retrieve
+        },
+        // call Isotope as a callback
+        function( newElements ) {
+            $container.isotope( 'insert', $( newElements ) );
+        }
+        );
+    });
     function colorLuminance(hex, lum) {
         // lum := singed floating number
         // positive for getting darker color

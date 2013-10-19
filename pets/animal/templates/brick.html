@@ -1,7 +1,8 @@
 <div class="span3 item element">
     <div class="picture">
         {% load index_layout_utils %}
-        <a class="image" href="/static/media/{{i.image_file}}" title="{{i.name}}"><img src="/static/media/{{i.smal_img_file}}" alt=""/></a>
+        <!--a class="image" href="/static/media/{{i.image_file}}" title="{{i.name}}">
+        <img src="/static/media/{{i.smal_img_file}}" alt=""/></a>-->
             <a class="image" href="{% url 'animal:profile' i.id %}" title="{{i.name}}">
             <img src="/static/media/{{i.smal_img_file}}" alt=""/></a>
         <div class="description">
@@ -17,25 +18,21 @@
             <span class="btn btn-primary"><i class="fa-icon-facebook-sign"></i> <a href="{{i.share_link_facebook}}">想分享</a></span>
         </div>
         <div class="meta">
-
             {% ifnotequal i.children_score 0 %}
             <span class="children_score label label-success" title="{{i.childre_anlong}}" data-score-max="3" data-score="{{i.children_score}}">親近孩童</span>
             {% endifnotequal %}
-
             {% ifnotequal i.animal_score 0 %}
             <span class="label label-success">親近動物</span>
             {% endifnotequal %}
-
             <br/>
-
             <span><i class="fa-icon-heart-empty"></i> <a href="#">{{i.name}}</a></span>
             <span><i class="fa-icon-phone"><a href="tel://{{i.phone_normalized}}">{{i.phone}}</a></i></span>
             <br />
             <span><i class="fa-icon-home muted"><small>{{i.resettlement|index_layout_utils|linebreaksbr}}</small></i></span>
             <br />
-            <i class="glyphicon glyphicon-hand-down">&nbsp;{{ i.count_clicks }}
-             </i>&nbsp;&nbsp;&nbsp;<i class="glyphicon glyphicon-eye-open">&nbsp;{{i.count_eyeons}}</i>
-            <span><i class="fa-icon-home muted"></i> <small>{{i.resettlement}}</small></span>
+            <i class="glyphicon glyphicon-hand-down">&nbsp;{{ i.count_clicks }}</i>&nbsp;&nbsp;&nbsp;
+            <i class="glyphicon glyphicon-eye-open">&nbsp;{{i.count_eyeons}}</i>
+            <!--<span><i class="fa-icon-home muted"></i> <small>{{i.resettlement}}</small></span>-->
         </div>
     </div>
 </div>
