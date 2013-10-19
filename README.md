@@ -40,27 +40,29 @@ Then you will see:
 pip install -r requirements.txt
 ```
 
-2.Sync db
+2.create setup `pets/pets/local_settings.py` from template file `local_settings.py`
 
-```
-cd pets
-python manage.py syncdb
-```
-
-3.Get initial pet's data from api
-
-```
-python manage.py get_animal
-```
-
-4.setup local_setting
 ```
 FACEBOOK_APP_ID = ''
 FACEBOOK_API_SECRET = ''
 SECRET_KEY = '' #<-random string and don't share it with anybody.
 ```
 
+3.Sync db
+
+```
+cd pets
+python manage.py syncdb
+```
+
+4.Get initial pet's data from api
+
+```
+python manage.py get_animal
+```
+
 5.Run development Server !
+
 ```
 python manage.py runserver
 ```
