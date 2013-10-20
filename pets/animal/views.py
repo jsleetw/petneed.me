@@ -83,7 +83,7 @@ def __extend_animal_fields(animal):
     animal.phone_normalized = re.sub('[ ()-]', '', animal.phone)  # used in tel:// protocol
 
     shared_target = {'u': 'http://%s/animal/profile/%s' % (settings.SITE_DOMAIN, animal.id)}
-    shared_target = urlencode(shared_target)
+    shared_target = urllib.urlencode(shared_target)
     animal.share_link_facebook = 'http://www.facebook.com/sharer/sharer.php?u=' + shared_target
 
     # higher (integer) score reflects that the animal is more close to children/animal
