@@ -3,6 +3,7 @@
 *.db
 pets/animal/pics/
 pets/src/media/*.jpg
+pets/src/media/
 *.pyc
 local_settings.py
 *~
