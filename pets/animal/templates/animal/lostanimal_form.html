@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}petneed.me|home{% endblock title %}
 {% block context %}
 <div id="container" class="container">
@@ -9,7 +10,7 @@
 	<table>
 		{{ form.as_table }}							
 	</table>
-	<input type="submit" value="Save" />
+	<input type="submit" value="Upload" />
 </form>
 </div>
 </div>

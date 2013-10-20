@@ -71,7 +71,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="/animal/find">Browse</a></li>
                                 <li><a href="/animal/find/upload">Upload</a></li>
-								<li><a href="{% url 'animal:LostAnimal_add' %}">Loast Upload</a></li>
+								<li><a href="{% url 'animal:LostAnimal_add' %}">Lost Upload</a></li>
                             </ul>
                         </li>
                         <li class="active dropdown">
@@ -88,8 +88,9 @@
                         <li class="active"><a href="/animal/register">Register</a></li>
                     {% endif %}
                     </ul>
-                    </li>
-                    </ul>
+		    <ul class="nav pull-right">		
+			<li><a class="btn btn-small" href="#searchModal" data-toggle="modal"><font size=3><b>全站搜尋</b></font></a></li>	
+		    </ul>
                 </div>
             </div>
         </div>
@@ -101,6 +102,32 @@
     <!--end: Container-->
     </header>
     <!--end: Header-->
+    <!-- Search Modal -->
+    <div id="searchModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3 id="myModalLabel" class="text-center">寵物需要我</h3>
+	</div>		
+	<div class="modal-body">
+	<!-- Custom google search -->
+	<script>
+	(function() {
+	var cx = '016410652507081970847:nmxbtz6ct1w';
+	var gcse = document.createElement('script');
+	gcse.type = 'text/javascript';
+	gcse.async = true;
+	gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+	'//www.google.com/cse/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(gcse, s);
+	})();
+	</script>
+	<gcse:search></gcse:search>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">離開</button>
+	</div>
+    </div>
     <!--start: Container -->
     {% block context %}
     {% endblock context %}
