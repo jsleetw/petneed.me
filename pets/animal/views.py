@@ -123,7 +123,8 @@ def __calculate_animal_score(statement):
     return score
 
 def user_profile(request):
-    from social_auth.backends.facebook import FacebookBackend
+    user = get_user(request)
+    print user
     return render_to_response("user_profile.html", context_instance=RequestContext(request))
 
 
