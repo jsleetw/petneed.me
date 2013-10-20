@@ -79,7 +79,7 @@ for r in range(1, 30):
     age_CHOICES.append((r,r))
 
 class LostAnimal(models.Model):
-    photo = models.ImageField(upload_to='upload')
+    photo = models.FileField(upload_to='upload')
     name = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
     email = models.EmailField(blank=True,null=True)
