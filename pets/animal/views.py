@@ -19,8 +19,17 @@ from django.contrib.auth import authenticate, login, logout, get_user
 from models import Animal, FindAnimal
 from django.contrib.auth import get_user_model
 from animal.utils import thumbnail
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+from animal.models import LostAnimal
+from animal.forms import LostAnimalForm
 
-
+class LostAnimalCreate(CreateView):
+    model = LostAnimal
+    form_class = LostAnimalForm
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super(LostAnimalCreate, self).form_valid(form)
 
 class RegisterForm(forms.Form):
     email = forms.EmailField(max_length=30)
@@ -54,8 +63,7 @@ def home(request):
     animals = paginator.page(1)
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
-    #animals = map(__extend_animal_fields, animals)
-    return render_to_response('index.html', {"animals": animals}, context_instance=RequestContext(request))
+    return render_to_response('index.html', {"animals": map(__extend_animal_fields,animals)}, context_instance=RequestContext(request))
 
 
 def page(request):
@@ -66,7 +74,7 @@ def page(request):
     print animals
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
-    return render_to_response('page.html', {"animals": animals})
+    return render_to_response('page.html', {"animals": map(__extend_animal_fields,animals)})
 
 
 def profile(request, animal_id):
@@ -114,7 +122,8 @@ def __calculate_animal_score(statement):
     return score
 
 def user_profile(request):
-    from social_auth.backends.facebook import FacebookBackend
+    user = get_user(request)
+    print user
     return render_to_response("user_profile.html", context_instance=RequestContext(request))
 
 

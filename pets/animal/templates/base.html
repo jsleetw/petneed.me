@@ -61,7 +61,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="/">PetNeed.me</a>
+                <a class="brand" href="/">
+                  <img src="{{ STATIC_URL }}/img/petNeedme_full_color.png"></img>
+                </a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li class="active"><a href="/">Adopt a pet</a></li>
@@ -70,7 +72,8 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Find my pet<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/animal/find">Browse</a></li>
-                                <li><a href="/animal/find/upload">Upload</a></li>
+                                <!-- <li><a href="/animal/find/upload">Upload</a></li>-->
+                                <li><a href="{% url 'animal:LostAnimal_add' %}">Lost Pet Upload</a></li>
                             </ul>
                         </li>
                         <li class="active dropdown">
@@ -93,9 +96,6 @@
             </div>
         </div>
         <!--end: Navigation -->
-        <div class="nav-logo">
-            <img src="{{ STATIC_URL }}/img/petNeedme_full_color.png" style="width: 74px; height: 57px"></img>
-        </div>
     </div>
     <!--end: Container-->
     </header>

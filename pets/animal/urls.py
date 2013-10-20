@@ -2,6 +2,7 @@
 from django.conf.urls import patterns, include, url
 from django.core.urlresolvers import reverse
 
+from animal.views import LostAnimalCreate
 
 urlpatterns = patterns('',
     url(r'^home', 'animal.views.home'),
@@ -17,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^thanks', 'animal.views.thanks'),
     url(r'^upload', 'animal.views.upload'),
     url(r'^user_profile', 'animal.views.user_profile'),
+    url(r'lost/add/$', LostAnimalCreate.as_view(), name='LostAnimal_add'),
     url(r'^find$', 'animal.views.find_animal'),
     url(r'^find/(?P<page_num>\d+)$', 'animal.views.find_animal_page'),
     url(r'^find/upload', 'animal.views.find_animal_upload'),

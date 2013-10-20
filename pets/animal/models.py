@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
+from django.core.urlresolvers import reverse
 from django.db import models
-import datetime
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
@@ -32,6 +33,7 @@ class AnimalCommonInfo(models.Model):
     class Meta:
         abstract = True
 
+
 class Animal(AnimalCommonInfo):
     pass
 #     accept_num = models.IntegerField(unique=True)
@@ -57,6 +59,42 @@ class Animal(AnimalCommonInfo):
 #     image_file = models.CharField(max_length=200)
 #     pub_date = models.DateTimeField(auto_now=True)
 
+gender_CHOICES = (
+    (u'公', u'公'),
+    (u'母', u'母'),
+    (u'不確定', u'不確定'),
+)
+species_CHOICES = (
+    (u'犬', u'犬'),
+    (u'貓', u'貓'),
+    (u'其他', u'其他'),
+)
+sterilization_CHOICES = (
+    (u'未絕育', u'未絕育'),
+    (u'已絕育', u'已絕育'),
+    (u'不確定', u'不確定'),
+)
+age_CHOICES = []
+for r in range(1, 30):
+    age_CHOICES.append((r,r))
+
+class LostAnimal(models.Model):
+    photo = models.FileField(upload_to='upload')
+    name = models.CharField(max_length=200)
+    phone = models.CharField(max_length=200)
+    email = models.EmailField(blank=True,null=True)
+    gender = models.CharField(max_length=200, choices=gender_CHOICES, default=u'公')
+    species = models.CharField(max_length=200, choices=species_CHOICES, default=u'犬')
+    age = models.CharField(max_length=200,blank=True,null=True, choices=age_CHOICES)
+    breed = models.CharField(max_length=200,blank=True,null=True,default=u'米克斯')
+    is_sterilization = models.CharField(max_length=200, choices=sterilization_CHOICES, default=u'未絕育')
+    hair_color = models.CharField(max_length=200,blank=True,null=True)
+    note = models.TextField(blank=True,null=True)
+    pub_date = models.DateTimeField(auto_now=True)
+    found = models.BooleanField()
+    #created_by = models.ForeignKey(MyUser)
+    def get_absolute_url(self):
+        return reverse('animal:profile', kwargs={'animal_id': self.pk})
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -81,20 +119,19 @@ class MyUserManager(BaseUserManager):
         birth and password.
         """
         user = self.create_user(email,
-            password=password,
-        )
+                                password=password,
+                                )
         user.is_admin = True
         user.save(using=self._db)
         return user
 
 
 class MyUser(AbstractBaseUser):
-    email = models.EmailField(
-            verbose_name='email address',
-            max_length=255,
-            unique=True,
-            db_index=True,
-            )
+    email = models.EmailField(verbose_name='email address',
+                              max_length=255,
+                              unique=True,
+                              db_index=True,
+                              )
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_fb = models.BooleanField(default=False)

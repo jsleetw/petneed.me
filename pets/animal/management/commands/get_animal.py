@@ -4,8 +4,8 @@ from animal.utils import thumbnail
 import json
 import urllib2
 import os
-import Image
 import urllib
+import Image
 
 class Command(BaseCommand):
     args = '<>'
