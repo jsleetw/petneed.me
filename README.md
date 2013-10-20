@@ -8,15 +8,21 @@ sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 ```
 0.2 for PIL recompile
+for ubuntu:
 ```
 sudo apt-get install libjpeg libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev
 sudo ln -s /usr/lib/i386-linux-gnu/libjpeg.so /usr/lib/
 sudo ln -s /usr/lib/i386-linux-gnu/libz.so /usr/lib/
 sudo ln -s /usr/lib/i386-linux-gnu/libfreetype.so /usr/lib/
 pip install -I PIL
-
 --i386 will replace to 'uname -i'
 ```
+
+for mac:
+```
+brew install jpeg-turbo jpeg little-cms zlib freetype
+```
+
 Then you will see:
 ```
     --------------------------------------------------------------------
