@@ -4,7 +4,8 @@ from django.db import models
 import datetime
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-class Animal(models.Model):
+
+class AnimalCommonInfo(models.Model):
     accept_num = models.IntegerField(unique=True)
     name = models.CharField(max_length=200)
     sex = models.CharField(max_length=200)
@@ -27,13 +28,43 @@ class Animal(models.Model):
     image_name = models.URLField(max_length=200)
     image_file = models.CharField(max_length=200)
     pub_date = models.DateTimeField(auto_now=True)
+    count_clicks = models.CharField(max_length=200, default=0)
+    count_eyeons = models.CharField(max_length=200, default=0)
 
-sex_CHOICES = (
+    class Meta:
+        abstract = True
+
+class Animal(AnimalCommonInfo):
+    pass
+#     accept_num = models.IntegerField(unique=True)
+#     name = models.CharField(max_length=200)
+#     sex = models.CharField(max_length=200)
+#     type = models.CharField(max_length=200)
+#     build = models.CharField(max_length=200)
+#     age = models.CharField(max_length=200)
+#     variety = models.CharField(max_length=200)
+#     reason = models.CharField(max_length=200)
+#     accept_num = models.CharField(max_length=200)
+#     chip_num = models.CharField(max_length=200)
+#     is_sterilization = models.CharField(max_length=200)
+#     hair_type = models.CharField(max_length=200)
+#     note = models.TextField()
+#     resettlement = models.CharField(max_length=200)
+#     phone = models.CharField(max_length=200)
+#     email = models.EmailField()
+#     childre_anlong = models.CharField(max_length=200)
+#     animal_anlong = models.CharField(max_length=200)
+#     bodyweight = models.CharField(max_length=200)
+#     image_name = models.URLField(max_length=200)
+#     image_file = models.CharField(max_length=200)
+#     pub_date = models.DateTimeField(auto_now=True)
+
+gender_CHOICES = (
     (u'公', u'公'),
     (u'母', u'母'),
     (u'不確定', u'不確定'),
 )
-type_CHOICES = (
+species_CHOICES = (
     (u'犬', u'犬'),
     (u'貓', u'貓'),
     (u'其他', u'其他'),
@@ -43,23 +74,25 @@ sterilization_CHOICES = (
     (u'已絕育', u'已絕育'),
     (u'不確定', u'不確定'),
 )
+age_CHOICES = []
+for r in range(1, 30):
+    age_CHOICES.append((r,r))
 
 class LostAnimal(models.Model):
+    photo = models.ImageField(upload_to='upload')
     name = models.CharField(max_length=200)
-    sex = models.CharField(max_length=200, choices=sex_CHOICES, default=u'公')
-    type = models.CharField(max_length=200, choices=type_CHOICES, default=u'犬')
-    age = models.CharField(max_length=200,blank=True,null=True)
-    variety = models.CharField(max_length=200,blank=True,null=True)
-    chip_num = models.CharField(max_length=200,blank=True,null=True)
-    is_sterilization = models.CharField(max_length=200, choices=sterilization_CHOICES, default=u'未絕育')
-    hair_type = models.CharField(max_length=200,blank=True,null=True)
-    note = models.TextField(blank=True,null=True)
     phone = models.CharField(max_length=200)
     email = models.EmailField(blank=True,null=True)
-    image_name = models.URLField(max_length=200,blank=True,null=True)
-    image_file = models.CharField(max_length=200,blank=True,null=True)
+    gender = models.CharField(max_length=200, choices=gender_CHOICES, default=u'公')
+    species = models.CharField(max_length=200, choices=species_CHOICES, default=u'犬')
+    age = models.CharField(max_length=200,blank=True,null=True, choices=age_CHOICES)
+    breed = models.CharField(max_length=200,blank=True,null=True,default=u'米克斯')
+    is_sterilization = models.CharField(max_length=200, choices=sterilization_CHOICES, default=u'未絕育')
+    hair_color = models.CharField(max_length=200,blank=True,null=True)
+    note = models.TextField(blank=True,null=True)
     pub_date = models.DateTimeField(auto_now=True)
     found = models.BooleanField()
+    #created_by = models.ForeignKey(MyUser)
     def get_absolute_url(self):
         return reverse('animal:profile', kwargs={'animal_id': self.pk})
 
@@ -136,3 +169,7 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+class FindAnimal(AnimalCommonInfo):
+    pass

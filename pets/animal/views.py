@@ -1,35 +1,61 @@
+# coding: utf-8
+
 import re
+import os
 import json
 import urllib
 import urllib2
+import time
 from datetime import datetime
 from django.shortcuts import render_to_response, get_object_or_404
 #from pprint import pprint
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.paginator import Paginator
 from django.template import RequestContext
 from django.utils import simplejson
 from django.conf import settings
 from django import forms
-from django.contrib.auth import authenticate, login, logout
-from models import Animal
+from django.contrib.auth import authenticate, login, logout, get_user
+from models import Animal, FindAnimal
 from django.contrib.auth import get_user_model
-from django.utils.http import urlencode
-
+from animal.utils import thumbnail
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from animal.models import LostAnimal
+from animal.forms import LostAnimalForm
 
 class LostAnimalCreate(CreateView):
     model = LostAnimal
-    fields = ['name']
-
+    form_class = LostAnimalForm
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super(LostAnimalCreate, self).form_valid(form)
 
 class RegisterForm(forms.Form):
     email = forms.EmailField(max_length=30)
     password = forms.CharField(max_length=20)
     conf_password = forms.CharField(max_length=20)
 
+class UploadForm(forms.Form):
+    name = forms.CharField(max_length=200)
+    #sex = forms.CharField(max_length=200)
+    #type = forms.CharField(max_length=200)
+    #build = forms.CharField(max_length=200)
+    #age = forms.CharField(max_length=200)
+    #variety = forms.CharField(max_length=200)
+    #reason = forms.CharField(max_length=200)
+    #accept_num = forms.CharField(max_length=200)
+    #chip_num = forms.CharField(max_length=200)
+    #is_sterilization = forms.CharField(max_length=200)
+    #hair_type = forms.CharField(max_length=200)
+    note = forms.CharField()
+    resettlement = forms.CharField(max_length=200)
+    phone = forms.CharField(max_length=200)
+    #email = forms.EmailField()
+    #childre_anlong = forms.CharField(max_length=200)
+    #animal_anlong = forms.CharField(max_length=200)
+    #bodyweight = forms.CharField(max_length=200)
+    photo = forms.ImageField()
 
 def home(request):
     animals = Animal.objects.order_by("-id")
@@ -37,37 +63,67 @@ def home(request):
     animals = paginator.page(1)
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
-    animals = map(__extend_animal_fields, animals)
+    #animals = map(__extend_animal_fields, animals)
     return render_to_response('index.html', {"animals": animals}, context_instance=RequestContext(request))
+
 
 def page(request):
     page = int(request.path_info.strip('/animal/page/'))
     animals = Animal.objects.order_by("-id")
     paginator = Paginator(animals, 10)
     animals = paginator.page(page)
-    animals = map(__extend_animal_fields, animals)
+    print animals
+    for i in animals:
+        i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
     return render_to_response('page.html', {"animals": animals})
 
 
 def profile(request, animal_id):
     animal = get_object_or_404(Animal, pk=animal_id)
-    print animal
+    animal = __extend_animal_fields(animal)
     return render_to_response('profile.html', {'current_url':
                               'http://petneed.me' + request.get_full_path(), "animal": animal},
                               context_instance=RequestContext(request))
 
 
 def __extend_animal_fields(animal):
+    animal.sex_class = 'male' if unicode(animal.sex) == u'雄' else 'female'
     animal.smal_img_file = "%s_248x350.jpg" % animal.image_file.split(".jpg")[0]
     animal.phone_normalized = re.sub('[ ()-]', '', animal.phone)  # used in tel:// protocol
 
     shared_target = {'u': 'http://%s/animal/profile/%s' % (settings.SITE_DOMAIN, animal.id)}
-    shared_target = urlencode(shared_target)
+    shared_target = urllib.urlencode(shared_target)
     animal.share_link_facebook = 'http://www.facebook.com/sharer/sharer.php?u=' + shared_target
+
+    # higher (integer) score reflects that the animal is more close to children/animal
+    # zero as strong negative
+    animal.children_score = __calculate_children_score(animal.childre_anlong)
+    animal.animal_score = __calculate_animal_score(animal.animal_anlong)
+
     return animal
 
+def __calculate_children_score(statement):
+    score = 0
+    if u'可' == statement:
+        score = 3
+    elif u'可' in statement:
+        score = 2
+    elif u'不建議' in statement:
+        score = 1
+    elif u'不可' in statement:
+        score = 0
+    return score
+
+def __calculate_animal_score(statement):
+    score = 0
+    if u'可' in statement:
+        score = 1
+    elif u'不可' in statement:
+        score = 0
+    return score
 
 def user_profile(request):
+    from social_auth.backends.facebook import FacebookBackend
     return render_to_response("user_profile.html", context_instance=RequestContext(request))
 
 
@@ -292,7 +348,80 @@ def register(request):
 def thanks(request):
     return render_to_response('thanks.html', context_instance=RequestContext(request))
 
+def upload(request):
+    error_msg = False
+    user = get_user(request)
+    if request.method == 'POST':
+        if not user.is_authenticated():
+            return HttpResponseRedirect("/")
+        form = UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            a = Animal() 
+            a.name = request.POST.get("name")
+    	    #a.sex = request.POST.get("sex")
+            #a.type = request.POST.get("type")
+            #a.build = request.POST.get("build")
+            #a.age = request.POST.get("age")
+            #a.variety = request.POST.get("variety")
+            #a.reason = request.POST.get("reason")
+            #a.accept_num = request.POST.get("accept_num")
+            #a.chip_num = request.POST.get("chip_num")
+            #a.is_sterilization = request.POST.get("is_sterilization")
+            #a.hair_type = request.POST.get("hair_type")
+            a.note = request.POST.get("note")
+            a.resettlement = request.POST.get("resettlement")
+            a.phone = request.POST.get("phone")
+            #a.email = request.POST.get("email")
+            #a.childre_anlong = request.POST.get("childre_anlong")
+            #a.nimal_anlong = request.POST.get("animal_anlong")
+            #a.bodyweight = request.POST.get("bodyweight")
+            image = request.FILES['photo']
+            
+            head, ext = os.path.splitext(image.name)
+            filename = user.get_username() + str(int(time.time())) + ext
+            savefilename = "src/media/" + filename
+            # TODO : try-catch for PIL errors
+            with open(savefilename, "wb") as code:
+                code.write(image.read())
+            a.image_file = filename
+            thumbnail(savefilename, "248x350")
+            thumbnail(savefilename, "248x350", True)
+            a.save()
+            # TODO : return new page while upload success
+            return HttpResponseRedirect("/")
+        else:
+            print "invalided"
+            print form.errors
+            return render_to_response('upload.html', {'error_msg': form.errors}, context_instance=RequestContext(request))
+    return render_to_response('upload.html', context_instance=RequestContext(request))
 
 #TODO@jsleetw: use view get image
 def get_img(request):
     pass
+
+
+def find_animal_upload(request):
+    return render_to_response('find_animal_upload.html', context_instance=RequestContext(request))
+
+
+def find_animal(request):
+    animals = FindAnimal.objects.order_by("-id")
+    paginator = Paginator(animals, 10)
+    animals = paginator.page(1)
+    for i in animals:
+        i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    return render_to_response('find_animal.html', {"animals": animals}, context_instance=RequestContext(request))
+
+
+def find_animal_page(request, page_num):
+    animals = FindAnimal.objects.order_by("-id")
+    paginator = Paginator(animals, 10)
+    try:
+        animals = paginator.page(page_num)
+    except:
+        return HttpResponseNotFound()
+
+    for i in animals:
+        i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
+    return render_to_response('page.html', {"animals": animals})
+

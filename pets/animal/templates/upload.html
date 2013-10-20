@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}petneed.me|upload{% endblock title %}
+{% block context %}
+<!--start: Container -->
+<div class="container">
+  <!-- start: Page Title -->
+  <div class="row-fluid">
+    <div id="page-title" class="span6 offset3">
+      <h2>Upload Animal Info</h2>
+    </div>
+  </div>
+  <!-- end: Page Title -->
+  <!--start: Wrapper-->
+  <div class="row-fluid">
+    <div class="offset3 span6">
+      <div id="wrapper" class="full">
+        <form method="POST" enctype="multipart/form-data"
+              class="form-horizontal clearfix">{% csrf_token %}
+          <div class="control-group">
+            <label class="control-label" for="inputPhoto">Select a
+              photo</label>
+            <div class="controls">
+              <input type="file" id="inputPhoto" name="photo"
+                     class="input-block-level">
+                {% if 'photo' in error_msg %}
+                <ul>
+                  {% for error in error_msg.photo %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputName">Pet's Name</label>
+            <div class="controls">
+              <input type="text" id="inputName" name="name"
+                     class="input-block-level">
+                {% if 'name' in error_msg %}
+                <ul>
+                  {% for error in error_msg.name %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPhone">Phone</label>
+            <div class="controls">
+              <input name="phone" type="text" id="inputPhone"
+                     class="input-block-level">
+                {% if 'phone' in error_msg %}
+                <ul>
+                  {% for error in error_msg.phone %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputRes">Organization</label>
+            <div class="controls">
+              <input name="resettlement" type="text" id="inputRes"
+                     class="input-block-level">
+                {% if 'resettlement' in error_msg %}
+                <ul>
+                  {% for error in error_msg.resettlement %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputNote">Note</label>
+            <div class="controls">
+              <textarea name="note" rows="6" class="input-block-level"
+                        id="inputNote"></textarea>
+              {% if 'note' in error_msg %}
+              <ul>
+                {% for error in error_msg.note %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+          <!-- TODO : input more info  -->
+          <button type="submit" class="btn span8 offset4
+                                       btn-success">Upload!</button>
+        </form>
+      </div>
+      <!-- end: Row -->
+    </div>
+    <!-- end: Wrapper  -->
+  </div>
+</div>
+{% endblock %}

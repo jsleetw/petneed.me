@@ -1,7 +1,9 @@
 #-*- coding: UTF-8 -*-
-from django import forms
+from django.forms import ModelForm
+from animal.models import LostAnimal
 
-class LostAnimalForm(forms.Form):
-    name = forms.CharField()
-    message = forms.CharField(widget=forms.Textarea)
-)
+
+class LostAnimalForm(ModelForm):
+    class Meta:
+        model = LostAnimal
+        exclude = ['found',]

@@ -4,12 +4,12 @@
 <div id="container" class="container">
 <div id="wrapper">
 <div class="row-fluid">
-<form action="{{ action }}" method="POST">
-  {% csrf_token %}
-  <ul>
-    {{ form.as_table }}
-  </ul>
-  <input type="submit" value="Save" />
+<form action="{{ action }}" method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	<table>
+		{{ form.as_table }}							
+	</table>
+	<input type="submit" value="Save" />
 </form>
 </div>
 </div>
