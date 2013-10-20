@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse
 from django.db import models
-import datetime
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
@@ -33,6 +32,7 @@ class AnimalCommonInfo(models.Model):
 
     class Meta:
         abstract = True
+
 
 class Animal(AnimalCommonInfo):
     pass
@@ -79,7 +79,7 @@ for r in range(1, 30):
     age_CHOICES.append((r,r))
 
 class LostAnimal(models.Model):
-    photo = models.ImageField(upload_to='upload')
+    photo = models.FileField(upload_to='upload')
     name = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
     email = models.EmailField(blank=True,null=True)
@@ -119,20 +119,19 @@ class MyUserManager(BaseUserManager):
         birth and password.
         """
         user = self.create_user(email,
-            password=password,
-        )
+                                password=password,
+                                )
         user.is_admin = True
         user.save(using=self._db)
         return user
 
 
 class MyUser(AbstractBaseUser):
-    email = models.EmailField(
-            verbose_name='email address',
-            max_length=255,
-            unique=True,
-            db_index=True,
-            )
+    email = models.EmailField(verbose_name='email address',
+                              max_length=255,
+                              unique=True,
+                              db_index=True,
+                              )
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_fb = models.BooleanField(default=False)

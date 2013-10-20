@@ -175,19 +175,15 @@ LOGIN_REDIRECT_URL = '/'
 FACEBOOK_EXTENDED_PERMISSIONS = ['email', 'publish_actions', 'user_about_me', 'user_photos', 'user_location']
 SITE_DOMAIN = "petneed.me"
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.contrib.messages.context_processors.messages",
-    "django.core.context_processors.request",
-    'social_auth.context_processors.social_auth_by_name_backends',
-    'social_auth.context_processors.social_auth_backends',
-    'social_auth.context_processors.social_auth_by_type_backends',
-    'social_auth.context_processors.social_auth_login_redirect',    
-)
+SOCIAL_AUTH_PIPELINE = (
+        'social_auth.backends.pipeline.social.social_auth_user',
+        'social_auth.backends.pipeline.associate.associate_by_email',
+        'social_auth.backends.pipeline.user.get_username',
+        'social_auth.backends.pipeline.user.create_user',
+        'social_auth.backends.pipeline.social.associate_user',
+        'social_auth.backends.pipeline.user.update_user_details',
+        #'auth_pipelines.pipelines.get_user_avatar',
+        )
 
 from local_settings import *
 
