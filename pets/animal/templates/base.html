@@ -64,10 +64,10 @@
                 <a class="brand" href="/">PetNeed.me</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li class="active"><a href="/">Home</a></li>
+                        <li class="active"><a href="/">Adopt a pet</a></li>
                     {% if user.is_authenticated %}
                         <li class="active dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Find<b class="caret"></b></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Find my pet<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/animal/find">Browse</a></li>
                                 <li><a href="/animal/find/upload">Upload</a></li>
@@ -83,6 +83,7 @@
                             </ul>
                         </li>
                     {% else %}
+                        <li class="active"><a href="/animal/find">Find my pet</a>
                         <li class="active"><a href="/animal/login">Login</a></li>
                         <li class="active"><a href="/animal/register">Register</a></li>
                     {% endif %}
