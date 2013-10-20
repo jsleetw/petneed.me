@@ -2,6 +2,7 @@
 from django.conf.urls import patterns, include, url
 from django.core.urlresolvers import reverse
 
+from animal.views import LostAnimalCreate
 
 urlpatterns = patterns('',
     url(r'^home', 'animal.views.home'),
@@ -16,5 +17,6 @@ urlpatterns = patterns('',
     url(r'^facebook_register$', 'animal.views.facebook_register'),
     url(r'^thanks', 'animal.views.thanks'),
     url(r'^user_profile', 'animal.views.user_profile'),
+    url(r'lost/add/$', LostAnimalCreate.as_view(), name='LostAnimal_add'),
     #url(r'^get_img', 'animal.views.get_img'),
 )

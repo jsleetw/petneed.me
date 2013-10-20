@@ -16,6 +16,14 @@ from models import Animal
 from django.contrib.auth import get_user_model
 from django.utils.http import urlencode
 
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+from animal.models import LostAnimal
+
+class LostAnimalCreate(CreateView):
+    model = LostAnimal
+    fields = ['name']
+
 
 class RegisterForm(forms.Form):
     email = forms.EmailField(max_length=30)

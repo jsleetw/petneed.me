@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}petneed.me|home{% endblock title %}
+{% block context %}
+<div id="container" class="container">
+<div id="wrapper">
+<div class="row-fluid">
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+  <ul>
+    {{ form.as_table }}
+  </ul>
+  <input type="submit" value="Save" />
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

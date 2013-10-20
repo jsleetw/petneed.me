@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from django.core.urlresolvers import reverse
 from django.db import models
 import datetime
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
@@ -26,6 +28,40 @@ class Animal(models.Model):
     image_file = models.CharField(max_length=200)
     pub_date = models.DateTimeField(auto_now=True)
 
+sex_CHOICES = (
+    (u'公', u'公'),
+    (u'母', u'母'),
+    (u'不確定', u'不確定'),
+)
+type_CHOICES = (
+    (u'犬', u'犬'),
+    (u'貓', u'貓'),
+    (u'其他', u'其他'),
+)
+sterilization_CHOICES = (
+    (u'未絕育', u'未絕育'),
+    (u'已絕育', u'已絕育'),
+    (u'不確定', u'不確定'),
+)
+
+class LostAnimal(models.Model):
+    name = models.CharField(max_length=200)
+    sex = models.CharField(max_length=200, choices=sex_CHOICES, default=u'公')
+    type = models.CharField(max_length=200, choices=type_CHOICES, default=u'犬')
+    age = models.CharField(max_length=200,blank=True,null=True)
+    variety = models.CharField(max_length=200,blank=True,null=True)
+    chip_num = models.CharField(max_length=200,blank=True,null=True)
+    is_sterilization = models.CharField(max_length=200, choices=sterilization_CHOICES, default=u'未絕育')
+    hair_type = models.CharField(max_length=200,blank=True,null=True)
+    note = models.TextField(blank=True,null=True)
+    phone = models.CharField(max_length=200)
+    email = models.EmailField(blank=True,null=True)
+    image_name = models.URLField(max_length=200,blank=True,null=True)
+    image_file = models.CharField(max_length=200,blank=True,null=True)
+    pub_date = models.DateTimeField(auto_now=True)
+    found = models.BooleanField()
+    def get_absolute_url(self):
+        return reverse('animal:profile', kwargs={'animal_id': self.pk})
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None):
