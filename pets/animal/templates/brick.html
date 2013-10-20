@@ -19,10 +19,10 @@
         </div>
         <div class="meta">
             {% ifnotequal i.children_score 0 %}
-            <span class="children_score label label-success" title="{{i.childre_anlong}}" data-score-max="3" data-score="{{i.children_score}}">親近孩童</span>
+            <span class="badge" title="{{i.childre_anlong}}" data-score-max="3" data-score="{{i.children_score}}">#親近孩童</span>
             {% endifnotequal %}
             {% ifnotequal i.animal_score 0 %}
-            <span class="label label-success">親近動物</span>
+            <span class="badge">#親近動物</span>
             {% endifnotequal %}
             <br/>
             <span><i class="fa-icon-heart-empty"></i> <a href="#">{{i.name}}</a></span>
@@ -30,9 +30,11 @@
             <br />
             <span><i class="fa-icon-home muted"><small>{{i.resettlement|index_layout_utils|linebreaksbr}}</small></i></span>
             <br />
+            <!--
             <i class="glyphicon glyphicon-hand-down">&nbsp;{{ i.count_clicks }}</i>&nbsp;&nbsp;&nbsp;
             <i class="glyphicon glyphicon-eye-open">&nbsp;{{i.count_eyeons}}</i>
-            <!--<span><i class="fa-icon-home muted"></i> <small>{{i.resettlement}}</small></span>-->
+            <span><i class="fa-icon-home muted"></i> <small>{{i.resettlement}}</small></span>
+            -->
         </div>
     </div>
 </div>
