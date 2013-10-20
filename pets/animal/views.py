@@ -54,8 +54,7 @@ def home(request):
     animals = paginator.page(1)
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
-    animals = map(__extend_animal_fields, animals)
-    return render_to_response('index.html', {"animals": animals}, context_instance=RequestContext(request))
+    return render_to_response('index.html', {"animals": map(__extend_animal_fields,animals)}, context_instance=RequestContext(request))
 
 
 def page(request):
@@ -66,7 +65,7 @@ def page(request):
     print animals
     for i in animals:
         i.smal_img_file = "%s_248x350.jpg" % i.image_file.split(".jpg")[0]
-    return render_to_response('page.html', {"animals": animals})
+    return render_to_response('page.html', {"animals": map(__extend_animal_fields,animals)})
 
 
 def profile(request, animal_id):
