@@ -376,9 +376,9 @@ def upload(request):
             #a.nimal_anlong = request.POST.get("animal_anlong")
             #a.bodyweight = request.POST.get("bodyweight")
             image = request.FILES['photo']
-            
             head, ext = os.path.splitext(image.name)
-            filename = user.get_username() + str(int(time.time())) + ext
+            #filename = user.get_username() + str(int(time.time())) + ext.lower()
+            filename = str(int(time.time())) + ".jpg"
             savefilename = "src/media/" + filename
             # TODO : try-catch for PIL errors
             with open(savefilename, "wb") as code:
