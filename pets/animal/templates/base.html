@@ -27,6 +27,7 @@
     <link href="/static/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
     <link href="/static/css/style.css" rel="stylesheet" type="text/css">
     <link href="/static/css/layerslider.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/gh-fork-ribbon.css" rel="stylesheet" type="text/css">
     {% endcompress %}
     <!--[if lt IE 9 ]>
     <link href="{{ STATIC_URL }}css/styleIE.css" rel="stylesheet">
@@ -39,6 +40,10 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!--[if IE]>
+    <link rel="stylesheet" href="/static/css/gh-fork-ribbon.ie.css" />
+    <![endif]-->
+    <!-- END COPYING HERE -->
 </head>
 <body>
 <div id="fb-root"></div>
@@ -238,5 +243,12 @@
 {% load settings_value %}
 {% settings_value "GOOGLE_ANALYTICS_KEY" %}
 <!-- end: Java Script -->
+<!-- BOTTOM RIGHT RIBBON: START COPYING HERE -->
+<div class="github-fork-ribbon-wrapper right-bottom">
+    <div class="github-fork-ribbon">
+        <a href="https://github.com/jsleetw/petneed.me">Fork me on GitHub</a>
+    </div>
+</div>
+<!-- BOTTOM RIGHT RIBBON: END COPYING HERE -->
 </body>
 </html>
