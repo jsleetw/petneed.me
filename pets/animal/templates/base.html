@@ -207,6 +207,9 @@
 <script defer="defer" src="{{ STATIC_URL }}js/custom.js"></script>
 {% block js_in_doc %} {% endblock js_in_doc %}
 {% endcompress %}
+
+{% load settings_value %}
+{% settings_value "GOOGLE_ANALYTICS_KEY" %}
 <!-- end: Java Script -->
 </body>
 </html>
