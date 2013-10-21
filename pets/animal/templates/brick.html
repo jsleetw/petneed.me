@@ -14,8 +14,8 @@
             {% endif %}
         </div>
         <div class="actions">
-            <span class="btn btn-danger"><i class="fa-icon-phone"></i> <a href="tel://{{i.phone_normalized}}">想瞭解</a></span>
-            <span class="btn btn-primary"><i class="fa-icon-facebook-sign"></i> <a href="{{i.share_link_facebook}}">想分享</a></span>
+            <span class="btn btn-success"><i class="fa-icon-phone"></i> <a href="tel://{{i.phone_normalized}}">想瞭解</a></span>
+            <span class="btn btn-primary"><i class="fa-icon-facebook-sign"></i><a href="{{i.share_link_facebook}}" target="_blank">想分享</a></span>
         </div>
         <div class="meta">
             {% ifnotequal i.children_score 0 %}
