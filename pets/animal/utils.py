@@ -25,4 +25,4 @@ def thumbnail(filename, size='104x104', x2=False):
             image.save(miniature_filename, image.format, quality=90)
 
     return miniature_filename
- 
+
