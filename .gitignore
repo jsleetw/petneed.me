@@ -7,3 +7,4 @@ pets/src/upload/*.*
 *.pyc
 local_settings.py
 *~
+.elasticbeanstalk/

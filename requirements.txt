@@ -9,4 +9,3 @@ pysqlite
 six==1.2.0
 wsgiref==0.1.2
 django-social-auth==0.7.25
-MySQL-python
