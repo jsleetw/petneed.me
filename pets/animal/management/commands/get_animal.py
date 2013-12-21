@@ -3,9 +3,8 @@ from animal.models import Animal
 from animal.utils import thumbnail
 import json
 import urllib2
-import os
 import urllib
-import Image
+
 
 class Command(BaseCommand):
     args = '<>'
@@ -15,15 +14,18 @@ class Command(BaseCommand):
     url = "http://60.199.253.136/api/action/datastore_search" + '?' + params
 
     def handle(self, *args, **options):
-        print self.url
+        print "start\n get data from" + self.url
         data = urllib2.urlopen(self.url)
         j = json.load(data)
         j = j["result"]["records"]
+        counter = 0
         for i in j:
-            print (i["Name"]).encode('utf-8')
             a1 = Animal.objects.filter(accept_num=i["AcceptNum"])
-            print a1
             if not a1:
+                counter += 1
+                print "new ->"
+                print (i["Name"]).encode('utf-8')
+                print i["AcceptNum"]
                 url = i["ImageName"]
                 url_file = url.split("/")[-1]
                 f = urllib2.urlopen(url)
@@ -53,4 +55,5 @@ class Command(BaseCommand):
                            image_name=i["ImageName"],
                            image_file=url_file,)
                 a.save()
+        print "total %s pet updated" % counter
         self.stdout.write('end\n')
