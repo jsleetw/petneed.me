@@ -44,6 +44,8 @@
     <link rel="stylesheet" href="/static/css/gh-fork-ribbon.ie.css" />
     <![endif]-->
     <!-- END COPYING HERE -->
+{% load settings_value %}
+{% settings_value "GOOGLE_ANALYTICS_KEY" %}
 </head>
 <body>
 <div id="fb-root"></div>
@@ -240,8 +242,6 @@
 {% block js_in_doc %} {% endblock js_in_doc %}
 {% endcompress %}
 
-{% load settings_value %}
-{% settings_value "GOOGLE_ANALYTICS_KEY" %}
 <!-- end: Java Script -->
 <!-- BOTTOM RIGHT RIBBON: START COPYING HERE -->
 <div class="github-fork-ribbon-wrapper right-bottom">
